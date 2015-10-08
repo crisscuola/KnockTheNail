@@ -68,12 +68,18 @@
             <artifactId>json</artifactId>
             <version>20141113</version>
         </dependency>
-
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
             <version>13.0</version>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>Test</scope>
+        </dependency>
+
 
     </dependencies>
 
