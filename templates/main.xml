@@ -1,0 +1,14 @@
+<fest:template xmlns:fest="http://fest.mail.ru">
+	<a class="button button_back" href="#">Back</a>
+	<div class="header">
+		<h1 class="header__title">Epic Game</h1>
+		<p class="header__par">Main Menu</p>
+	</div>
+	<div class="square">
+		<ul class="menu">
+			<li class="menu__item"><a class="button" href="#game">Start Game</a></li>
+			<li class="menu__item"><a class="button" href="#scoreboard">Score Board</a></li>
+			<li class="menu__item"><a class="button" href="#login">LogIn</a></li>
+		</ul>
+	</div>
+</fest:template>

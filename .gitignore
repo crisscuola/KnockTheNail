@@ -1,0 +1,8 @@
+*~
+/node_modules/
+/public_html/js/tmpl/
+*.jar
+
+.idea/
+*.iml
+*.log
