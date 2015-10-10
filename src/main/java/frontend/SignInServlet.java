@@ -23,7 +23,8 @@ public class SignInServlet extends HttpServlet {
         this.accountService = accountService;
     }
 
-    @Override public void doGet(HttpServletRequest request,
+    @Override
+    public void doGet(HttpServletRequest request,
                       HttpServletResponse response) throws ServletException, IOException {
         response.setStatus(HttpServletResponse.SC_OK);
 
@@ -32,8 +33,14 @@ public class SignInServlet extends HttpServlet {
         response.getWriter().println(PageGenerator.getPage("signin.html", pageVariables));
     }
 
+<<<<<<< HEAD
     @Override public void doPost(@NotNull HttpServletRequest request,
         @NotNull HttpServletResponse response) throws ServletException, IOException {
+=======
+    @Override
+    public void doPost(@NotNull HttpServletRequest request,
+                       @NotNull HttpServletResponse response) throws ServletException, IOException {
+>>>>>>> d74c2d4f15e3f688815fad5f97f40fa567086edb
         String name = request.getParameter("name");
         String password = request.getParameter("password");
 
@@ -44,10 +51,10 @@ public class SignInServlet extends HttpServlet {
         UserProfile profile = accountService.getUser(name);
         String sessionCurrent = request.getSession().getId();
 
-        if (accountService.isSignedIn(sessionCurrent) == null)
-        {
+        if (accountService.isSignedIn(sessionCurrent) == null) {
             if (profile != null && password.equals(profile.getPassword())) {
                 accountService.addSessions(String.valueOf(sessionCurrent), profile);
+<<<<<<< HEAD
                 profile.setIsLogged(true);
                 responseJSON.put("success", true);
                 responseJSON.put("message", " successfully logged in!");
@@ -63,5 +70,19 @@ public class SignInServlet extends HttpServlet {
         }
             //response.getWriter().println(PageGenerator.getPage("authstatus.html", pageVariables));
         response.getWriter().println(responseJSON.toString());
+=======
+                pageVariables.put("loginStatus", "user " + name + " Login passed");
+                pageVariables.put("isLogin", 1);
+                response.sendRedirect("/");
+            } else {
+                pageVariables.put("loginStatus", "Wrong login/password");
+                pageVariables.put("isLogin", 0);
+            }
+        } else {
+            pageVariables.put("isLogin", 1);
+            pageVariables.put("loginStatus", "You are already logged in");
+        }
+        response.getWriter().println(PageGenerator.getPage("authstatus.html", pageVariables));
+>>>>>>> d74c2d4f15e3f688815fad5f97f40fa567086edb
     }
 }

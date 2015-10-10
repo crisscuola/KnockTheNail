@@ -1,4 +1,5 @@
 <fest:template xmlns:fest="http://fest.mail.ru">
+<<<<<<< HEAD
 	<div class="header">
 		<h1 class="header__title">Epic Game</h1>
 		<p class="header__par">Main Menu</p>
@@ -11,4 +12,24 @@
 			<li class="menu__item" hidden="true"><a class="button" href="#logout">LogOut</a></li>
 		</ul>
 	</div>
+=======
+    <a class="button button_back" href="#">Back</a>
+    <div class="header">
+        <h1 class="header__title">Epic Game</h1>
+        <p class="header__par">Main Menu</p>
+    </div>
+    <div class="square">
+        <ul class="menu">
+            <li class="menu__item">
+                <a class="button" href="#game">Start Game</a>
+            </li>
+            <li class="menu__item">
+                <a class="button" href="#scoreboard">Score Board</a>
+            </li>
+            <li class="menu__item">
+                <a class="button" href="#login">LogIn</a>
+            </li>
+        </ul>
+    </div>
+>>>>>>> d74c2d4f15e3f688815fad5f97f40fa567086edb
 </fest:template>

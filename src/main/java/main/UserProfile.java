@@ -18,11 +18,13 @@ public class UserProfile {
         isLogged = status;
     }
 
-    @Nullable public String getName() {
+    @Nullable
+    public String getName() {
         return name;
     }
 
-    @Nullable public String getPassword() {
+    @Nullable
+    public String getPassword() {
         return password;
     }
 }

@@ -1,28 +1,34 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="players">
-	<a class="button button_back" href="#">Back</a>
-	<div class="header">
-		<h1 class="header__title">Epic Game</h1>
-		<p class="header__par">Scoreboard</p>
-	</div>	
-	<div class="square square_scoreboard">
-    	<table class="table table-hover">
-      		<thead>
-        		<tr>
- 					<th>Num.</th>       	
-          			<th>Username</th>
-          			<th>Score</th>
-        		</tr>
-      		</thead>
-      		<tbody>
-      			<fest:each iterate="players" index="i" value="player">
-        			<tr>
-        				<th scope="row"><fest:value>++i</fest:value></th>
-    					<td><fest:value>player.name</fest:value></td>
-    					<td><fest:value>player.score</fest:value></td>
-    				</tr>
-    			</fest:each>
-      		</tbody>
-    	</table>
-  	</div>
+    <a class="button button_back" href="#">Back</a>
+    <div class="header">
+        <h1 class="header__title">Epic Game</h1>
+        <p class="header__par">Scoreboard</p>
+    </div>
+    <div class="square square_scoreboard">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Num.</th>
+                    <th>Username</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <fest:each iterate="players" index="i" value="player">
+                    <tr>
+                        <th scope="row">
+                            <fest:value>++i</fest:value>
+                        </th>
+                        <td>
+                            <fest:value>player.name</fest:value>
+                        </td>
+                        <td>
+                            <fest:value>player.score</fest:value>
+                        </td>
+                    </tr>
+                </fest:each>
+            </tbody>
+        </table>
+    </div>
 
 </fest:template>
