@@ -1,10 +1,9 @@
 <fest:template xmlns:fest="http://fest.mail.ru">
-<<<<<<< HEAD
 	<a class="button button_back" href="#">Back</a>
 	<div class="header">
 		<h1 class="header__title">Epic Game</h1>
 		<p class="header__par">!The game is under construction...!</p>
-	</div>	
+	</div>
 		<div class="square square_game">
 			<div class="square__nail"></div>
 			<div class="square__button-group">
@@ -15,13 +14,4 @@
 			<div class="square__table"></div>
 			<button class="square__reset">Reset</button>
 		</div>
-=======
-    <a class="button button_back" href="#">Back</a>
-    <div class="header">
-        <h1 class="header__title">Epic Game</h1>
-        <p class="header__par">!The game is under construction...!</p>
-    </div>
-    <div class="square square_game">
-    </div>
->>>>>>> d74c2d4f15e3f688815fad5f97f40fa567086edb
 </fest:template>

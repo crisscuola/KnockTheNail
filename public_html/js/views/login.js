@@ -1,17 +1,17 @@
 define([
     'backbone',
     'tmpl/login',
-    'models/login'
+    //'models/login'
 ], function(
     Backbone,
-    tmpl,
-    login
+    tmpl
+    //login
 ){
 
     var View = Backbone.View.extend({
         el: '.page',
         template: tmpl,
-        model: login,
+        //model: login,
         events: {
             'click .login-form__button': 'onSubmit',
         },
@@ -32,11 +32,10 @@ define([
         },
 
         onSubmit: function(event) {
-            event.preventDefault();
             var $loginForm = $('.login-form__input');
             if (!$loginForm[0].checkValidity() ||
-             !$loginForm[1].checkValidity()) {
-                $loginForm.find('.login-form__button').click();
+                !$loginForm[1].checkValidity()) {
+                    $loginForm.find('.login-form__button').click();
             } else {
                 event.preventDefault();
                 var data =  $(".login-form").serialize();
@@ -48,9 +47,9 @@ define([
                     console.log("SERVER ANSWER : " + obj);
                     var answer = JSON.parse(obj);
                     if (answer.success) {
-                        var usr = new user();
-                        usr.name = answer.name;
-                        usr.logged = true;
+//                        var usr = new user();
+//                        usr.name = answer.name;
+//                        usr.logged = true;
                         location.href = "#";
                         alert(answer.name +" " +answer.message);
                     } else {

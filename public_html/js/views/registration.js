@@ -32,7 +32,6 @@ define([
         },
 
         onSubmit: function(event) {
-            event.preventDefault();
             var $registerForm = $('.register-form__input');
             if (!$registerForm[0].checkValidity() ||
                 !$registerForm[1].checkValidity()) {

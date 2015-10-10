@@ -11,7 +11,7 @@ define([
     var View = Backbone.View.extend({
         el: '.page',
         template: tmpl,
-        model: user
+        model: user,
         events: {
             "click .menu__item": "hide"
         },
