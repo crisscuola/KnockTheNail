@@ -9,20 +9,21 @@ define([
     var View = Backbone.View.extend({
         el: '.page',
         template: tmpl,
+        events: {
+            "click .menu__item": "hide"
+        },
         initialize: function () {
-
-            console.log("main view is initialized");
         },
         render: function () {
             this.$el.html(this.template);
-
+            this.$el.find(".square").css('bottom', '700px')
+                .animate({bottom: 0});
             return this;
         },
         show: function () {
-            
         },
         hide: function () {
-            this.$el.find(".button_back").hide();
+            this.$el.find(".square").animate({bottom: '700px'});
         }
 
     });

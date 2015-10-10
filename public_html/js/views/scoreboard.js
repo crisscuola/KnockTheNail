@@ -26,10 +26,12 @@ define([
         },
         render: function () {
             this.$el.html(this.template(this.collection.toJSON()));
+            this.$el.find(".square").css('bottom', '700px')
+                .animate({bottom: 0});
             return this;
         },
         show: function () {
-            this.$el.find(".button_back").show();
+
         },
         hide: function () {
             // TODO

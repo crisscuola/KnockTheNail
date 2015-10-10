@@ -4,6 +4,14 @@
 		<h1 class="header__title">Epic Game</h1>
 		<p class="header__par">!The game is under construction...!</p>
 	</div>	
-		<div class="square square_game">	
+		<div class="square square_game">
+			<div class="square__nail"></div>
+			<div class="square__button-group">
+				<button class="button-group__button">F=1</button>
+				<button class="button-group__button">F=2</button>
+				<button class="button-group__button">F=5</button>
+			</div>
+			<div class="square__table"></div>
+			<button class="square__reset">Reset</button>
 		</div>
 </fest:template>

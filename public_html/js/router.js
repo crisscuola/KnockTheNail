@@ -23,34 +23,19 @@ define([
             '*default': 'defaultActions'
         },
         defaultActions: function () {
-            console.log("from default");
-            var mainView = main;
-            mainView.render();
-            mainView.hide();
+            main.render();
         },
         scoreboardAction: function () {
-            console.log("from scoreboard");
-            var scoreboardView =  scoreboard;
             scoreboard.render();
-            scoreboard.show();
         },
         gameAction: function () {
-            console.log("from game");
-            var gameView = game;
-            gameView.render();
-            gameView.show();
+            game.render();
         },
         loginAction: function () {
-            console.log("from login");
-            var loginView = login;
-            loginView.render();
-            loginView.show();
+            login.render();
         },
         registrationAction: function () {
-            console.log("from registration");
-            var registrationView = registration;
-            registrationView.render();
-            registration.show();
+            registration.render();
         }
     });
 
