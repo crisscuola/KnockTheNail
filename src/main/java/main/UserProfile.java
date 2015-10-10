@@ -12,11 +12,13 @@ public class UserProfile {
         this.password = password;
     }
 
-    @Nullable public String getName() {
+    @Nullable
+    public String getName() {
         return name;
     }
 
-    @Nullable public String getPassword() {
+    @Nullable
+    public String getPassword() {
         return password;
     }
 }

@@ -1,14 +1,16 @@
 <fest:template xmlns:fest="http://fest.mail.ru">
-	<a class="button button_back" href="#">Back</a>
-	<div class="header">
-		<h1 class="header__title">Epic Game</h1>
-		<p class="header__par">Sign Up</p>
-	</div>	
-		<div class="square">
-			<form  class="register-form" method='post'  >
-				<input class="register-form__input" type="text" name="name" placeholder="Login" maxlength="30"  pattern="[A-Za-z-0-9]+" required="required" title="A-Z, a-z, 0-9"/>
-				<input class="register-form__input" name="password" placeholder="Password" maxlength="30" required="required" pattern="[A-Za-z-0-9]+" title="A-Z, a-z, 0-9"/>
-				<input class="register-from__button button" type="submit" name="submit" value="Submit"/>
-			</form>
-		</div>
+    <a class="button button_back" href="#">Back</a>
+    <div class="header">
+        <h1 class="header__title">Epic Game</h1>
+        <p class="header__par">Sign Up</p>
+    </div>
+    <div class="square">
+        <form class="register-form" method='post'>
+            <input class="register-form__input" type="text" name="name" placeholder="Login" maxlength="30"
+                   pattern="[A-Za-z-0-9]+" required="required" title="A-Z, a-z, 0-9"/>
+            <input class="register-form__input" name="password" placeholder="Password" maxlength="30"
+                   required="required" pattern="[A-Za-z-0-9]+" title="A-Z, a-z, 0-9"/>
+            <input class="register-from__button button" type="submit" name="submit" value="Submit"/>
+        </form>
+    </div>
 </fest:template>

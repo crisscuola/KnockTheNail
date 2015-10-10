@@ -1,9 +1,9 @@
 <fest:template xmlns:fest="http://fest.mail.ru">
-	<a class="button button_back" href="#">Back</a>
-	<div class="header">
-		<h1 class="header__title">Epic Game</h1>
-		<p class="header__par">!The game is under construction...!</p>
-	</div>	
-		<div class="square square_game">	
-		</div>
+    <a class="button button_back" href="#">Back</a>
+    <div class="header">
+        <h1 class="header__title">Epic Game</h1>
+        <p class="header__par">!The game is under construction...!</p>
+    </div>
+    <div class="square square_game">
+    </div>
 </fest:template>

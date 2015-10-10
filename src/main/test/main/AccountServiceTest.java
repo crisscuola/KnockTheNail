@@ -13,6 +13,7 @@ import static org.junit.Assert.*;
 public class AccountServiceTest {
     private AccountService accountService;
     private UserProfile userProfile;
+
     @NotNull
     private Map<String, UserProfile> sessions = new HashMap<>();
     @NotNull
@@ -22,8 +23,8 @@ public class AccountServiceTest {
     @Test
     public void testSignUp() throws Exception {
         accountService = new AccountService();
-        userProfile = new UserProfile("name","password");
-        accountService.addUser("name",userProfile);
+        userProfile = new UserProfile("name", "password");
+        accountService.addUser("name", userProfile);
         UserProfile result = accountService.getUser("name");
         assertNotNull(result);
 
@@ -33,11 +34,11 @@ public class AccountServiceTest {
     @Test
     public void testAddUser() throws Exception {
         accountService = new AccountService();
-        userProfile = new UserProfile("name","password");
-        accountService.addUser("name",userProfile);
-        userProfile = new UserProfile("name","");
-        accountService.addUser("name",userProfile);
-        users.put("name",userProfile);
+        userProfile = new UserProfile("name", "password");
+        accountService.addUser("name", userProfile);
+        userProfile = new UserProfile("name", "");
+        accountService.addUser("name", userProfile);
+        users.put("name", userProfile);
 
     }
 
@@ -45,7 +46,7 @@ public class AccountServiceTest {
     public void testAddSessions() throws Exception {
         accountService = new AccountService();
         String sessionId = "session";
-        userProfile = new UserProfile("name","password");
+        userProfile = new UserProfile("name", "password");
         accountService.addSessions(sessionId, userProfile);
 
     }
@@ -59,7 +60,7 @@ public class AccountServiceTest {
     public void testIsSignedIn() throws Exception {
         accountService = new AccountService();
         String sessionId = "session";
-        userProfile = new UserProfile("name","password");
+        userProfile = new UserProfile("name", "password");
         accountService.addSessions(sessionId, userProfile);
 
     }

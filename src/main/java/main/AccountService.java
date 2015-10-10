@@ -19,7 +19,7 @@ public class AccountService {
         if (users.containsKey(userName))
             return false;
         users.put(userName, userProfile);
-            return true;
+        return true;
     }
 
     public void addSessions(String sessionId, UserProfile userProfile) {

@@ -26,7 +26,7 @@ public class Main {
         int port = DEF_PORT;
         if (args.length == 1) {
             String portString = args[0];
-            if ((Integer.valueOf(portString)>=1024) && (Integer.valueOf(portString)<=49151))
+            if ((Integer.valueOf(portString) >= 1024) && (Integer.valueOf(portString) <= 49151))
                 port = Integer.valueOf(portString);
             else {
                 System.out.append("Incorrect port").append('\n');

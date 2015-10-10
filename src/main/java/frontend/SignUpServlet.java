@@ -25,8 +25,9 @@ public class SignUpServlet extends HttpServlet {
         this.accountService = accountService;
     }
 
-    @Override public void doGet( HttpServletRequest request,
-                                HttpServletResponse response) throws ServletException, IOException {
+    @Override
+    public void doGet(HttpServletRequest request,
+                      HttpServletResponse response) throws ServletException, IOException {
 
         Map<String, Object> pageVariables = new HashMap<>();
 
@@ -34,7 +35,8 @@ public class SignUpServlet extends HttpServlet {
         response.setStatus(HttpServletResponse.SC_OK);
     }
 
-    @Override public void doPost(@NotNull HttpServletRequest request,
+    @Override
+    public void doPost(@NotNull HttpServletRequest request,
                        @NotNull HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         String password = request.getParameter("password");
