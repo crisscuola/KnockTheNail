@@ -37,13 +37,13 @@ public class Main {
 
         AccountService accountService = new AccountService();
 
-        Servlet signin = new SignInServlet(accountService);
+        Servlet signIn = new SignInServlet(accountService);
         Servlet signUp = new SignUpServlet(accountService);
         Servlet logout = new LogOutServlet(accountService);
         Servlet admin = new AdminPageServlet(accountService);
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        context.addServlet(new ServletHolder(signin), "/signin");
+        context.addServlet(new ServletHolder(signIn), "/signin");
         context.addServlet(new ServletHolder(signUp), "/signup");
         context.addServlet(new ServletHolder(logout), "/api/v1/auth/logout");
         context.addServlet(new ServletHolder(admin), "/admin");

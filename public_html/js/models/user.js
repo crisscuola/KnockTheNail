@@ -9,14 +9,13 @@ define([
         score: 0,
         logged: false,
         initialize: function() {
-
         },
-        uninitialize: function() {
-
-        },
-        isLogged: function() {
-            return this.logged;
-        }
+//      uninitialize: function() {
+//
+//        },
+//        isLogged: function() {
+//            return this.logged;
+//        }
     });
     return Model;
 });

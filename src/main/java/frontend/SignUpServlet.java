@@ -35,24 +35,22 @@ public class SignUpServlet extends HttpServlet {
     }
 
     @Override public void doPost(@NotNull HttpServletRequest request,
-                       @NotNull HttpServletResponse response) throws ServletException, IOException {
+        @NotNull HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         String password = request.getParameter("password");
         JSONObject responseJSON = new JSONObject();
         Map<String, Object> pageVariables = new HashMap<>();
 
         if (accountService.addUser(name, new UserProfile(name, password))) {
-            pageVariables.put("signUpStatus", "New user created");
+            //pageVariables.put("signUpStatus", "New user created");
             responseJSON.put("success", true);
             responseJSON.put("message", " successfully registered!");
             responseJSON.put("name", name);
         } else {
-            //pageVariables.put("signUpStatus", "User with name: " + name + " already exists");
+            responseJSON.put("success", false);
             responseJSON.put("name", name);
             responseJSON.put("message", "is already signed up");
         }
         response.getWriter().println(responseJSON.toString());
-        //response.getWriter().println(PageGenerator.getPage("signupstatus.html", pageVariables));
-        //response.setStatus(HttpServletResponse.SC_OK);
     }
 }

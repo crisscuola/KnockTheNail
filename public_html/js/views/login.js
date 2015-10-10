@@ -11,7 +11,7 @@ define([
     var View = Backbone.View.extend({
         el: '.page',
         template: tmpl,
-        model: new login(),
+        model: login,
         events: {
             'click .login-form__button': 'onSubmit',
         },
@@ -48,6 +48,9 @@ define([
                     console.log("SERVER ANSWER : " + obj);
                     var answer = JSON.parse(obj);
                     if (answer.success) {
+                        var usr = new user();
+                        usr.name = answer.name;
+                        usr.logged = true;
                         location.href = "#";
                         alert(answer.name +" " +answer.message);
                     } else {

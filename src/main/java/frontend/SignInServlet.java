@@ -33,13 +33,13 @@ public class SignInServlet extends HttpServlet {
     }
 
     @Override public void doPost(@NotNull HttpServletRequest request,
-                        @NotNull HttpServletResponse response) throws ServletException, IOException {
+        @NotNull HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         String password = request.getParameter("password");
 
-
         response.setStatus(HttpServletResponse.SC_OK);
         Map<String, Object> pageVariables = new HashMap<>();
+        JSONObject responseJSON = new JSONObject();
 
         UserProfile profile = accountService.getUser(name);
         String sessionCurrent = request.getSession().getId();
@@ -48,17 +48,20 @@ public class SignInServlet extends HttpServlet {
         {
             if (profile != null && password.equals(profile.getPassword())) {
                 accountService.addSessions(String.valueOf(sessionCurrent), profile);
-                pageVariables.put("loginStatus", "user " + name + " Login passed");
-                pageVariables.put("isLogin",1);
-                response.sendRedirect("/");
+                profile.setIsLogged(true);
+                responseJSON.put("success", true);
+                responseJSON.put("message", " successfully logged in!");
+                responseJSON.put("name", name);
             } else {
-                pageVariables.put("loginStatus", "Wrong login/password");
-                pageVariables.put("isLogin",0);
+                responseJSON.put("success", false);
+                responseJSON.put("message", " login failed");
             }
         } else {
-            pageVariables.put("isLogin",1);
-            pageVariables.put("loginStatus", "You are already logged in");
+            responseJSON.put("name", name);
+            responseJSON.put("success", true);
+            responseJSON.put("message", " already logged in");
         }
-            response.getWriter().println(PageGenerator.getPage("authstatus.html", pageVariables));
+            //response.getWriter().println(PageGenerator.getPage("authstatus.html", pageVariables));
+        response.getWriter().println(responseJSON.toString());
     }
 }

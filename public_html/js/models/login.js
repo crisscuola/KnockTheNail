@@ -5,7 +5,7 @@ define([
 ){
 
     var Model = Backbone.Model.extend({
-    	initialize: function(){	
+    	initialize: function(){
             console.log("Login model initialized.");
     	},
     });
