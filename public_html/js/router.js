@@ -36,7 +36,9 @@ define([
         },
         registrationAction: function () {
             registration.render();
-        }
+        },
+
+
     });
 
     return new Router();

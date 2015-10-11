@@ -7,8 +7,8 @@
 		<ul class="menu">
 			<li class="menu__item"><a class="button" href="#game">Start Game</a></li>
 			<li class="menu__item"><a class="button" href="#scoreboard">Score Board</a></li>
-			<li class="menu__item"><a class="button" href="#login">LogIn</a></li>
-			<li class="menu__item" hidden="true"><a class="button" href="#logout">LogOut</a></li>
+			<li class="menu__item menu__item_login"><a class="button" href="#login">LogIn</a></li>
+			<li class="menu__item menu__item_logout"><a class="button" href="#">LogOut</a></li>
 		</ul>
 	</div>
 </fest:template>

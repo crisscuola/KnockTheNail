@@ -4,10 +4,12 @@ define([
     Backbone
 ){
     var Model = Backbone.Model.extend({
-        name: "",
-        password: "",
-        score: 0,
-        logged: false,
+        defaults: {
+            name: "",
+            password: "",
+            score: 0,
+            logged: false
+        },
         initialize: function() {
         },
 //      uninitialize: function() {

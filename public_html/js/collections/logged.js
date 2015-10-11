@@ -7,8 +7,7 @@ define([
 ){
 
     var LoggedUsers = Backbone.Collection.extend({
-    	model: user,
-
+    	model: user
     });
 
     return new LoggedUsers();
