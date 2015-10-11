@@ -1,10 +1,7 @@
 package main;
 
 import freemarker.template.TemplateException;
-import frontend.AdminPageServlet;
-import frontend.LogOutServlet;
-import frontend.SignInServlet;
-import frontend.SignUpServlet;
+import frontend.*;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
@@ -41,12 +38,14 @@ public class Main {
         Servlet signUp = new SignUpServlet(accountService);
         Servlet logout = new LogOutServlet(accountService);
         Servlet admin = new AdminPageServlet(accountService);
+        Servlet check = new CheckingSessionServlet(accountService);
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(signIn), "/signin");
         context.addServlet(new ServletHolder(signUp), "/signup");
         context.addServlet(new ServletHolder(logout), "/logout");
         context.addServlet(new ServletHolder(admin), "/admin");
+        context.addServlet(new ServletHolder(check), "/check");
 
         ResourceHandler resource_handler = new ResourceHandler();
         resource_handler.setDirectoriesListed(true);

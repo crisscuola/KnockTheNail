@@ -31,6 +31,7 @@ define([
             }
         },
         render: function () {
+            console.log("from render main");
             this.$el.html(this.template);
             this.check();
             this.$el.find(".square").css('bottom', '700px')

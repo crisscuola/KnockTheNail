@@ -37,11 +37,15 @@ public class AccountService {
 
     @Nullable
     public UserProfile getUserBySession(String session) {
-        try {
+//        try {
+//            return sessions.get(session);
+//        } catch (NullPointerException e) {
+//            return null;
+//        }
+        if(sessions.containsKey(session))
             return sessions.get(session);
-        } catch (NullPointerException e) {
+        else
             return null;
-        }
     }
 
     @Nullable
