@@ -36,6 +36,15 @@ public class AccountService {
     }
 
     @Nullable
+    public UserProfile getUserBySession(String session) {
+        try {
+            return sessions.get(session);
+        } catch (NullPointerException e) {
+            return null;
+        }
+    }
+
+    @Nullable
     public String isSignedIn(String sessionId) {
         if (sessions.containsKey(sessionId))
             return sessionId;
@@ -43,7 +52,7 @@ public class AccountService {
             return null;
     }
 
-    public boolean removeSessions(String sessionId) {
+    public boolean removeSession(String sessionId) {
         if (sessions.containsKey(sessionId)) {
             sessions.remove(sessionId);
             return true;

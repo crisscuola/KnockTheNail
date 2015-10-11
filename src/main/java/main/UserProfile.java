@@ -14,7 +14,7 @@ public class UserProfile {
         this.isLogged = false;
     }
 
-    @Nullable public void setIsLogged(boolean status) {
+    public void setIsLogged(boolean status) {
         isLogged = status;
     }
 

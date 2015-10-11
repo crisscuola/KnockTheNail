@@ -44,7 +44,22 @@ define([
             this.$el.find(".square").animate({bottom: '700px'});
         },
         logout: function() {
+            var data = this.collection.at(0).name;
             this.collection.remove(this.collection.at(0));
+            $.ajax({
+                type: "POST",
+                url: "/logout",
+                data: {name: data}
+            }).done(function(obj) {
+                console.log("SERVER ANSWER : " + obj);
+                var answer = JSON.parse(obj);
+                if (answer.success) {
+                    location.href = "#";
+                    alert(data + answer.message);
+                } else {
+                    alert(answer.message);
+                }
+            });
             this.render();
 
         }

@@ -45,7 +45,7 @@ public class Main {
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(signIn), "/signin");
         context.addServlet(new ServletHolder(signUp), "/signup");
-        context.addServlet(new ServletHolder(logout), "/api/v1/auth/logout");
+        context.addServlet(new ServletHolder(logout), "/logout");
         context.addServlet(new ServletHolder(admin), "/admin");
 
         ResourceHandler resource_handler = new ResourceHandler();

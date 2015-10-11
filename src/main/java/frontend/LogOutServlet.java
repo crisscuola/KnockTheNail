@@ -4,6 +4,7 @@ import main.AccountService;
 import main.UserProfile;
 import org.jetbrains.annotations.NotNull;
 import templater.PageGenerator;
+import org.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,24 +23,31 @@ public class LogOutServlet extends HttpServlet {
     }
 
 
-    @Override
-    public void doGet(@NotNull HttpServletRequest request,
-                      @NotNull HttpServletResponse response) throws ServletException, IOException {
+    @Override public void doPost(@NotNull HttpServletRequest request,
+                                 @NotNull HttpServletResponse response) throws ServletException, IOException {
+
+        String name = request.getParameter("name");
+        System.out.append("Name from front: ").append(name);
+        JSONObject responseJSON = new JSONObject();
 
         String sessionCurrent = request.getSession().getId();
+        UserProfile user = accountService.getUserBySession(name);
 
-        response.setStatus(HttpServletResponse.SC_OK);
-        Map<String, Object> pageVariables = new HashMap<>();
-        if (accountService.isSignedIn(sessionCurrent) != null) {
-            accountService.removeSessions(sessionCurrent);
-            pageVariables.put("isLogin", 0);
-            pageVariables.put("loginStatus", "Loggout passed");
+        if ((accountService.isSignedIn(sessionCurrent) != null)) {
+            if (accountService.removeSession(sessionCurrent)) {
+                responseJSON.put("success", true);
+                responseJSON.put("name", name);
+                responseJSON.put("message", " successfully logged out");
+            } else {
+                responseJSON.put("success", false);
+                responseJSON.put("name", name);
+                responseJSON.put("message", " hasn't been signed in before");
+            }
         } else {
-            pageVariables.put("isLogin", 0);
-            pageVariables.put("loginStatus", "error logout");
+            responseJSON.put("success", false);
+            responseJSON.put("name", name);
+            responseJSON.put("message", " hasn't been signed in before");
         }
-
-        response.getWriter().println(PageGenerator.getPage("authstatus.html", pageVariables));
-
+        response.getWriter().println(responseJSON.toString());
     }
 }
