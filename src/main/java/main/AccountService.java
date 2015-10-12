@@ -28,20 +28,11 @@ public class AccountService {
 
     @Nullable
     public UserProfile getUser(String userName) {
-        try {
-            return users.get(userName);
-        } catch (NullPointerException e) {
-            return null;
-        }
+        return users.get(userName);
     }
 
     @Nullable
     public UserProfile getUserBySession(String session) {
-//        try {
-//            return sessions.get(session);
-//        } catch (NullPointerException e) {
-//            return null;
-//        }
         if(sessions.containsKey(session))
             return sessions.get(session);
         else
@@ -65,12 +56,7 @@ public class AccountService {
     }
 
     public int countSignIn() {
-        try {
-            return sessions.size();
-
-        } catch (NullPointerException e) {
-            return -1;
-        }
+        return sessions.size();
     }
 
     public int countSignUp() {

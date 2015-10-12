@@ -6,22 +6,17 @@ import static org.junit.Assert.*;
 
 
 public class UserProfileTest {
-    private String name;
-    private String password;
-    private UserProfile userProfile;
-    private AccountService accountService;
+    private UserProfile userProfile = new UserProfile("1","1");
 
     @Test
     public void testGetName() throws Exception {
-        userProfile = new UserProfile("name", "password");
         String result = userProfile.getName();
-        assertEquals(result,"name");
+        assertEquals(result,"1");
     }
 
     @Test
     public void testGetPassword() throws Exception {
-        userProfile = new UserProfile("name", "password");
         String result = userProfile.getPassword();
-        assertEquals(result,"password");
+        assertEquals(result,"1");
     }
 }
