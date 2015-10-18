@@ -36,7 +36,7 @@ define([
                 $nail.animate({ top: "+=10"});
                 console.log(parseInt($nail.css('top'), 10));
                 if((parseInt($nail.css('top'), 10) > 245)) {
-                    alert("YOU LOSE");
+                    alert("WINNER");
                     this.$el.find('.square__button-group').attr("disabled", "disabled");
                 }
             }

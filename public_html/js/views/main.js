@@ -25,14 +25,16 @@ define([
             if (this.collection.length == 0) {
                 this.$el.find(".menu__item_login").show();
                 this.$el.find(".menu__item_logout").hide();
+                this.$el.find(".username").text("");
             } else {
                 this.$el.find(".menu__item_login").hide();
                 this.$el.find(".menu__item_logout").show();
+                this.$el.find(".username").text(this.collection.at(0).name);
             }
         },
         render: function () {
             console.log("from render main");
-            this.$el.html(this.template);
+            this.$el.html(this.template(this.collection.toJSON()));
             this.check();
             this.$el.find(".square").css('bottom', '700px')
                 .animate({bottom: 0});
