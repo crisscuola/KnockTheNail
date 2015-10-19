@@ -2,12 +2,14 @@ define([
     'backbone',
     'tmpl/main',
     'models/user',
-    'collections/logged'
+    'collections/logged',
+    'views/viewManager'
 ], function(
     Backbone,
     tmpl,
     user,
-    logged
+    logged,
+    viewManager
 ){
 
     var View = Backbone.View.extend({
@@ -19,32 +21,34 @@ define([
             "click .menu__item_logout": "logout"
         },
         initialize: function () {
+            console.log('new main view')
         },
         check: function() {
             console.log('collections.length = ' + this.collection.length);
             if (this.collection.length == 0) {
                 this.$el.find(".menu__item_login").show();
                 this.$el.find(".menu__item_logout").hide();
-                this.$el.find(".username").text("");
+                this.$el.find(".corner__username").text("");
             } else {
                 this.$el.find(".menu__item_login").hide();
                 this.$el.find(".menu__item_logout").show();
-                this.$el.find(".username").text(this.collection.at(0).name);
+                this.$el.find(".corner__username").text(this.collection.at(0).name);
             }
         },
         render: function () {
-            console.log("from render main");
+
             this.$el.html(this.template(this.collection.toJSON()));
             this.check();
-            this.$el.find(".square").css('bottom', '700px')
-                .animate({bottom: 0});
-            return this;
+//            this.$el.find(".square").css('bottom', '700px')
+//                .animate({bottom: 0});
+            console.log(this);
+//          return this;
         },
         show: function () {
 
         },
         hide: function () {
-            this.$el.find(".square").animate({bottom: '700px'});
+            this.$el.find(".square").animate({bottom: '700px', height: "50%"});
         },
         logout: function() {
             var data = this.collection.at(0).name;

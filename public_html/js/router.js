@@ -4,14 +4,16 @@ define([
     'views/scoreboard',
     'views/game',
     'views/login',
-    'views/registration'
+    'views/registration',
+    'views/viewManager'
 ], function(
     Backbone,
     main,
     scoreboard,
     game,
     login,
-    registration
+    registration,
+    viewManager
 ){
 
     var Router = Backbone.Router.extend({
@@ -22,22 +24,41 @@ define([
             'registration': 'registrationAction',
             '*default': 'defaultActions'
         },
+
+//        initialize: function(options){
+//            this.appView = viewManager.appView;
+//         },
+
+        showView: function (view) {
+            if (this.currentView) {
+                this.currentView.hide();
+                this.currentView.close();
+            }
+
+            this.currentView = view;
+            $(".wrapper .container").append(this.currentView.el);
+            this.currentView.render();
+        },
         defaultActions: function () {
-            main.render();
+            this.showView(main);
+            //main.render();
         },
         scoreboardAction: function () {
-            scoreboard.render();
+            this.showView(scoreboard);
+            //scoreboard.render();
         },
         gameAction: function () {
-            game.render();
+            this.showView(game);
+            //game.render();
         },
         loginAction: function () {
-            login.render();
+            this.showView(login);
+            //login.render();
         },
         registrationAction: function () {
-            registration.render();
+            this.showView(registration);
+            //registration.render();
         },
-
 
     });
 

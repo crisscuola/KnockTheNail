@@ -31,7 +31,7 @@ define([
 
         },
         hide: function () {
-            this.$el.find(".square").animate({bottom: '700px'});
+            //this.$el.find(".square").animate({bottom: '700px'});
         },
 
         onSubmit: function(event) {

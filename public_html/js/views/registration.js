@@ -20,9 +20,9 @@ define([
         },
         render: function () {
             this.$el.html(this.template);
-            this.$el.find(".square").css('bottom', '700px')
-                .animate({bottom: 0});
-            return this;
+//            this.$el.find(".square").css('bottom', '700px')
+//                .animate({bottom: 0});
+//            return this;
         },
         show: function () {
 

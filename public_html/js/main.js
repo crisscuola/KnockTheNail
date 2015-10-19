@@ -30,6 +30,12 @@ define([
     logged,
     main
 ){
+    Backbone.View.prototype.close = function(){
+      this.remove();
+      this.unbind();
+      console.log("current view closed");
+
+    }
     var loggedIn = logged;
     var userLogged =  new user();
     $.ajax({
@@ -44,9 +50,9 @@ define([
             loggedIn.push(userLogged);
             console.log("LOGGED");
         } else {
-        console.log("NELOGGED");
+        console.log("NOT LOGGED");
         }
-        var mainView = main.render();
+        //var mainView = main.render();
     });
     Backbone.history.start();
 });
