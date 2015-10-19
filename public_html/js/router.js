@@ -25,39 +25,32 @@ define([
             '*default': 'defaultActions'
         },
 
-//        initialize: function(options){
-//            this.appView = viewManager.appView;
-//         },
+        VM: null,
 
-        showView: function (view) {
-            if (this.currentView) {
-                this.currentView.hide();
-                this.currentView.close();
-            }
+        initialize: function() {
+            this.VM = new viewManager();
+         },
 
-            this.currentView = view;
-            $(".wrapper .container").append(this.currentView.el);
-            this.currentView.render();
+
+        showView: function(viewKey) {
+            console.log('showView key: ' + viewKey)
+            this.VM.presentView(viewKey);
         },
+
         defaultActions: function () {
-            this.showView(main);
-            //main.render();
+            this.showView(this.VM.mainView);
         },
         scoreboardAction: function () {
-            this.showView(scoreboard);
-            //scoreboard.render();
+            this.showView(this.VM.scoreboardView);
         },
         gameAction: function () {
-            this.showView(game);
-            //game.render();
+            this.showView(this.VM.gameView);
         },
         loginAction: function () {
-            this.showView(login);
-            //login.render();
+            this.showView(this.VM.loginView);
         },
         registrationAction: function () {
-            this.showView(registration);
-            //registration.render();
+            this.showView(this.VM.regView);
         },
 
     });

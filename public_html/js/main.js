@@ -32,7 +32,7 @@ define([
 ){
     Backbone.View.prototype.close = function(){
       this.remove();
-      this.unbind();
+      //this.unbind();
       console.log("current view closed");
 
     }

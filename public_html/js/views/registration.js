@@ -19,6 +19,7 @@ define([
             new registration();
         },
         render: function () {
+            console.log("from register");
             this.$el.html(this.template);
 //            this.$el.find(".square").css('bottom', '700px')
 //                .animate({bottom: 0});
@@ -32,6 +33,7 @@ define([
         },
 
         onSubmit: function(event) {
+            console.log("from reg submit");
             var $registerForm = $('.register-form__input');
             if (!$registerForm[0].checkValidity() ||
                 !$registerForm[1].checkValidity()) {

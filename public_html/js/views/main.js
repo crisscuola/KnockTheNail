@@ -2,14 +2,12 @@ define([
     'backbone',
     'tmpl/main',
     'models/user',
-    'collections/logged',
-    'views/viewManager'
+    'collections/logged'
 ], function(
     Backbone,
     tmpl,
     user,
-    logged,
-    viewManager
+    logged
 ){
 
     var View = Backbone.View.extend({
@@ -21,7 +19,7 @@ define([
             "click .menu__item_logout": "logout"
         },
         initialize: function () {
-            console.log('new main view')
+            console.log('main view initialized')
         },
         check: function() {
             console.log('collections.length = ' + this.collection.length);
@@ -36,12 +34,10 @@ define([
             }
         },
         render: function () {
-
             this.$el.html(this.template(this.collection.toJSON()));
             this.check();
 //            this.$el.find(".square").css('bottom', '700px')
 //                .animate({bottom: 0});
-            console.log(this);
 //          return this;
         },
         show: function () {
@@ -52,6 +48,7 @@ define([
         },
         logout: function() {
             var data = this.collection.at(0).name;
+            console.log("logout clicked");
             this.collection.remove(this.collection.at(0));
             $.ajax({
                 type: "POST",
@@ -68,7 +65,6 @@ define([
                 }
             });
             this.render();
-
         }
     });
 
