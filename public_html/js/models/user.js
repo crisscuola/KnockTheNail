@@ -12,12 +12,7 @@ define([
         },
         initialize: function() {
         },
-//      uninitialize: function() {
-//
-//        },
-//        isLogged: function() {
-//            return this.logged;
-//        }
+
     });
     return Model;
 });

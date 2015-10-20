@@ -31,7 +31,6 @@ define([
             this.VM = new viewManager();
          },
 
-
         showView: function(viewKey) {
             console.log('showView key: ' + viewKey)
             this.VM.presentView(viewKey);

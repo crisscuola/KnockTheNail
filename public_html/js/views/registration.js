@@ -21,9 +21,12 @@ define([
         render: function () {
             console.log("from register");
             this.$el.html(this.template);
+            this.delegateEvents();
+            //this.listenTo(this.el, "click", this.onSubmit);
+            //this.$el.find(".register-form").on("submit", this.onSubmit);
 //            this.$el.find(".square").css('bottom', '700px')
 //                .animate({bottom: 0});
-//            return this;
+            return this;
         },
         show: function () {
 

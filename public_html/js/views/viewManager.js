@@ -31,7 +31,7 @@ define([
         }, 
 
         initialize: function () {
-            this.views[this.gameView] = game;
+            this.views[this.gameView] =  game;
             this.views[this.loginView] = login;
             this.views[this.mainView] = main;
             this.views[this.scoreboardView] = scoreboard;

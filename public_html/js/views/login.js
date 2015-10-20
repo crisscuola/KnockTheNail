@@ -16,15 +16,18 @@ define([
         collection: logged,
         model: user,
         events: {
-            'click .login-form__button': 'onSubmit',
+            'submit': 'onSubmit',
         },
         initialize: function () {
 
         },
         render: function () {
             this.$el.html(this.template);
-            this.$el.find(".square").css('bottom', '700px')
-                .animate({bottom: 0});
+            this.delegateEvents();
+//            this.$el.find(".square").css('bottom', '700px')
+//                .animate({bottom: 0});
+            //this.$el.find(".login-form").on("submit", this.onSubmit);
+            console.log(new this.model());
             return this;
         },
         show: function () {
@@ -36,7 +39,7 @@ define([
 
         onSubmit: function(event) {
             var loggedIn = this.collection;
-            var userLogged =  new this.model();
+            var userLogged = new this.model();
             var $loginForm = $('.login-form__input');
             if (!$loginForm[0].checkValidity() ||
                 !$loginForm[1].checkValidity()) {

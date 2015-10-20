@@ -20,8 +20,13 @@ define([
         },
         render: function () {
             this.$el.html(this.template);
-            this.$el.find(".square").css('right', '700px')
-                .animate({right: 0});
+            this.delegateEvents();
+//            this.$el.find(".square").css('right', '700px')
+//                .animate({right: 0});
+//            this.$el.find(".button-group__button:first").on("click", this.knock1);
+//            this.$el.find(".button-group__button:nth-child(2)").on("click", this.knock2);
+//            this.$el.find(".button-group__button:nth-child(3)").on("click", this.knock3);
+//            this.$el.find(".square__reset").on("click", this.reset);
             return this;
         },
         show: function () {
@@ -70,5 +75,5 @@ define([
 
     });
 
-    return new View();
+    return  new View();
 });
