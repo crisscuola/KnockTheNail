@@ -5,6 +5,9 @@ import base.AuthService;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author v.chibrikov
+ */
 public class AuthServiceImpl implements AuthService {
     private Map<String, String> userSessions = new HashMap<>();
 

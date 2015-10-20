@@ -10,7 +10,6 @@ import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
 import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 import org.json.simple.JSONObject;
 
-
 @WebSocket
 public class GameWebSocket {
     private String myName;
@@ -50,12 +49,40 @@ public class GameWebSocket {
         }
     }
 
+    @OnWebSocketMessage
+    public void onMessage(String data) {
+        gameMechanics.incrementScore(myName);
+    }
 
     @OnWebSocketConnect
     public void onOpen(Session session) {
         setSession(session);
         webSocketService.addUser(this);
         gameMechanics.addUser(myName);
+    }
+
+    public void setMyScore(GameUser user) {
+        JSONObject jsonStart = new JSONObject();
+        jsonStart.put("status", "increment");
+        jsonStart.put("name", myName);
+        jsonStart.put("score", user.getMyScore());
+        try {
+            session.getRemote().sendString(jsonStart.toJSONString());
+        } catch (Exception e) {
+            System.out.print(e.toString());
+        }
+    }
+
+    public void setEnemyScore(GameUser user) {
+        JSONObject jsonStart = new JSONObject();
+        jsonStart.put("status", "increment");
+        jsonStart.put("name", user.getEnemyName());
+        jsonStart.put("score", user.getEnemyScore());
+        try {
+            session.getRemote().sendString(jsonStart.toJSONString());
+        } catch (Exception e) {
+            System.out.print(e.toString());
+        }
     }
 
     public Session getSession() {
@@ -70,5 +97,4 @@ public class GameWebSocket {
     public void onClose(int statusCode, String reason) {
 
     }
-
 }
