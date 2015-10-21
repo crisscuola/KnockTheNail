@@ -1,0 +1,5 @@
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="logged">
+    <a class="corner__btn corner__btn_reg" href="#registration">Sign Up</a>
+    <p class="corner__username"></p>
+    <a class="corner__btn corner__btn_logout" href="#">Log Out</a>
+</fest:template>

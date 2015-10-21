@@ -1,36 +1,37 @@
 define([
     'backbone',
-    'tmpl/main',
+    'tmpl/base',
     'models/user',
-    'collections/logged'
+    'collections/logged',
+    'views/main'
 ], function(
     Backbone,
     tmpl,
     user,
-    logged
+    logged,
+    main
 ){
 
     var View = Backbone.View.extend({
-        el: '.page',
+        el: '.corner',
         template: tmpl,
         collection: logged,
         events: {
-            "click .menu__item.button:lt(3)": "hide",
-            "click .menu__item_logout": "logout"
+            "click .corner__btn_logout": function(event){ event.preventDefault(); main.logout();}
         },
         initialize: function () {
-            console.log('main view initialized')
+            console.log('base view initialized')
         },
         check: function() {
-            console.log('collections.length = ' + this.collection.length);
             if (this.collection.length == 0) {
-                this.$el.find(".menu__item_login").show();
-                this.$el.find(".menu__item_logout").hide();
-                this.$el.find(".corner__username").text("");
+                this.$el.find(".corner__btn_reg").show();
+                this.$el.find(".corner__btn_logout").hide();
+                this.$el.find(".corner__username").hide();
             } else {
-                this.$el.find(".menu__item_login").hide();
-                this.$el.find(".menu__item_logout").show();
-                this.$el.find(".corner__username").text(this.collection.at(0).name);
+                this.$el.find(".corner__btn_reg").hide();
+                this.$el.find(".corner__btn_logout").show()
+                this.$el.find(".corner__username").show();
+                this.$el.find(".corner__username").text("You are logged as " + this.collection.at(0).name);
             }
         },
         render: function () {
@@ -39,7 +40,7 @@ define([
             this.check();
 //            this.$el.find(".square").css('bottom', '700px')
 //                .animate({bottom: 0});
-//          return this;
+            return this;
         },
         show: function () {
 
@@ -50,6 +51,7 @@ define([
 
         logout: function() {
             var data = this.collection.at(0).name;
+            console.log("logout clicked");
             this.collection.remove(this.collection.at(0));
             $.ajax({
                 type: "POST",
@@ -66,7 +68,6 @@ define([
                 }
             });
             this.render();
-
         }
     });
 

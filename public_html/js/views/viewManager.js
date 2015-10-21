@@ -3,13 +3,15 @@ define([
     'views/scoreboard',
     'views/login',
     'views/game',
-    'views/registration'
+    'views/registration',
+    'views/base'
 ], function(
 	main,
 	scoreboard,
 	login,
 	game,
-	reg
+	reg,
+	base
 ){
 
     var ViewManager = Backbone.View.extend({
@@ -48,6 +50,7 @@ define([
 
             $(".wrapper .container").append(view.el);
             view.render();
+            base.render();
             this.currentView = view;
         }
     });

@@ -22,13 +22,15 @@ define([
     'router',
     'models/user',
     'collections/logged',
-    'views/main'
+    'views/main',
+    'views/base'
 ], function(
     Backbone,
     router,
     user,
     logged,
-    main
+    main,
+    base
 ){
     Backbone.View.prototype.close = function(){
       this.remove();
@@ -52,7 +54,8 @@ define([
         } else {
         console.log("NOT LOGGED");
         }
-        //var mainView = main.render();
+        var mainView = main.render();
+        var baseVIew = base.render();
     });
     Backbone.history.start();
 });

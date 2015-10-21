@@ -20,16 +20,18 @@ body, html {
 }
 
 .corner {
-	float: right;
-	margin-right: 80px;
-	margin-top: 20px;
+	display: inline;
+	position: relative;
 	background-color: transparent;
 	max-height: 50px;
-	max-width: 120px;
-	font-size: 18px;
+	max-width: 160px;
+	font-size: 15px;
+	float: right;
+	margin-right: 40px;
+	margin-top: 10px;
 }
 
-.corner__reg {
+.corner__btn {
 	text-decoration: none;
 	color: #000;
 	border-radius: 4px;
@@ -38,7 +40,7 @@ body, html {
 	padding: 5px 8px;
 }
 
-.corner__reg:hover {
+.corner__btn:hover {
 	text-decoration: none;
 	color: #000;
 	background-color: #ffd46d;
