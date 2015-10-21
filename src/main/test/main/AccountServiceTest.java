@@ -23,8 +23,10 @@ public class AccountServiceTest {
         UserProfile result1 = accountService.getUser("1");
         assertTrue(result);
         assertNotNull(result1);
+        assertTrue(accountService.getUser("1") == userProfile);
         Boolean result2 = accountService.addUser("1", userProfile);
         assertEquals(false,result2);
+        
     }
 
 
