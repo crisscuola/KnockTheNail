@@ -34,28 +34,24 @@ define([
 ){
     Backbone.View.prototype.close = function(){
       this.remove();
-      //this.unbind();
       console.log("current view closed");
 
     }
     var loggedIn = logged;
-    var userLogged =  new user();
+    userLogged =  user;
     $.ajax({
         type: "POST",
         url: "/check"
     }).done(function(obj) {
-        console.log("SERVER ANSWER : " + obj);
         var answer = JSON.parse(obj);
         if (answer.success) {
-            userLogged.name = answer.name;
-            userLogged.logged = true;
-            loggedIn.push(userLogged);
+            userLogged.set({name: answer.name, logged: true});
             console.log("LOGGED");
         } else {
         console.log("NOT LOGGED");
         }
+        location.href = "#";
         var mainView = main.render();
-        var baseVIew = base.render();
     });
     Backbone.history.start();
 });

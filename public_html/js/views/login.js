@@ -24,10 +24,6 @@ define([
         render: function () {
             this.$el.html(this.template);
             this.delegateEvents();
-//            this.$el.find(".square").css('bottom', '700px')
-//                .animate({bottom: 0});
-            //this.$el.find(".login-form").on("submit", this.onSubmit);
-            console.log(new this.model());
             return this;
         },
         show: function () {
@@ -39,7 +35,7 @@ define([
 
         onSubmit: function(event) {
             var loggedIn = this.collection;
-            var userLogged = new this.model();
+            //var userLogged = this.model;
             var $loginForm = $('.login-form__input');
             if (!$loginForm[0].checkValidity() ||
                 !$loginForm[1].checkValidity()) {
@@ -55,9 +51,8 @@ define([
                     console.log("SERVER ANSWER : " + obj);
                     var answer = JSON.parse(obj);
                     if (answer.success) {
-                        userLogged.name = answer.name;
-                        userLogged.logged = true;
-                        loggedIn.push(userLogged);
+                        userLogged.set({name: answer.name, logged: true});
+                        console.log('model.logged login= ' + userLogged.get("logged"));
                         location.href = "#";
                         alert(answer.name + " " + answer.message);
                     } else {

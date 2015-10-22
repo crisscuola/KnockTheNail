@@ -1,22 +1,18 @@
 define([
     'backbone',
-    'tmpl/registration',
-    'models/registration'
+    'tmpl/registration'
 ], function(
     Backbone,
-    tmpl,
-    registration
+    tmpl
 ){
 
     var View = Backbone.View.extend({
         el: '.page',
         template: tmpl,
-        model: new registration(),
         events: {
             'submit': 'onSubmit'
         },
         initialize: function () {
-            new registration();
         },
         render: function () {
             console.log("from register");

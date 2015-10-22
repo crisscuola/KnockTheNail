@@ -16,7 +16,6 @@ define([
             'click .square__reset': 'reset'
         },
         initialize: function () {
-            console.log("game view is initialized");
         },
         render: function () {
             this.$el.html(this.template);

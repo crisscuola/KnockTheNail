@@ -16,7 +16,6 @@ define([
         collection: players,
         model: player,
         initialize: function () {
-            console.log("scoreboard view is initialized");
             for (var i = 0; i < 10; i++) {
             var rand_name = Math.random().toString(36).substr(2, 5);
             var rand_score = Math.floor(Math.random()*(100));

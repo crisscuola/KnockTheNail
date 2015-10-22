@@ -42,15 +42,20 @@ define([
 
         presentView: function(viewKey) {
             var view = this.views[viewKey];
-            console.log("prView: "+view);
+            console.log("prView: "+viewKey);
 
             if (this.currentView) {
+                base.close();
                 this.currentView.close();
             }
 
             $(".wrapper .container").append(view.el);
+            $(".wrapper ").prepend(base.el);
             view.render();
             base.render();
+            if (viewKey == "main") {
+                $(".wrapper .corner").find(".corner__btn_logout").hide();
+            }
             this.currentView = view;
         }
     });
