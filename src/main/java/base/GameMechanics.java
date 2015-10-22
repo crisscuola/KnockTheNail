@@ -1,8 +1,8 @@
 package base;
 
-/**
- * @author v.chibrikov
- */
+
+import org.json.simple.JSONObject;
+
 public interface GameMechanics {
 
     public void addUser(String user);

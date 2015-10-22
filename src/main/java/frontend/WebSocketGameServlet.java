@@ -32,3 +32,4 @@ public class WebSocketGameServlet extends WebSocketServlet {
         factory.setCreator(new GameWebSocketCreator(authService, gameMechanics, webSocketService));
     }
 }
+

@@ -42,7 +42,19 @@
                 if(data.status == "increment" && data.name == document.getElementById("enemyName").innerHTML){
                     document.getElementById("enemyScore").innerHTML = data.score;
                 }
+
+                if (data.status == "increment" )
+                {
+                    document.getElementById("commonScore").innerHTML = data.score;
+                }
+
+                document.getElementById("test1").value ="Btn1 = " + data.button1;
+                document.getElementById("test2").value ="Btn2 =  " + data.button2;
+                document.getElementById("test3").value ="Btn3 =  " + data.button3;
+
             }
+
+
 
             ws.onclose = function (event) {
 
@@ -51,8 +63,8 @@
         };
 
         function sendMessage() {
-            var message = "{}";
-            ws.send(message);
+            var message = {"force": "5"};
+            ws.send(JSON.stringify(message));
         }
 
     </script>
@@ -72,10 +84,19 @@
             <p>${myName}: <span id="myScore">0</span></p>
 
             <p><span id="enemyName"></span>: <span id="enemyScore">0</span></p>
+
+            <p> <a> commonScore </a> <span id="commonScore">0</span></p>
+
         </div>
 
+        <input id="test1" type="text"/>
+        <input id="test2" type="text"/>
+        <input id="test3" type="text"/>
+
         <form name="gamePlay" action="">
-            <input type="button" name="submit" value="Press to win!" onclick="sendMessage();"/>
+            <input type="button" name="submit" value="Force = 1H" onclick="sendMessage();"/>
+            <input type="button" name="submit" value="Force = 2H" onclick="sendMessage();"/>
+            <input type="button" name="submit" value="Force = 5H" onclick="sendMessage();"/>
         </form>
     </div>
 

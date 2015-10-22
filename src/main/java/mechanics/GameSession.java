@@ -6,9 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author v.chibrikov
- */
+
 public class GameSession {
     private final long startTime;
     private final GameUser first;

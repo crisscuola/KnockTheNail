@@ -2,9 +2,7 @@ package base;
 
 import frontend.GameWebSocket;
 
-/**
- * @author v.chibrikov
- */
+
 public interface WebSocketService {
 
     void addUser(GameWebSocket user);
@@ -13,7 +11,10 @@ public interface WebSocketService {
 
     void notifyEnemyNewScore(GameUser user);
 
+    void notifyCommonNewScore(GameUser user);
+
     void notifyStartGame(GameUser user);
 
     void notifyGameOver(GameUser user, boolean win);
 }
+

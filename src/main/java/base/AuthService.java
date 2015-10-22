@@ -1,8 +1,6 @@
 package base;
 
-/**
- * @author v.chibrikov
- */
+
 public interface AuthService {
     String getUserName(String sessionId);
 

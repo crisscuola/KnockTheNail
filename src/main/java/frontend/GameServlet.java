@@ -2,6 +2,7 @@ package frontend;
 
 import base.AuthService;
 import base.GameMechanics;
+//import utils.PageGenerator;
 import templater.PageGenerator;
 
 import javax.servlet.ServletException;
@@ -12,9 +13,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author v.chibrikov
- */
+
 public class GameServlet extends HttpServlet {
 
     private GameMechanics gameMechanics;

@@ -6,9 +6,7 @@ import base.WebSocketService;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author v.chibrikov
- */
+
 public class WebSocketServiceImpl implements WebSocketService {
     private Map<String, GameWebSocket> userSockets = new HashMap<>();
 
@@ -23,6 +21,8 @@ public class WebSocketServiceImpl implements WebSocketService {
     public void notifyEnemyNewScore(GameUser user) {
         userSockets.get(user.getMyName()).setEnemyScore(user);
     }
+
+    public void notifyCommonNewScore (GameUser user) {userSockets.get(user.getMyName()).setCommonScore(user);}
 
     public void notifyStartGame(GameUser user) {
         GameWebSocket gameWebSocket = userSockets.get(user.getMyName());

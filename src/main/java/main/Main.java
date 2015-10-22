@@ -14,6 +14,16 @@ import org.jetbrains.annotations.Nullable;
 import javax.servlet.Servlet;
 import java.io.IOException;
 
+import base.AuthService;
+import base.GameMechanics;
+import base.WebSocketService;
+
+import frontend.AuthServiceImpl;
+import frontend.GameServlet;
+import frontend.WebSocketGameServlet;
+import frontend.WebSocketServiceImpl;
+import mechanics.GameMechanicsImpl;
+
 
 public class Main {
 
@@ -40,12 +50,19 @@ public class Main {
         Servlet admin = new AdminPageServlet(accountService);
         Servlet check = new CheckingSessionServlet(accountService);
 
+        WebSocketService webSocketService = new WebSocketServiceImpl();
+        GameMechanics gameMechanics = new GameMechanicsImpl(webSocketService);
+        AuthService authService = new AuthServiceImpl();
+
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(signIn), "/signin");
         context.addServlet(new ServletHolder(signUp), "/signup");
         context.addServlet(new ServletHolder(logout), "/logout");
         context.addServlet(new ServletHolder(admin), "/admin");
         context.addServlet(new ServletHolder(check), "/check");
+
+        context.addServlet(new ServletHolder(new WebSocketGameServlet(authService, gameMechanics, webSocketService)), "/gameplay");
+        context.addServlet(new ServletHolder(new GameServlet(gameMechanics, authService)), "/game.html");
 
         ResourceHandler resource_handler = new ResourceHandler();
         resource_handler.setDirectoriesListed(true);
@@ -59,5 +76,7 @@ public class Main {
 
         server.start();
         server.join();
+
+        gameMechanics.run();
     }
 }

@@ -51,6 +51,13 @@ public class GameWebSocket {
 
     @OnWebSocketMessage
     public void onMessage(String data) {
+//        JSONParser jsonParser = new JSONParser();
+//        Object object = jsonParser.parse(data);
+//        JSONObject jsonForce = new JSONObject();
+//        jsonForce = (JSONObject) object;
+
+        System.out.print(data);
+
         gameMechanics.incrementScore(myName);
     }
 
@@ -78,6 +85,22 @@ public class GameWebSocket {
         jsonStart.put("status", "increment");
         jsonStart.put("name", user.getEnemyName());
         jsonStart.put("score", user.getEnemyScore());
+        try {
+            session.getRemote().sendString(jsonStart.toJSONString());
+        } catch (Exception e) {
+            System.out.print(e.toString());
+        }
+    }
+
+
+    public void setCommonScore(GameUser user) {
+        JSONObject jsonStart = new JSONObject();
+        jsonStart.put("status", "increment");
+        jsonStart.put("button1", "10");
+        jsonStart.put("button2", "20");
+        jsonStart.put("button3", "50");
+        // jsonStart.put("name", myName);
+        jsonStart.put("score", user.getCommonScore());
         try {
             session.getRemote().sendString(jsonStart.toJSONString());
         } catch (Exception e) {
