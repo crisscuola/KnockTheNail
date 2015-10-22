@@ -1,127 +1,128 @@
-<fest:template xmlns:fest="http://fest.mail.ru">
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="name">
 	<a class="button button_back" href="#">Back</a>
 	<div class="header">
 		<h1 class="header__title">Epic Game</h1>
 		<p class="header__par">!The game is under construction...!</p>
 	</div>
 		<div class="square square_game">
-			<div class="square__nail"></div>
-			<div class="square__button-group">
-				<button class="button-group__button">F=1</button>
-				<button class="button-group__button">F=2</button>
-				<button class="button-group__button">F=5</button>
+			<!--<div class="square__nail"></div>-->
+			<!--<div class="square__button-group">-->
+				<!--<button class="button-group__button">F=1</button>-->
+				<!--<button class="button-group__button">F=2</button>-->
+				<!--<button class="button-group__button">F=5</button>-->
+			<!--</div>-->
+			<!--<div class="square__table"></div>-->
+
+
+
+			<script type="text/javascript">
+				var ws;
+				var started = false;
+				var finished = false;
+
+				var myName = "${myName}";
+				var enemyName = "";
+
+				init = function () {
+				ws = new WebSocket("ws://localhost:8080/gameplay");
+				console.log("INIT:" + ws);
+				ws.onopen = function (event) {
+
+				}
+
+
+
+				ws.onmessage = function (event) {
+				var data = JSON.parse(event.data);
+				if(data.status == "start"){
+				document.getElementById("wait").style.display = "none";
+				document.getElementById("gameplay").style.display = "block";
+				document.getElementById("enemyName").innerHTML = data.enemyName;
+				}
+
+				if(data.status == "finish"){
+				document.getElementById("gameOver").style.display = "block";
+				document.getElementById("gameplay").style.display = "none";
+
+				if(data.win)
+				document.getElementById("win").innerHTML = "winner!";
+				else
+				document.getElementById("win").innerHTML = "loser!";
+				}
+
+				if(data.status == "increment" && data.name == "${myName}"){
+				document.getElementById("myScore").innerHTML = data.score;
+				}
+
+				if(data.status == "increment" && data.name == document.getElementById("enemyName").innerHTML){
+				document.getElementById("enemyScore").innerHTML = data.score;
+				}
+
+				if (data.status == "increment" )
+				{
+				document.getElementById("commonScore").innerHTML = data.score;
+				}
+
+				document.getElementById("test1").value ="Btn1 = " + data.button1;
+				document.getElementById("test2").value ="Btn2 =  " + data.button2;
+				document.getElementById("test3").value ="Btn3 =  " + data.button3;
+
+				}
+
+
+
+				ws.onclose = function (event) {
+
+				}
+
+				};
+
+				function sendMessage() {
+				var message = {"force": "5"};
+				ws.send(JSON.stringify(message));
+				}
+
+				$("body").find(".square_game").load(init());
+			</script>
+
+
+			<div id="hello">
+				<p>Hello, <fest:value>name</fest:value>!</p>
 			</div>
-			<div class="square__table"></div>
 
+			<div id="wait">
+				<p>Prepare yourself. Wait for enemy!</p>
+			</div>
 
+			<div id="gameplay" style="display: none">
+				<div id="score">
+					<p>${myName}: <span id="myScore">0</span></p>
 
-			<!--<script type="text/javascript">-->
-				<!--var ws;-->
-				<!--var started = false;-->
-				<!--var finished = false;-->
+					<p><span id="enemyName"></span>: <span id="enemyScore">0</span></p>
 
-				<!--var myName = "${myName}";-->
-				<!--var enemyName = "";-->
+					<p> <a> commonScore </a> <span id="commonScore">0</span></p>
 
-				<!--init = function () {-->
-				<!--ws = new WebSocket("ws://localhost:8080/gameplay");-->
+				</div>
 
-				<!--ws.onopen = function (event) {-->
+				<input id="test1" type="text"/>
+				<input id="test2" type="text"/>
+				<input id="test3" type="text"/>
 
-				<!--}-->
+				<form name="gamePlay" action="">
+					<input type="button" name="submit" value="Force = 1H" onclick="sendMessage();"/>
+					<input type="button" name="submit" value="Force = 2H" onclick="sendMessage();"/>
+					<input type="button" name="submit" value="Force = 5H" onclick="sendMessage();"/>
+				</form>
+			</div>
 
-				<!--ws.onmessage = function (event) {-->
-				<!--var data = JSON.parse(event.data);-->
-				<!--if(data.status == "start"){-->
-				<!--document.getElementById("wait").style.display = "none";-->
-				<!--document.getElementById("gameplay").style.display = "block";-->
-				<!--document.getElementById("enemyName").innerHTML = data.enemyName;-->
-				<!--}-->
-
-				<!--if(data.status == "finish"){-->
-				<!--document.getElementById("gameOver").style.display = "block";-->
-				<!--document.getElementById("gameplay").style.display = "none";-->
-
-				<!--if(data.win)-->
-				<!--document.getElementById("win").innerHTML = "winner!";-->
-				<!--else-->
-				<!--document.getElementById("win").innerHTML = "loser!";-->
-				<!--}-->
-
-				<!--if(data.status == "increment" && data.name == "${myName}"){-->
-				<!--document.getElementById("myScore").innerHTML = data.score;-->
-				<!--}-->
-
-				<!--if(data.status == "increment" && data.name == document.getElementById("enemyName").innerHTML){-->
-				<!--document.getElementById("enemyScore").innerHTML = data.score;-->
-				<!--}-->
-
-				<!--if (data.status == "increment" )-->
-				<!--{-->
-				<!--document.getElementById("commonScore").innerHTML = data.score;-->
-				<!--}-->
-
-				<!--document.getElementById("test1").value ="Btn1 = " + data.button1;-->
-				<!--document.getElementById("test2").value ="Btn2 =  " + data.button2;-->
-				<!--document.getElementById("test3").value ="Btn3 =  " + data.button3;-->
-
-				<!--}-->
-
-
-
-				<!--ws.onclose = function (event) {-->
-
-				<!--}-->
-
-				<!--};-->
-
-				<!--function sendMessage() {-->
-				<!--var message = {"force": "5"};-->
-				<!--ws.send(JSON.stringify(message));-->
-				<!--}-->
-
-			<!--</script>-->
-		<!--</head>-->
-	<!--<body onload="init();">-->
-		<!--<div id="body">-->
-			<!--<div id="hello">-->
-				<!--<p>Hello, ${myName}!</p>-->
-			<!--</div>-->
-
-			<!--<div id="wait">-->
-				<!--<p>Prepare yourself. Wait for enemy!</p>-->
-			<!--</div>-->
-
-			<!--<div id="gameplay" style="display: none">-->
-				<!--<div id="score">-->
-					<!--<p>${myName}: <span id="myScore">0</span></p>-->
-
-					<!--<p><span id="enemyName"></span>: <span id="enemyScore">0</span></p>-->
-
-					<!--<p> <a> commonScore </a> <span id="commonScore">0</span></p>-->
-
-				<!--</div>-->
-
-				<!--<input id="test1" type="text"/>-->
-				<!--<input id="test2" type="text"/>-->
-				<!--<input id="test3" type="text"/>-->
-
-				<!--<form name="gamePlay" action="">-->
-					<!--<input type="button" name="submit" value="Force = 1H" onclick="sendMessage();"/>-->
-					<!--<input type="button" name="submit" value="Force = 2H" onclick="sendMessage();"/>-->
-					<!--<input type="button" name="submit" value="Force = 5H" onclick="sendMessage();"/>-->
-				<!--</form>-->
-			<!--</div>-->
-
-			<!--<div id="gameOver" style="display: none">-->
-				<!--<p>Game over! You are <span id="win"></span></p>-->
-			<!--</div>-->
-
-		<!--</div>-->
+			<div id="gameOver" style="display: none">
+				<p>Game over! You are <span id="win"></span></p>
+			</div>
 
 
 
 
-			<button class="square__reset">Reset</button>
+
+			<!--<button class="square__reset">Reset</button>-->
 		</div>
 </fest:template>

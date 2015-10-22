@@ -36,8 +36,10 @@ public class GameMechanicsImpl implements GameMechanics {
         if (waiter != null) {
             starGame(user);
             waiter = null;
+            System.out.println("GameMech AddUser2 OK");
         } else {
             waiter = user;
+            System.out.println("GameMech AddUser1 OK");
         }
     }
 
@@ -100,6 +102,7 @@ public class GameMechanicsImpl implements GameMechanics {
         nameToGame.put(first, gameSession);
         nameToGame.put(second, gameSession);
 
+        System.out.println("GameMech StartGame() -> notifyStartGame");
         webSocketService.notifyStartGame(gameSession.getSelf(first));
         webSocketService.notifyStartGame(gameSession.getSelf(second));
     }

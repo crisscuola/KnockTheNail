@@ -18,7 +18,7 @@ define([
         initialize: function () {
         },
         render: function () {
-            this.$el.html(this.template);
+            this.$el.html(this.template(userLogged.get("name")));
             this.delegateEvents();
 //            this.$el.find(".square").css('right', '700px')
 //                .animate({right: 0});

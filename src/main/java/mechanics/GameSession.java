@@ -27,6 +27,8 @@ public class GameSession {
 
         this.first = gameUser1;
         this.second = gameUser2;
+
+        System.out.println("Game Session OK");
     }
 
     public GameUser getEnemy(String user) {

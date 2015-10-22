@@ -21,6 +21,7 @@ public class GameWebSocket {
         this.myName = myName;
         this.gameMechanics = gameMechanics;
         this.webSocketService = webSocketService;
+        this.session = session;
     }
 
     public String getMyName() {
@@ -56,16 +57,18 @@ public class GameWebSocket {
 //        JSONObject jsonForce = new JSONObject();
 //        jsonForce = (JSONObject) object;
 
-        System.out.print(data);
+        System.out.print("SocketMessage " + data);
 
         gameMechanics.incrementScore(myName);
     }
 
     @OnWebSocketConnect
     public void onOpen(Session session) {
+        System.out.println("GameWebSocket Connect first");
         setSession(session);
         webSocketService.addUser(this);
         gameMechanics.addUser(myName);
+        System.out.println("GameWebSocket Connect second");
     }
 
     public void setMyScore(GameUser user) {
