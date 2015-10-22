@@ -50,8 +50,9 @@ define([
         } else {
         console.log("NOT LOGGED");
         }
-        location.href = "#";
         var mainView = main.render();
+        var baseView = base.render();
+        location.href = "#";
     });
     Backbone.history.start();
 });

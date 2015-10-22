@@ -31,17 +31,15 @@ define([
                 this.$el.find(".corner__username").hide();
             } else {
                 this.$el.find(".corner__btn_reg").hide();
-                this.$el.find(".corner__btn_logout").show()
+                this.$el.find(".corner__btn_logout").show();
                 this.$el.find(".corner__username").show();
-                this.$el.find(".corner__username").text("You are logged as " + userLogged.get("name"));//this.collection.at(0).name);
+                this.$el.find(".corner__username").text("You are logged as " + userLogged.get("name"));
             }
         },
         render: function () {
             this.$el.html(this.template);
             this.delegateEvents();
             this.check();
-//            this.$el.find(".square").css('bottom', '700px')
-//                .animate({bottom: 0});
             return this;
         },
         show: function () {

@@ -27,11 +27,12 @@ body, html {
 	max-width: 160px;
 	font-size: 15px;
 	float: right;
-	margin-right: 40px;
+	margin-right: 180px;
 	margin-top: 10px;
 }
 
 .corner__btn {
+	float: right;
 	text-decoration: none;
 	color: #000;
 	border-radius: 4px;
@@ -206,17 +207,34 @@ body, html {
 /*Scoreboard*/
 
 .square_scoreboard {
-	width: 500px;
+	width: 600px;
 	min-height: 530px;
 	padding: 20px 20px 20px 20px;
   	padding-top: 20px;
   	color: #fff;
+
 }
 
 tr {
 	width: 100%;
 	display: inline-table;
 }
+
+tbody tr th {
+	text-align: center;
+	width: 70px;
+}
+
+tbody tr td:first-child {
+	text-align: center;
+	width: 260px;
+}
+
+tbody tr td:last-child {
+	text-align: center;
+	width: 60px;
+}
+
 
 tbody tr:hover {
 	color: #85c2c1;
@@ -237,7 +255,7 @@ tbody{
 
 .square_game {
 	width: 1000px;
-	height: 550px;
+	height: 520px;
   	padding-top: 60px;
 	margin-bottom: 25px;
 }
