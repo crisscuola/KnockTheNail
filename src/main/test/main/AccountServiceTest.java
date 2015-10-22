@@ -20,9 +20,8 @@ public class AccountServiceTest {
     @Test
     public void testAddUser() throws Exception {
         Boolean result = accountService.addUser("1", userProfile);
-        UserProfile result1 = accountService.getUser("1");
         assertTrue(result);
-        assertNotNull(result1);
+        assertEquals(userProfile,accountService.getUser("1"));
         Boolean result2 = accountService.addUser("1", userProfile);
         assertEquals(false,result2);
     }
@@ -34,19 +33,22 @@ public class AccountServiceTest {
         accountService.addSessions(sessionId, userProfile);
         String result = accountService.isSignedIn(sessionId);
         assertEquals(sessionId,result);
+        accountService.addSessions(sessionId, userProfile);
     }
 
     @Test
     public void testGetUser() throws Exception {
+        assertNull(accountService.getUser("1"));
         accountService.addUser("1", userProfile);
         UserProfile result = accountService.getUser("1");
         assertEquals(userProfile, result);
-        UserProfile result2 = accountService.getUser(null);
+        UserProfile result2 = accountService.getUser("abcd");
         assertNull(result2);
     }
 
     @Test
     public void testIsSignedIn() throws Exception {
+        assertNull(accountService.isSignedIn("session"));
         String sessionId = "session";
         accountService.addSessions(sessionId, userProfile);
         String result = accountService.isSignedIn(sessionId);
@@ -61,6 +63,7 @@ public class AccountServiceTest {
         accountService.addSessions(sessionId, userProfile);
         Boolean result = accountService.removeSession(sessionId);
         assertTrue(result);
+        assertNull(accountService.isSignedIn("session"));
         Boolean result2 = accountService.removeSession("abcd");
         assertFalse(result2);
     }
