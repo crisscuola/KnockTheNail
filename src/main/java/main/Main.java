@@ -81,7 +81,7 @@ public class Main {
 
         server.start();
         server.join();
-
+        // version 2 for Serg 
         gameMechanics.run();
     }
 }
