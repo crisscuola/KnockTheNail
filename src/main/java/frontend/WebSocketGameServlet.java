@@ -1,6 +1,5 @@
 package frontend;
 
-import base.AuthService;
 import main.AccountService;
 import base.GameMechanics;
 import base.WebSocketService;

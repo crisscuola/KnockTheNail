@@ -1,6 +1,5 @@
 package main;
 
-import freemarker.template.TemplateException;
 import frontend.*;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
@@ -9,18 +8,12 @@ import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import javax.servlet.Servlet;
-import java.io.IOException;
 
-import main.AccountService;
-import base.AuthService;
 import base.GameMechanics;
 import base.WebSocketService;
 
-import frontend.AuthServiceImpl;
-import frontend.GameServlet;
 import frontend.WebSocketGameServlet;
 import frontend.WebSocketServiceImpl;
 import mechanics.GameMechanicsImpl;
@@ -54,8 +47,6 @@ public class Main {
         WebSocketService webSocketService = new WebSocketServiceImpl();
         GameMechanics gameMechanics = new GameMechanicsImpl(webSocketService);
 
-        //AuthService authService = new AuthServiceImpl();
-
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(signIn), "/signin");
         context.addServlet(new ServletHolder(signUp), "/signup");
@@ -64,7 +55,6 @@ public class Main {
         context.addServlet(new ServletHolder(check), "/check");
 
         context.addServlet(new ServletHolder(new WebSocketGameServlet(accountService, gameMechanics, webSocketService)), "/gameplay");
-        //context.addServlet(new ServletHolder(new GameServlet(gameMechanics, accountService)), "/game");
 
         ResourceHandler resource_handler = new ResourceHandler();
         resource_handler.setDirectoriesListed(true);
@@ -80,8 +70,7 @@ public class Main {
         server.setHandler(handlers);
 
         server.start();
-        server.join();
-        // version 2 for Serg 
+
         gameMechanics.run();
     }
 }

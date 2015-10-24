@@ -30,7 +30,6 @@ public class LogOutServlet extends HttpServlet {
         JSONObject responseJSON = new JSONObject();
 
         String sessionCurrent = request.getSession().getId();
-        UserProfile user = accountService.getUserBySession(sessionCurrent);
 
         if ((accountService.isSignedIn(sessionCurrent) != null)) {
             if (accountService.removeSession(sessionCurrent)) {

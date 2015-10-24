@@ -40,7 +40,6 @@ public class SignInServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         response.setStatus(HttpServletResponse.SC_OK);
-        Map<String, Object> pageVariables = new HashMap<>();
         JSONObject responseJSON = new JSONObject();
 
         UserProfile profile = accountService.getUser(name);
@@ -61,7 +60,6 @@ public class SignInServlet extends HttpServlet {
             responseJSON.put("success", true);
             responseJSON.put("message", " already logged in");
         }
-            //response.getWriter().println(PageGenerator.getPage("authstatus.html", pageVariables));
         response.getWriter().println(responseJSON.toString());
 
     }

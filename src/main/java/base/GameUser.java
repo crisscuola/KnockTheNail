@@ -6,8 +6,6 @@ public class GameUser {
     private String enemyName;
     private int myScore = 0;
     private int enemyScore = 0;
-    private  int commonScore = 0;
-    private Boolean lastClick = true;
 
     public GameUser(String myName) {
         this.myName = myName;
@@ -27,16 +25,9 @@ public class GameUser {
 
     public int getEnemyScore() { return enemyScore; }
 
-    public  int getCommonScore() { return commonScore; }
-
     public void incrementMyScore() { myScore++; }
 
     public void incrementEnemyScore() { enemyScore++; }
 
-    public void incrementCommonScore() { commonScore++; }
-
     public void setEnemyName(String enemyName) { this.enemyName = enemyName; }
-
-    public  void setLastclick() { lastClick =  !lastClick; }
-
 }

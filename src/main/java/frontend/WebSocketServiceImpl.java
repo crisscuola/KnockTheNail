@@ -22,8 +22,6 @@ public class WebSocketServiceImpl implements WebSocketService {
         userSockets.get(user.getMyName()).setEnemyScore(user);
     }
 
-    public void notifyCommonNewScore (GameUser user) {userSockets.get(user.getMyName()).setCommonScore(user);}
-
     public void notifyStartGame(GameUser user) {
         GameWebSocket gameWebSocket = userSockets.get(user.getMyName());
         System.out.println("notifyStartGame");

@@ -11,6 +11,7 @@ public class GameSession {
     private final long startTime;
     private final GameUser first;
     private final GameUser second;
+    private int commonScore;
 
     private Map<String, GameUser> users = new HashMap<>();
 
@@ -27,6 +28,8 @@ public class GameSession {
 
         this.first = gameUser1;
         this.second = gameUser2;
+
+        commonScore = 0;
 
         System.out.println("Game Session OK");
     }
@@ -54,5 +57,14 @@ public class GameSession {
 
     public  boolean isFirstWin(){
         return first.getMyScore() > second.getMyScore();
+    }
+
+    public void incrementCommonScore(){
+        commonScore++;
+    }
+
+    public int getCommonScore() {
+        System.out.println(commonScore);
+        return commonScore;
     }
 }

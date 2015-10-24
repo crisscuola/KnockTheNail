@@ -3,6 +3,7 @@ package mechanics;
 import base.GameMechanics;
 import base.GameUser;
 import base.WebSocketService;
+import example.TimeHelper;
 import org.json.simple.JSONObject;
 //import utils.TimeHelper;
 
@@ -26,11 +27,11 @@ public class GameMechanicsImpl implements GameMechanics {
         this.webSocketService = webSocketService;
     }
 
-    private Boolean  win = true;
+    //private Boolean  win = true;
 
-    public void setWin() { win = !win; }
+    //public void setWin() { win = !win; }
 
-    public boolean checkWin() { return win;}
+    //public boolean checkWin() { return win;}
 
     public void addUser(String user) {
         if (waiter != null) {
@@ -52,45 +53,30 @@ public class GameMechanicsImpl implements GameMechanics {
         GameUser enemyUser = myGameSession.getEnemy(userName);
         enemyUser.incrementEnemyScore();
 
-        myUser.incrementCommonScore();
-        enemyUser.incrementCommonScore();
-
-        setWin();
+        myGameSession.incrementCommonScore();
 
         webSocketService.notifyMyNewScore(myUser);
         webSocketService.notifyEnemyNewScore(enemyUser);
-        webSocketService.notifyCommonNewScore(myUser);
-        webSocketService.notifyCommonNewScore(enemyUser);
     }
 
     @Override
     public void run() {
         while (true) {
+            System.out.println("run()");
             gmStep();
-           // TimeHelper.sleep(STEP_TIME);
+            TimeHelper.sleep(STEP_TIME);
         }
     }
 
     private void gmStep() {
-
         for (GameSession session : allSessions) {
-
-            if(session.getFirst().getCommonScore() >= 20) {
-                if (checkWin()) {
-                    boolean firstWin = session.isFirstWin();
-                    webSocketService.notifyGameOver(session.getFirst(), firstWin);
-                    webSocketService.notifyGameOver(session.getSecond(), !firstWin);
-                }
-
-                else {
-                    boolean firstWin = ! session.isFirstWin();
-                    webSocketService.notifyGameOver(session.getFirst(), firstWin);
-                    webSocketService.notifyGameOver(session.getSecond(), !firstWin);
-
-                }
-
+            System.out.println(session.getFirst().getMyName());
+            if (session.getCommonScore() >= 20) {
+                boolean firstWin = session.isFirstWin();
+                webSocketService.notifyGameOver(session.getFirst(), firstWin);
+                webSocketService.notifyGameOver(session.getSecond(), !firstWin);
+                allSessions.remove(session);
             }
-
         }
     }
 

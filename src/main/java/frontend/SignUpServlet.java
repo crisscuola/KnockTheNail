@@ -43,7 +43,6 @@ public class SignUpServlet extends HttpServlet {
         JSONObject responseJSON = new JSONObject();
 
         if (accountService.addUser(name, new UserProfile(name, password))) {
-            //pageVariables.put("signUpStatus", "New user created");
             responseJSON.put("success", true);
             responseJSON.put("message", " successfully registered!");
             responseJSON.put("name", name);
