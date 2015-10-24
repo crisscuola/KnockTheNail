@@ -2,6 +2,7 @@
 /node_modules/
 *.jar
 
-.idea/
-*.iml
+workspace.xml
+tasks.xml
+*.iws
 *.log
