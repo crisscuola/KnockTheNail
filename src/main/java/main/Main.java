@@ -69,8 +69,8 @@ public class Main {
         Server server = new Server(port);
         server.setHandler(handlers);
 
+        //server.start();
         server.start();
-
         gameMechanics.run();
     }
 }

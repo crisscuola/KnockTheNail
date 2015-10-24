@@ -52,6 +52,8 @@ public class GameMechanicsImpl implements GameMechanics {
 
         webSocketService.notifyMyNewScore(myUser);
         webSocketService.notifyEnemyNewScore(enemyUser);
+        webSocketService.notifyCommonScore(myUser);
+        webSocketService.notifyCommonScore(enemyUser);
     }
 
     @Override

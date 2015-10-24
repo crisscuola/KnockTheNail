@@ -13,6 +13,8 @@ public interface WebSocketService {
 
     void notifyStartGame(GameUser user);
 
+    void notifyCommonScore(GameUser user);
+
     void notifyGameOver(GameUser user, boolean win);
 }
 
