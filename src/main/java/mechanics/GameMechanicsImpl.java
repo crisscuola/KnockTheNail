@@ -27,12 +27,6 @@ public class GameMechanicsImpl implements GameMechanics {
         this.webSocketService = webSocketService;
     }
 
-    //private Boolean  win = true;
-
-    //public void setWin() { win = !win; }
-
-    //public boolean checkWin() { return win;}
-
     public void addUser(String user) {
         if (waiter != null) {
             starGame(user);
@@ -54,6 +48,7 @@ public class GameMechanicsImpl implements GameMechanics {
         enemyUser.incrementEnemyScore();
 
         myGameSession.incrementCommonScore();
+        myGameSession.setLastClick(myUser);
 
         webSocketService.notifyMyNewScore(myUser);
         webSocketService.notifyEnemyNewScore(enemyUser);
@@ -62,7 +57,6 @@ public class GameMechanicsImpl implements GameMechanics {
     @Override
     public void run() {
         while (true) {
-            System.out.println("run()");
             gmStep();
             TimeHelper.sleep(STEP_TIME);
         }
@@ -70,7 +64,6 @@ public class GameMechanicsImpl implements GameMechanics {
 
     private void gmStep() {
         for (GameSession session : allSessions) {
-            System.out.println(session.getFirst().getMyName());
             if (session.getCommonScore() >= 20) {
                 boolean firstWin = session.isFirstWin();
                 webSocketService.notifyGameOver(session.getFirst(), firstWin);

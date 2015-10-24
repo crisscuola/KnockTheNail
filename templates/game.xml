@@ -77,8 +77,8 @@
 
 				};
 
-				function sendMessage() {
-				var message = {"force": "5"};
+				function sendMessage(int force) {
+				var message = {"force": force};
 				ws.send(JSON.stringify(message));
 				}
 
@@ -109,9 +109,9 @@
 				<input id="test3" type="text"/>
 
 				<form name="gamePlay" action="">
-					<input type="button" name="submit" value="Force = 1H" onclick="sendMessage();"/>
-					<input type="button" name="submit" value="Force = 2H" onclick="sendMessage();"/>
-					<input type="button" name="submit" value="Force = 5H" onclick="sendMessage();"/>
+					<input type="button" name="submit" value="Force = 1H" onclick="sendMessage(1);"/>
+					<input type="button" name="submit" value="Force = 2H" onclick="sendMessage(2);"/>
+					<input type="button" name="submit" value="Force = 5H" onclick="sendMessage(5);"/>
 				</form>
 			</div>
 

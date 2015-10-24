@@ -12,6 +12,7 @@ public class GameSession {
     private final GameUser first;
     private final GameUser second;
     private int commonScore;
+    private GameUser lastClick;
 
     private Map<String, GameUser> users = new HashMap<>();
 
@@ -43,10 +44,6 @@ public class GameSession {
         return users.get(user);
     }
 
-    public long getSessionTime(){
-        return new Date().getTime() - startTime;
-    }
-
     public GameUser getFirst() {
         return first;
     }
@@ -55,8 +52,8 @@ public class GameSession {
         return second;
     }
 
-    public  boolean isFirstWin(){
-        return first.getMyScore() > second.getMyScore();
+    public  boolean isFirstWin() {
+        return lastClick == first;
     }
 
     public void incrementCommonScore(){
@@ -64,7 +61,10 @@ public class GameSession {
     }
 
     public int getCommonScore() {
-        System.out.println(commonScore);
         return commonScore;
+    }
+
+    public void setLastClick(GameUser user) {
+        lastClick = user;
     }
 }
