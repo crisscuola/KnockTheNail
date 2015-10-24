@@ -1,6 +1,6 @@
 body, html {
 	margin: 0;
-	font-family:  Arial, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	background-color: #20b2aa;
 	height: 100%;
 }
@@ -220,21 +220,20 @@ tr {
 	display: inline-table;
 }
 
-tbody tr th {
+tbody tr th, thead tr th {
 	text-align: center;
 	width: 70px;
 }
 
-tbody tr td:first-child {
+tbody tr td:nth-child(2), thead tr td:nth-child(2) {
 	text-align: center;
 	width: 260px;
 }
 
-tbody tr td:last-child {
+tbody tr td:last-child, thead tr td:last-child {
 	text-align: center;
-	width: 60px;
+	width: 80px;
 }
-
 
 tbody tr:hover {
 	color: #85c2c1;

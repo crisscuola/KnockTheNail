@@ -10,8 +10,8 @@
                 <tr>
                     <th>Num.</th>
                     <th>Username</th>
-                    <th>Score</th>
-                    <th>Score</th>
+                    <th>Wins</th>
+                    <th>Loses</th>
                 </tr>
             </thead>
             <tbody>
