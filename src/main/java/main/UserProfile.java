@@ -6,6 +6,7 @@ import org.jetbrains.annotations.Nullable;
 public class UserProfile {
     private String name;
     private String password;
+    private int id;
 
     public UserProfile(String login, String password) {
         this.name = login;
@@ -20,5 +21,13 @@ public class UserProfile {
     @Nullable
     public String getPassword() {
         return password;
+    }
+
+    public void setId(int id){
+        this.id = id;
+    }
+
+    public int getId(){
+        return id;
     }
 }

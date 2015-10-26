@@ -1,11 +1,13 @@
 package main;
 
 
+import base.GameUser;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 
 public class AccountService {
@@ -18,8 +20,21 @@ public class AccountService {
     public boolean addUser(String userName, UserProfile userProfile) {
         if (users.containsKey(userName))
             return false;
+        int id = users.size();
+        userProfile.setId(id);
         users.put(userName, userProfile);
         return true;
+    }
+
+    public UserProfile createRandomUser(){
+        Random random = new Random();
+        Integer randInt = random.nextInt();
+        String name = randInt.toString();
+        int id = users.size();
+        UserProfile user = new UserProfile(name,"");
+        user.setId(id);
+        users.put(name,user);
+        return user;
     }
 
     public void addSessions(String sessionId, UserProfile userProfile) {

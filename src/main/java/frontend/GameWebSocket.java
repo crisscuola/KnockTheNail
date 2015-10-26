@@ -3,6 +3,7 @@ package frontend;
 import base.GameMechanics;
 import base.GameUser;
 import base.WebSocketService;
+import main.UserProfile;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketClose;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketConnect;
@@ -15,19 +16,19 @@ import java.io.IOException;
 
 @WebSocket
 public class GameWebSocket {
-    private String myName;
+    private UserProfile user;
     private Session session;
     private GameMechanics gameMechanics;
     private WebSocketService webSocketService;
 
-    public GameWebSocket(@NotNull String myName, GameMechanics gameMechanics, WebSocketService webSocketService) {
-        this.myName = myName;
+    public GameWebSocket(@NotNull UserProfile user, GameMechanics gameMechanics, WebSocketService webSocketService) {
+        this.user = user;
         this.gameMechanics = gameMechanics;
         this.webSocketService = webSocketService;
     }
 
-    public String getMyName() {
-        return myName;
+    public Integer getMyId() {
+        return user.getId();
     }
 
     public void startGame(GameUser user) {
@@ -55,7 +56,7 @@ public class GameWebSocket {
     @OnWebSocketMessage
     public void onMessage(String data) {
         System.out.print("SocketMessage " + data);
-        gameMechanics.incrementScore(myName);
+        gameMechanics.incrementScore(user.getId());
     }
 
     @OnWebSocketConnect
@@ -63,14 +64,14 @@ public class GameWebSocket {
         System.out.println("GameWebSocket Connect first");
         this.session = s;
         webSocketService.addUser(this);
-        gameMechanics.addUser(myName);
+        gameMechanics.addUser(user);
         System.out.println("GameWebSocket Connect second");
     }
 
     public void setMyScore(GameUser user) {
         JSONObject jsonStart = new JSONObject();
         jsonStart.put("status", "increment");
-        jsonStart.put("name", myName);
+        jsonStart.put("name", user.getMyName());
         jsonStart.put("score", user.getMyScore());
         try {
             session.getRemote().sendString(jsonStart.toJSONString());
@@ -107,6 +108,6 @@ public class GameWebSocket {
 
     @OnWebSocketClose
     public void onClose(int statusCode, String reason) {
-
+        //gameMechanics.removeUser(user.getId());
     }
 }

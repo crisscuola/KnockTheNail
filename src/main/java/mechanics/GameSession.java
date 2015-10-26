@@ -1,6 +1,7 @@
 package mechanics;
 
 import base.GameUser;
+import main.UserProfile;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,17 +13,24 @@ public class GameSession {
     private int commonScore;
     private GameUser lastClick;
 
-    private Map<String, GameUser> users = new HashMap<>();
+    private Map<Integer, GameUser> users = new HashMap<>();
 
-    public GameSession(String user1, String user2) {
-        GameUser gameUser1 = new GameUser(user1);
-        gameUser1.setEnemyName(user2);
+    public GameSession(UserProfile user1, UserProfile user2) {
+        int id1 = user1.getId();
+        int id2 = user2.getId();
+        String name1 = user1.getName();
+        String name2 = user2.getName();
 
-        GameUser gameUser2 = new GameUser(user2);
-        gameUser2.setEnemyName(user1);
+        GameUser gameUser1 = new GameUser(name1,id1);
+        gameUser1.setEnemyName(name2);
+        gameUser1.setEnemyId(id2);
 
-        users.put(user1, gameUser1);
-        users.put(user2, gameUser2);
+        GameUser gameUser2 = new GameUser(name2,id2);
+        gameUser2.setEnemyName(name1);
+        gameUser2.setEnemyId(id1);
+
+        users.put(id1, gameUser1);
+        users.put(id2, gameUser2);
 
         this.first = gameUser1;
         this.second = gameUser2;
@@ -32,13 +40,13 @@ public class GameSession {
         System.out.println("Game Session OK");
     }
 
-    public GameUser getEnemy(String user) {
-        String enemyName = users.get(user).getEnemyName();
-        return users.get(enemyName);
+    public GameUser getEnemy(int id) {
+        int enemyId = users.get(id).getEnemyId();
+        return users.get(enemyId);
     }
 
-    public GameUser getSelf(String user) {
-        return users.get(user);
+    public GameUser getSelf(int id) {
+        return users.get(id);
     }
 
     public GameUser getFirst() {

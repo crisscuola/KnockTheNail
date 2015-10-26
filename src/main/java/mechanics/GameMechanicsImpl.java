@@ -4,8 +4,10 @@ import base.GameMechanics;
 import base.GameUser;
 import base.WebSocketService;
 import example.TimeHelper;
+import main.UserProfile;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 
 public class GameMechanicsImpl implements GameMechanics {
@@ -13,36 +15,28 @@ public class GameMechanicsImpl implements GameMechanics {
 
     private WebSocketService webSocketService;
 
-    private Map<String, GameSession> nameToGame = new HashMap<>();
+    private Map<Integer, GameSession> nameToGame = new HashMap<>();
 
     private Set<GameSession> allSessions = new HashSet<>();
 
-    private String waiter;
+    private Queue<UserProfile> usersToGame = new ConcurrentLinkedQueue<>();
 
     public GameMechanicsImpl(WebSocketService webSocketService) {
         this.webSocketService = webSocketService;
     }
 
-    @Override
-    public void addUser(String user) {
-        if (waiter != null) {
-            starGame(user);
-            waiter = null;
-            System.out.println("GameMech AddUser2 OK");
-        } else {
-            waiter = user;
-            System.out.println("GameMech AddUser1 OK");
-        }
+    public void addUser(UserProfile user) {
+        usersToGame.add(user);
     }
 
     @Override
-    public void incrementScore(String userName) {
-        GameSession myGameSession = nameToGame.get(userName);
+    public void incrementScore(int id) {
+        GameSession myGameSession = nameToGame.get(id);
 
-        GameUser myUser = myGameSession.getSelf(userName);
+        GameUser myUser = myGameSession.getSelf(id);
         myUser.incrementMyScore();
 
-        GameUser enemyUser = myGameSession.getEnemy(userName);
+        GameUser enemyUser = myGameSession.getEnemy(id);
         enemyUser.incrementEnemyScore();
 
         myGameSession.incrementCommonScore();
@@ -68,6 +62,11 @@ public class GameMechanicsImpl implements GameMechanics {
     }
 
     private void gmStep() {
+        if(usersToGame.size() >= 2){
+            UserProfile first = usersToGame.poll();
+            UserProfile second = usersToGame.poll();
+            starGame(first,second);
+        }
         for (GameSession session : allSessions) {
             if (session.getCommonScore() >= 20) {
                 boolean firstWin = session.isFirstWin();
@@ -79,15 +78,15 @@ public class GameMechanicsImpl implements GameMechanics {
     }
 
 
-    private void starGame(String first) {
-        String second = waiter;
+    private void starGame(UserProfile first, UserProfile second) {
         GameSession gameSession = new GameSession(first, second);
         allSessions.add(gameSession);
-        nameToGame.put(first, gameSession);
-        nameToGame.put(second, gameSession);
+
+        nameToGame.put(first.getId(), gameSession);
+        nameToGame.put(second.getId(), gameSession);
 
         System.out.println("GameMech StartGame() -> notifyStartGame");
-        webSocketService.notifyStartGame(gameSession.getSelf(first));
-        webSocketService.notifyStartGame(gameSession.getSelf(second));
+        webSocketService.notifyStartGame(gameSession.getSelf(first.getId()));
+        webSocketService.notifyStartGame(gameSession.getSelf(second.getId()));
     }
 }
