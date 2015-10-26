@@ -2,13 +2,11 @@ package mechanics;
 
 import base.GameUser;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 
 public class GameSession {
-    private final long startTime;
     private final GameUser first;
     private final GameUser second;
     private int commonScore;
@@ -17,7 +15,6 @@ public class GameSession {
     private Map<String, GameUser> users = new HashMap<>();
 
     public GameSession(String user1, String user2) {
-        startTime = new Date().getTime();
         GameUser gameUser1 = new GameUser(user1);
         gameUser1.setEnemyName(user2);
 

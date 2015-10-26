@@ -3,6 +3,7 @@ package frontend;
 import  main.AccountService;
 import base.GameMechanics;
 import base.WebSocketService;
+import main.UserProfile;
 import org.eclipse.jetty.websocket.servlet.ServletUpgradeRequest;
 import org.eclipse.jetty.websocket.servlet.ServletUpgradeResponse;
 import org.eclipse.jetty.websocket.servlet.WebSocketCreator;
@@ -23,11 +24,17 @@ public class GameWebSocketCreator implements WebSocketCreator {
 
     @Override
     public Object createWebSocket(ServletUpgradeRequest req, ServletUpgradeResponse resp) {
-        System.out.println("resp: " + resp);
         String sessionId = req.getHttpServletRequest().getSession().getId();
-        String name = accountService.getUserBySession(sessionId).getName();
-        System.out.println("get Name: " + name);
-
+        String name = "Guest";
+        UserProfile player = accountService.getUserBySession(sessionId);
+        if(player != null){
+            name = player.getName();
+            if(name == null)
+                name = "Guest";
+        }
+        else{
+            System.out.println("Created guest user");
+        }
         return new GameWebSocket(name, gameMechanics, webSocketService);
     }
 }

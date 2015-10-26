@@ -4,16 +4,12 @@ import base.GameMechanics;
 import base.GameUser;
 import base.WebSocketService;
 import example.TimeHelper;
-import org.json.simple.JSONObject;
-//import utils.TimeHelper;
 
 import java.util.*;
 
 
 public class GameMechanicsImpl implements GameMechanics {
     private static final int STEP_TIME = 100;
-
-    private static final int gameTime = 15 * 1000000;
 
     private WebSocketService webSocketService;
 
@@ -27,6 +23,7 @@ public class GameMechanicsImpl implements GameMechanics {
         this.webSocketService = webSocketService;
     }
 
+    @Override
     public void addUser(String user) {
         if (waiter != null) {
             starGame(user);
@@ -38,6 +35,7 @@ public class GameMechanicsImpl implements GameMechanics {
         }
     }
 
+    @Override
     public void incrementScore(String userName) {
         GameSession myGameSession = nameToGame.get(userName);
 
@@ -59,8 +57,13 @@ public class GameMechanicsImpl implements GameMechanics {
     @Override
     public void run() {
         while (true) {
-            gmStep();
-            TimeHelper.sleep(STEP_TIME);
+            try {
+                gmStep();
+                TimeHelper.sleep(STEP_TIME);
+            } catch (RuntimeException e){
+                e.printStackTrace();
+                break;
+            }
         }
     }
 

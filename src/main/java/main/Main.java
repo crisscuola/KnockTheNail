@@ -64,12 +64,9 @@ public class Main {
         handlers.setHandlers(new Handler[]{resource_handler, context});
 
 
-
-
         Server server = new Server(port);
         server.setHandler(handlers);
 
-        //server.start();
         server.start();
         gameMechanics.run();
     }

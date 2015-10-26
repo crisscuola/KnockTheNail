@@ -8,7 +8,10 @@ import org.eclipse.jetty.websocket.api.annotations.OnWebSocketClose;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketConnect;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
 import org.eclipse.jetty.websocket.api.annotations.WebSocket;
+import org.jetbrains.annotations.NotNull;
 import org.json.simple.JSONObject;
+
+import java.io.IOException;
 
 @WebSocket
 public class GameWebSocket {
@@ -17,11 +20,10 @@ public class GameWebSocket {
     private GameMechanics gameMechanics;
     private WebSocketService webSocketService;
 
-    public GameWebSocket(String myName, GameMechanics gameMechanics, WebSocketService webSocketService) {
+    public GameWebSocket(@NotNull String myName, GameMechanics gameMechanics, WebSocketService webSocketService) {
         this.myName = myName;
         this.gameMechanics = gameMechanics;
         this.webSocketService = webSocketService;
-        this.session = session;
     }
 
     public String getMyName() {
@@ -34,7 +36,7 @@ public class GameWebSocket {
             jsonStart.put("status", "start");
             jsonStart.put("enemyName", user.getEnemyName());
             session.getRemote().sendString(jsonStart.toJSONString());
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.print(e.toString());
         }
     }
@@ -45,7 +47,7 @@ public class GameWebSocket {
             jsonStart.put("status", "finish");
             jsonStart.put("win", win);
             session.getRemote().sendString(jsonStart.toJSONString());
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.print(e.toString());
         }
     }
@@ -57,9 +59,9 @@ public class GameWebSocket {
     }
 
     @OnWebSocketConnect
-    public void onOpen(Session session) {
+    public void onOpen(Session s) {
         System.out.println("GameWebSocket Connect first");
-        setSession(session);
+        this.session = s;
         webSocketService.addUser(this);
         gameMechanics.addUser(myName);
         System.out.println("GameWebSocket Connect second");
@@ -72,7 +74,7 @@ public class GameWebSocket {
         jsonStart.put("score", user.getMyScore());
         try {
             session.getRemote().sendString(jsonStart.toJSONString());
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.print(e.toString());
         }
     }
@@ -84,11 +86,10 @@ public class GameWebSocket {
         jsonStart.put("score", user.getEnemyScore());
         try {
             session.getRemote().sendString(jsonStart.toJSONString());
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.print(e.toString());
         }
     }
-
 
     public void setCommonScore(GameUser user) {
         JSONObject jsonStart = new JSONObject();
@@ -99,17 +100,9 @@ public class GameWebSocket {
         jsonStart.put("score", user.getMyScore()+user.getEnemyScore());
         try {
             session.getRemote().sendString(jsonStart.toJSONString());
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.print(e.toString());
         }
-    }
-
-    public Session getSession() {
-        return session;
-    }
-
-    public void setSession(Session session) {
-        this.session = session;
     }
 
     @OnWebSocketClose
