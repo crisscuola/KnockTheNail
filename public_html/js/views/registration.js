@@ -7,32 +7,27 @@ define([
 ){
 
     var View = Backbone.View.extend({
-        el: '.page',
+        el: '.registration',
         template: tmpl,
+        name: 'registration',
         events: {
             'submit': 'onSubmit'
         },
         initialize: function () {
         },
         render: function () {
-            console.log("from register");
             this.$el.html(this.template);
             this.delegateEvents();
-            //this.listenTo(this.el, "click", this.onSubmit);
-            //this.$el.find(".register-form").on("submit", this.onSubmit);
-//            this.$el.find(".square").css('bottom', '700px')
-//                .animate({bottom: 0});
             return this;
         },
         show: function () {
-
+            this.trigger('show', this);
         },
         hide: function () {
-
+            this.$el.hide();
         },
 
         onSubmit: function(event) {
-            console.log("from reg submit");
             var $registerForm = $('.register-form__input');
             if (!$registerForm[0].checkValidity() ||
                 !$registerForm[1].checkValidity()) {

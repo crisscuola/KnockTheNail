@@ -3,7 +3,6 @@ define([
 ], function(
     Backbone
 ){
-
     var Player = Backbone.Model.extend({
     	urlRoot: '/player',
     	defaults: {
@@ -11,7 +10,6 @@ define([
     		score: 0
     	},
     	initialize: function(){
-    		console.log("Player has been created.");
     	},
 
     });

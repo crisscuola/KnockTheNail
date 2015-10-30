@@ -7,8 +7,9 @@ define([
 ){
 
     var View = Backbone.View.extend({
-        el: '.page',
+        el: '.game',
         template: tmpl,
+        name: 'game',
         events: {
             'click .button-group__button:first': 'knock1',
             'click .button-group__button:nth-child(2)': 'knock2',
@@ -18,21 +19,15 @@ define([
         initialize: function () {
         },
         render: function () {
-            this.$el.html(this.template(userLogged.get("name")));
+            this.$el.html(this.template);
             this.delegateEvents();
-//            this.$el.find(".square").css('right', '700px')
-//                .animate({right: 0});
-//            this.$el.find(".button-group__button:first").on("click", this.knock1);
-//            this.$el.find(".button-group__button:nth-child(2)").on("click", this.knock2);
-//            this.$el.find(".button-group__button:nth-child(3)").on("click", this.knock3);
-//            this.$el.find(".square__reset").on("click", this.reset);
             return this;
         },
         show: function () {
-
+            this.trigger("show", this);
         },
         hide: function () {
-
+            this.$el.hide();
         },
         knock1: function() {
             if(this.$el.find('.square__button-group').attr("disabled") != "disabled") {

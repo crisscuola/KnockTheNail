@@ -11,17 +11,16 @@ define([
     logged,
     main
 ){
-
     var View = Backbone.View.extend({
         el: '.corner',
         template: tmpl,
         collection: logged,
         model: user,
+        name: 'base',
         events: {
             "click .corner__btn_logout": "logout"
         },
         initialize: function () {
-            //console.log("view: " + main);
         },
         check: function() {
             if (!userLogged.get("logged")) {
@@ -39,14 +38,8 @@ define([
         render: function () {
             this.$el.html(this.template);
             this.delegateEvents();
-            this.check();
+            //this.check();
             return this;
-        },
-        show: function () {
-
-        },
-        hide: function () {
-            //this.$el.find(".square").animate({bottom: '700px', height: "50%"});
         },
 
         logout: function(event){

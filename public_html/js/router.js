@@ -24,32 +24,26 @@ define([
             'registration': 'registrationAction',
             '*default': 'defaultActions'
         },
-
-        VM: null,
+        manager: null,
 
         initialize: function() {
-            this.VM = new viewManager();
+            this.manager = new viewManager();
          },
 
-        showView: function(viewKey) {
-            console.log('showView key: ' + viewKey)
-            this.VM.presentView(viewKey);
-        },
-
         defaultActions: function () {
-            this.showView(this.VM.mainView);
+            main.show();
         },
         scoreboardAction: function () {
-            this.showView(this.VM.scoreboardView);
+            scoreboard.show();
         },
         gameAction: function () {
-            this.showView(this.VM.gameView);
+            game.show();
         },
         loginAction: function () {
-            this.showView(this.VM.loginView);
+            login.show();
         },
         registrationAction: function () {
-            this.showView(this.VM.regView);
+            registration.show();
         },
 
     });

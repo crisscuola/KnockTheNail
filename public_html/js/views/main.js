@@ -13,7 +13,8 @@ define([
 ){
 
     var View = Backbone.View.extend({
-        el: '.page',
+        el: '.main',
+        name: "main",
         template: tmpl,
         collection: logged,
         model: user,
@@ -26,7 +27,7 @@ define([
         },
         check: function() {
             console.log('model.logged= ' + userLogged.get("logged"));
-            if (!userLogged.get("logged")) {//(this.collection.length == 0) {
+            if (!userLogged.get("logged")) {
                 this.$el.find(".menu__item_login").show();
                 this.$el.find(".menu__item_logout").hide();
             } else {
@@ -37,21 +38,20 @@ define([
         render: function () {
             this.$el.html(this.template);
             this.delegateEvents();
-            this.check();
-            console.log('main rendered');
+            //this.check();
             return this;
         },
         show: function () {
-
+            this.trigger('show', this);
         },
         hide: function () {
-            //this.$el.find(".square").animate({bottom: '700px', height: "50%"});
+            this.$el.hide();
         },
 
         logout: function() {
             userLogged.set({ logged: false });
-             this.render();
-             base.render();
+            this.render();
+            base.render();
         }
     });
 

@@ -34,25 +34,36 @@ define([
 ){
     Backbone.View.prototype.close = function(){
       this.remove();
-      console.log("current view closed");
-
     }
-    var loggedIn = logged;
-    userLogged =  user;
-    $.ajax({
-        type: "POST",
-        url: "/check"
-    }).done(function(obj) {
-        var answer = JSON.parse(obj);
-        if (answer.success) {
-            userLogged.set({name: answer.name, logged: true});
-            console.log("LOGGED");
-        } else {
-        console.log("NOT LOGGED");
+    var userLogged = new user();
+    var tmp = userLogged.save({}, {
+    success: function(userLogged,response){
+        if (response.success){
+            userLogged.logged = true;
+            userLogged.name = response.name;
         }
-        var mainView = main.render();
-        var baseView = base.render();
-        location.href = "#";
+        else
+          userLogged.logged = false;
+    }
     });
+    console.log(userLogged)
+    console.log(tmp);
+//    var loggedIn = logged;
+//    userLogged =  user;
+//    $.ajax({
+//        type: "POST",
+//        url: "/check"
+//    }).done(function(obj) {
+//        var answer = JSON.parse(obj);
+//        if (answer.success) {
+//            userLogged.set({name: answer.name, logged: true});
+//            console.log("LOGGED");
+//        } else {
+//        console.log("NOT LOGGED");
+//        }
+//        var mainView = main.render();
+//        var baseView = base.render();
+//        location.href = "#";
+//    });
     Backbone.history.start();
 });

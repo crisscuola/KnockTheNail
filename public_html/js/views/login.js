@@ -11,7 +11,8 @@ define([
 ){
 
     var View = Backbone.View.extend({
-        el: '.page',
+        el: '.login',
+        name: 'login',
         template: tmpl,
         collection: logged,
         model: user,
@@ -27,9 +28,10 @@ define([
             return this;
         },
         show: function () {
-
+            this.trigger("show", this);
         },
         hide: function () {
+            this.$el.hide();
             //this.$el.find(".square").animate({bottom: '700px'});
         },
 

@@ -6,7 +6,7 @@ define([
     main
 ){
     var Model = Backbone.Model.extend({
-
+        url: '/check',
         defaults: {
             name: "",
             password: "",
@@ -14,12 +14,14 @@ define([
             logged: false
         },
         initialize: function() {
-            console.log("model main:" + main);
             this.on("change:logged", function(model){
                 if (!model.get("logged"))
                     this.logout();
             });
         },
+
+
+
         logout: function() {
             var data = userLogged.get("name");
             $.ajax({
@@ -40,6 +42,5 @@ define([
 
     });
 
-
-    return  new Model();
+    return  Model;
 });
