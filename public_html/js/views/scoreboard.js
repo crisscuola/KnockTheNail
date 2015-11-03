@@ -14,13 +14,14 @@ define([
         el: '.scoreboard',
         template: tmpl,
         collection: players,
-        model: player,
+        player: player,
         name: 'scoreboard',
         initialize: function () {
+            console.log(this.player);
             for (var i = 0; i < 10; i++) {
             var rand_name = Math.random().toString(36).substr(2, 5);
             var rand_score = Math.floor(Math.random()*(100));
-            this.collection.push(new this.model({name: rand_name, score: rand_score}));
+            //this.collection.push(this.player({name: rand_name, score: rand_score}));
             }
             this.collection.sort('score');
         },
@@ -33,6 +34,7 @@ define([
         },
         show: function () {
             this.trigger("show", this);
+            console.log(this.model);
         },
         hide: function () {
             this.$el.hide();
@@ -40,5 +42,5 @@ define([
 
     });
 
-    return new View();
+    return View;
 });

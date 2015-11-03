@@ -10,6 +10,7 @@ define([
         el: '.game',
         template: tmpl,
         name: 'game',
+        model: null,
         events: {
             'click .button-group__button:first': 'knock1',
             'click .button-group__button:nth-child(2)': 'knock2',
@@ -69,5 +70,5 @@ define([
 
     });
 
-    return  new View();
+    return View;
 });

@@ -1,26 +1,25 @@
 define([
     'backbone',
     'tmpl/base',
-    'models/user',
     'collections/logged',
     'views/main'
 ], function(
     Backbone,
     tmpl,
-    user,
     logged,
     main
 ){
     var View = Backbone.View.extend({
         el: '.corner',
         template: tmpl,
-        collection: logged,
-        model: user,
+        model: null,
         name: 'base',
         events: {
             "click .corner__btn_logout": "logout"
         },
         initialize: function () {
+            var that = this;
+            this.model.on('change', that.render.bind(that));
         },
         check: function() {
             if (!userLogged.get("logged")) {
@@ -36,18 +35,31 @@ define([
             }
         },
         render: function () {
-            this.$el.html(this.template);
+            console.log("base render ");
+            this.$el.html(this.template(this.model.toJSON()));
             this.delegateEvents();
             //this.check();
             return this;
         },
 
+        logoutBtnHide: function(){
+            console.log("logoutHide from base");
+            this.trigger("hideLogout", this);
+        },
+
+        logoutBtnShow: function(){
+            console.log("logoutShow from base");
+            this.trigger("showLogout", this);
+        },
+
         logout: function(event){
-            event.preventDefault();
-            userLogged.set({logged: false});
+            //event.preventDefault();
+            this.model.trigger('logout');
             this.render();
+            //userLogged.set({logged: false});
+            //this.render();
         }
     });
 
-    return new View();
+    return View;
 });

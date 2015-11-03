@@ -4,7 +4,9 @@ require.config({
     paths: {
         jquery: "lib/jquery",
         underscore: "lib/underscore",
-        backbone: "lib/backbone"
+        backbone: "lib/backbone",
+        cookie: "lib/jquery.cookie",
+        test: "lib/test"
     },
     shim: {
         'backbone': {
@@ -13,6 +15,9 @@ require.config({
         },
         'underscore': {
             exports: '_'
+        },
+        'cookie': {     //<-- cookie depends on Jquery and exports nothing
+            deps: ['jquery']
         }
     }
 });
@@ -23,31 +28,34 @@ define([
     'models/user',
     'collections/logged',
     'views/main',
-    'views/base'
+    'views/base',
+    'cookie'
 ], function(
     Backbone,
     router,
     user,
     logged,
     main,
-    base
+    base,
+    cookie
 ){
     Backbone.View.prototype.close = function(){
       this.remove();
     }
-    var userLogged = new user();
-    var tmp = userLogged.save({}, {
-    success: function(userLogged,response){
-        if (response.success){
-            userLogged.logged = true;
-            userLogged.name = response.name;
-        }
-        else
-          userLogged.logged = false;
-    }
-    });
-    console.log(userLogged)
-    console.log(tmp);
+    //console.log(Cookies);
+    //var userLogged = new user();
+//    user.save({}, {
+//    success: function(userLogged,response){
+//        console.log(response);
+//        if(response.success) {
+//            user.logged = true;
+//            user.name = response.name;
+//        }
+//        else
+//            user.logged = false;
+//    }
+//    });
+    //base.render();
 //    var loggedIn = logged;
 //    userLogged =  user;
 //    $.ajax({

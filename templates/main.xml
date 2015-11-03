@@ -1,4 +1,4 @@
-<fest:template xmlns:fest="http://fest.mail.ru" context_name="logged">
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="user">
 	<div class="header">
 		<h1 class="header__title">Epic Game</h1>
 		<p class="header__par">Main Menu</p>
@@ -7,8 +7,14 @@
 		<ul class="menu">
 			<li class="menu__item"><a class="button" href="#game">Start Game</a></li>
 			<li class="menu__item"><a class="button" href="#scoreboard">Score Board</a></li>
-			<li class="menu__item menu__item_login"><a class="button" href="#login">LogIn</a></li>
-			<li class="menu__item menu__item_logout"><a class="button" href="#">LogOut</a></li>
+			<fest:choose>
+				<fest:when test="!user.logged">
+					<li class="menu__item menu__item_login"><a class="button" href="#login">LogIn</a></li>
+				</fest:when>
+				<fest:when test="user.logged">
+					<li class="menu__item menu__item_logout"><a class="button" href="#">LogOut</a></li>
+				</fest:when>
+			</fest:choose>
 		</ul>
 	</div>
 </fest:template>
