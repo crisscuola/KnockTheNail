@@ -7,6 +7,8 @@ public interface GameMechanics {
 
     public void addUser(UserProfile user);
 
+    public void removeUser(UserProfile user);
+
     public void incrementScore(int userName);
 
     public void run();

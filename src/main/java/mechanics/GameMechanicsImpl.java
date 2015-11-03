@@ -15,9 +15,7 @@ public class GameMechanicsImpl implements GameMechanics {
 
     private WebSocketService webSocketService;
 
-    private Map<Integer, GameSession> nameToGame = new HashMap<>();
-
-    private Set<GameSession> allSessions = new HashSet<>();
+    private Map<Integer, GameSession> usersInGame = new HashMap<>();
 
     private Queue<UserProfile> usersToGame = new ConcurrentLinkedQueue<>();
 
@@ -25,13 +23,19 @@ public class GameMechanicsImpl implements GameMechanics {
         this.webSocketService = webSocketService;
     }
 
+    @Override
     public void addUser(UserProfile user) {
         usersToGame.add(user);
     }
 
     @Override
+    public void removeUser(UserProfile user){
+        usersToGame.remove(user);
+    }
+
+    @Override
     public void incrementScore(int id) {
-        GameSession myGameSession = nameToGame.get(id);
+        GameSession myGameSession = usersInGame.get(id);
 
         GameUser myUser = myGameSession.getSelf(id);
         myUser.incrementMyScore();
@@ -42,10 +46,19 @@ public class GameMechanicsImpl implements GameMechanics {
         myGameSession.incrementCommonScore();
         myGameSession.setLastClick(myUser);
 
+
         webSocketService.notifyMyNewScore(myUser);
         webSocketService.notifyEnemyNewScore(enemyUser);
         webSocketService.notifyCommonScore(myUser);
         webSocketService.notifyCommonScore(enemyUser);
+
+        if(myGameSession.getCommonScore() >= 20){
+            boolean firstWin = myGameSession.isFirstWin();
+            webSocketService.notifyGameOver(myGameSession.getFirst(), firstWin);
+            webSocketService.notifyGameOver(myGameSession.getSecond(), !firstWin);
+            usersInGame.remove(id);
+            usersInGame.remove(enemyUser.getMyId());
+        }
     }
 
     @Override
@@ -67,23 +80,14 @@ public class GameMechanicsImpl implements GameMechanics {
             UserProfile second = usersToGame.poll();
             starGame(first,second);
         }
-        for (GameSession session : allSessions) {
-            if (session.getCommonScore() >= 20) {
-                boolean firstWin = session.isFirstWin();
-                webSocketService.notifyGameOver(session.getFirst(), firstWin);
-                webSocketService.notifyGameOver(session.getSecond(), !firstWin);
-                allSessions.remove(session);
-            }
-        }
     }
 
 
     private void starGame(UserProfile first, UserProfile second) {
         GameSession gameSession = new GameSession(first, second);
-        allSessions.add(gameSession);
 
-        nameToGame.put(first.getId(), gameSession);
-        nameToGame.put(second.getId(), gameSession);
+        usersInGame.put(first.getId(), gameSession);
+        usersInGame.put(second.getId(), gameSession);
 
         System.out.println("GameMech StartGame() -> notifyStartGame");
         webSocketService.notifyStartGame(gameSession.getSelf(first.getId()));

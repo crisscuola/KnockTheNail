@@ -3,9 +3,6 @@ package mechanics;
 import base.GameUser;
 import main.UserProfile;
 
-import java.util.HashMap;
-import java.util.Map;
-
 
 public class GameSession {
     private final GameUser first;
@@ -13,11 +10,10 @@ public class GameSession {
     private int commonScore;
     private GameUser lastClick;
 
-    private Map<Integer, GameUser> users = new HashMap<>();
-
     public GameSession(UserProfile user1, UserProfile user2) {
         int id1 = user1.getId();
         int id2 = user2.getId();
+
         String name1 = user1.getName();
         String name2 = user2.getName();
 
@@ -29,9 +25,6 @@ public class GameSession {
         gameUser2.setEnemyName(name1);
         gameUser2.setEnemyId(id1);
 
-        users.put(id1, gameUser1);
-        users.put(id2, gameUser2);
-
         this.first = gameUser1;
         this.second = gameUser2;
 
@@ -41,12 +34,11 @@ public class GameSession {
     }
 
     public GameUser getEnemy(int id) {
-        int enemyId = users.get(id).getEnemyId();
-        return users.get(enemyId);
+        return first.getMyId() == id ? second : first;
     }
 
     public GameUser getSelf(int id) {
-        return users.get(id);
+        return first.getMyId() == id ? first : second;
     }
 
     public GameUser getFirst() {
