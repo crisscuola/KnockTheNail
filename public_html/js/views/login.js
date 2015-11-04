@@ -41,7 +41,6 @@ define([
             } else {
                 event.preventDefault();
                 var data =  $(".login-form").serialize();
-                console.log(this);
                 $.ajax({
                     type: "POST",
                     url: "/signin",
@@ -51,18 +50,13 @@ define([
                     console.log("SERVER ANSWER : " + obj);
                     var answer = JSON.parse(obj);
                     if (answer.success) {
-                        //this.model.set({name: answer.name, logged: true});
-                        console.log(this);
                         this.model.set({name: answer.name, logged: true});
-                        console.log(this);
-                        console.log('model.logged login= ' + this.model.get("logged"));
                         location.href = "#";
                         alert(answer.name + " " + answer.message);
                     } else {
                         alert(answer.message);
                     }
                 });
-                console.log(this.model);
             }
         }
 

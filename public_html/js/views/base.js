@@ -38,26 +38,19 @@ define([
             console.log("base render ");
             this.$el.html(this.template(this.model.toJSON()));
             this.delegateEvents();
-            //this.check();
             return this;
         },
 
         logoutBtnHide: function(){
-            console.log("logoutHide from base");
             this.trigger("hideLogout", this);
         },
 
         logoutBtnShow: function(){
-            console.log("logoutShow from base");
             this.trigger("showLogout", this);
         },
 
         logout: function(event){
-            //event.preventDefault();
             this.model.trigger('logout');
-            this.render();
-            //userLogged.set({logged: false});
-            //this.render();
         }
     });
 

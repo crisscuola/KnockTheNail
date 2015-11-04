@@ -22,12 +22,11 @@
 
 				var myName = "${myName}";
 				var enemyName = "";
-
 				init = function () {
 				ws = new WebSocket("ws://localhost:8080/gameplay");
 				console.log("INIT:" + ws);
 				ws.onopen = function (event) {
-
+				console.log("Web Socket opened");
 				}
 
 
@@ -50,7 +49,7 @@
 				document.getElementById("win").innerHTML = "loser!";
 				}
 
-				if(data.status == "increment" && data.name == userLogged.get("name")){
+				if(data.status == "increment" && data.name == <fest:value>name.name</fest:value>){
 				document.getElementById("myScore").innerHTML = data.score;
 				}
 
@@ -72,7 +71,8 @@
 
 
 				ws.onclose = function (event) {
-
+					console.log("WebSocket closed");
+					ws.close();
 				}
 
 				};
@@ -86,8 +86,8 @@
 			</script>
 
 
-			<div id="hello">
-				<p>Hello, <fest:value>name</fest:value>!</p>
+			<div id="game">
+				<p>Hello, <fest:value>name.name</fest:value>!</p>
 			</div>
 
 			<div id="wait">
@@ -96,7 +96,7 @@
 
 			<div id="gameplay" style="display: none">
 				<div id="score">
-					<p>user name : <fest:value>name</fest:value> MyScore : <span id="myScore">0</span></p>
+					<p>user name : <fest:value>name.name</fest:value> MyScore : <span id="myScore">0</span></p>
 
 					<p>user name : <span id="enemyName"></span> enemyScore : <span id="enemyScore">0</span></p>
 

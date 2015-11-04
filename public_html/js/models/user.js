@@ -19,24 +19,6 @@ define([
         },
 
         initialize: function() {
-            console.log("model init");
-            console.log("this.mainView:"+this.view);
-//            this.save({}, {
-//                 function(response){
-//                    console.log(response);
-//                    if(response.success) {
-//                        this.logged = response.success;
-//                        this.name = response.name;
-//                        this.set({name: response.name, logged: true});
-//                    }
-//                    else {
-//                        this.logged = false;
-//                        this.name = '';
-//                    }
-//                    console.log(this.get("logged"));
-//                }
-//
-//                });
             $.ajax({
                 type: "POST",
                 url: "/check",
@@ -56,19 +38,6 @@ define([
                 console.log('LOGOUT EVENT');
                 this.logout();
             });
-        //});
-//            this.on("change:logged", function(model){
-//                //this.trigger('changed');
-//                console.log(model);
-////                //var newModel  = new model.view();
-////                if (!model.get("logged"))
-////                    this.logout();
-////                this.test();
-//            });
-        },
-
-        test: function(){
-            console.log("this.mainView:"+this.view);
         },
 
         logout: function() {

@@ -21,7 +21,7 @@ define([
 ){
 
     var mainView = new main({model: user});
-    //var gameView = new game({model: user});
+    var gameView = new game({model: user});
     var loginView = new login({model: user});
     var registrationView = new registration({model: user});
     var scoreboardView = new scoreboard({model: user});
@@ -41,13 +41,13 @@ define([
         initialize: function() {
             this.manager = new viewManager();
             this.manager.add(mainView);
-            //this.manager.add(gameView);
+            this.manager.add(gameView);
             this.manager.add(loginView);
             this.manager.add(registrationView);
             this.manager.add(scoreboardView);
             this.manager.add(baseView);
             mainView.on("show", this.manager.hideExceptOne.bind(this.manager.views));
-            //gameView.on("show", this.manager.hideExceptOne.bind(this.manager.views));
+            gameView.on("show", this.manager.hideExceptOne.bind(this.manager.views));
             loginView.on("show", this.manager.hideExceptOne.bind(this.manager.views));
             registrationView.on("show", this.manager.hideExceptOne.bind(this.manager.views));
             scoreboardView.on("show", this.manager.hideExceptOne.bind(this.manager.views));
@@ -65,6 +65,7 @@ define([
         },
         gameAction: function () {
             gameView.show();
+            gameView.render();
         },
         loginAction: function () {
             loginView.show();
