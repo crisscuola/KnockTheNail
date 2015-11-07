@@ -39,6 +39,11 @@
 				document.getElementById("enemyName").innerHTML = data.enemyName;
 				}
 
+				if(data.status == "disconnect"){
+				document.getElementById("disconnect").style.display = "block";
+				document.getElementById("gameplay").style.display = "none";
+				}
+
 				if(data.status == "finish"){
 				document.getElementById("gameOver").style.display = "block";
 				document.getElementById("gameplay").style.display = "none";
@@ -115,8 +120,12 @@
 				</form>
 			</div>
 
+			<div id="disconnect" style="display: none">
+				<p>You enemy disconnect ! </p>
+			</div>
+
 			<div id="gameOver" style="display: none">
-				<p>Game over! You are <span id="win"></span></p><span>Kostyan_test</span>
+				<p>Game over! You are <span id="win"></span></p>
 			</div>
 
 

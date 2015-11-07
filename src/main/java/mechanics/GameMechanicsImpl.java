@@ -15,6 +15,8 @@ public class GameMechanicsImpl implements GameMechanics {
 
     private WebSocketService webSocketService;
 
+
+
     private Map<Integer, GameSession> usersInGame = new HashMap<>();
 
     private Queue<UserProfile> usersToGame = new ConcurrentLinkedQueue<>();
@@ -29,8 +31,11 @@ public class GameMechanicsImpl implements GameMechanics {
     }
 
     @Override
-    public void removeUser(UserProfile user){
-        usersToGame.remove(user);
+    public void removeUser(UserProfile user){usersToGame.remove(user);
+        int id = user.getId();
+        GameSession myGameSession = usersInGame.get(id);
+        GameUser enemyUser = myGameSession.getEnemy(id);
+        webSocketService.notifyDisconnect(enemyUser);
     }
 
     @Override
@@ -51,6 +56,7 @@ public class GameMechanicsImpl implements GameMechanics {
         webSocketService.notifyEnemyNewScore(enemyUser);
         webSocketService.notifyCommonScore(myUser);
         webSocketService.notifyCommonScore(enemyUser);
+
 
         if(myGameSession.getCommonScore() >= 20){
             boolean firstWin = myGameSession.isFirstWin();

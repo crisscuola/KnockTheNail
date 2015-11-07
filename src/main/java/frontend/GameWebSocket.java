@@ -53,6 +53,16 @@ public class GameWebSocket {
         }
     }
 
+    public void disconnect(GameUser user) {
+        try {
+            JSONObject jsonStart = new JSONObject();
+            jsonStart.put("status", "disconnect");
+            session.getRemote().sendString(jsonStart.toJSONString());
+        } catch (IOException e) {
+            System.out.print(e.toString());
+        }
+    }
+
     @OnWebSocketMessage
     public void onMessage(String data) {
         System.out.print("SocketMessage " + data);
@@ -109,6 +119,8 @@ public class GameWebSocket {
     @OnWebSocketClose
     public void onClose(int statusCode, String reason) {
         gameMechanics.removeUser(user);
+
         System.out.println("Closed by " + user.getName());
+
     }
 }

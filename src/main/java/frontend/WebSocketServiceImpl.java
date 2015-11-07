@@ -39,4 +39,8 @@ public class WebSocketServiceImpl implements WebSocketService {
     public void notifyGameOver(GameUser user, boolean win) {
         userSockets.get(user.getMyId()).gameOver(user, win);
     }
+
+    public  void notifyDisconnect(GameUser user) { userSockets.get(user.getMyId()).disconnect(user);
+        System.out.println("disconnect");
+    }
 }
