@@ -118,8 +118,8 @@ public class GameWebSocket {
 
     @OnWebSocketClose
     public void onClose(int statusCode, String reason) {
-        gameMechanics.removeUser(user);
-
+        gameMechanics.removeUserToGame(user);
+        gameMechanics.removeUserInGame(user);
         System.out.println("Closed by " + user.getName());
 
     }

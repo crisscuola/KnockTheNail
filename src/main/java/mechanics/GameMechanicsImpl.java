@@ -31,7 +31,17 @@ public class GameMechanicsImpl implements GameMechanics {
     }
 
     @Override
-    public void removeUser(UserProfile user){usersToGame.remove(user);
+    public void removeUserToGame(UserProfile user){
+        usersToGame.remove(user);
+        int id = user.getId();
+        GameSession myGameSession = usersInGame.get(id);
+        GameUser enemyUser = myGameSession.getEnemy(id);
+        webSocketService.notifyDisconnect(enemyUser);
+    }
+
+    @Override
+    public  void removeUserInGame(UserProfile user) {
+        usersInGame.remove(user);
         int id = user.getId();
         GameSession myGameSession = usersInGame.get(id);
         GameUser enemyUser = myGameSession.getEnemy(id);
