@@ -58,6 +58,7 @@ define([
                     }
                 });
             }
+            $(".login-form")[0].reset();
         }
 
     });

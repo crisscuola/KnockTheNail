@@ -39,7 +39,6 @@ define([
             this.model.trigger('logout');
         },
         game: function(event){
-            console.log("TEEEST");
             if(!this.model.get("logged")){
                 event.preventDefault();
                 alert("Please log in to play!");

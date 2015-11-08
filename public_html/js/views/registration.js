@@ -22,6 +22,7 @@ define([
         },
         show: function () {
             this.trigger('show', this);
+            //this.find(".register-form")[0].reset();
         },
         hide: function () {
             this.$el.hide();
@@ -45,11 +46,13 @@ define([
                     if (answer.success) {
                         location.href = "#";
                         alert(answer.name +" " +answer.message);
+                        console.log(data)
                     } else {
                         alert(answer.name + " " +answer.message);
                     }
                 });
             }
+            $(".register-form")[0].reset();
         }
 
     });

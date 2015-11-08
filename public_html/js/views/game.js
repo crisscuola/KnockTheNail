@@ -1,9 +1,11 @@
 define([
     'backbone',
-    'tmpl/game'
+    'tmpl/game',
+    'gameSocket'
 ], function(
     Backbone,
-    tmpl
+    tmpl,
+    gameSocket
 ){
 
     var View = Backbone.View.extend({
@@ -11,11 +13,14 @@ define([
         template: tmpl,
         name: 'game',
         model: null,
+        socket: new gameSocket(),
         events: {
             'click .button-group__button:first': 'knock1',
             'click .button-group__button:nth-child(2)': 'knock2',
             'click .button-group__button:nth-child(3)': 'knock3',
-            'click .square__reset': 'reset'
+            'click .square__reset': 'reset',
+            'click .game-form input': 'btn1Clicked',
+            'click .button_back': 'backClick'
         },
         initialize: function () {
         },
@@ -26,6 +31,8 @@ define([
         },
         show: function () {
             this.trigger("show", this);
+            this.socket.onGameStart();
+            //this.socket.onGameStart();
         },
         hide: function () {
             this.$el.hide();
@@ -66,6 +73,13 @@ define([
         reset: function() {
             $nail = this.$el.find('.square__nail').animate({ top: '110px'}, 'fast');
             this.$el.find('.square__button-group').attr("disabled", false);
+        },
+        btn1Clicked: function() {
+            var message = {"force": '5'};
+            ws.send(JSON.stringify(message));
+        },
+        backClick: function(){
+            ws.close();
         }
 
     });
