@@ -9,7 +9,6 @@ define(function(){
 
         this.init = function () {
            ws = new WebSocket("ws://localhost:8080/gameplay");
-           console.log("INIT:" + ws);
            ws.onopen = function (event) {
            console.log("Web Socket opened");
         }
@@ -36,7 +35,7 @@ define(function(){
                    document.getElementById("win").innerHTML = "loser!";
            }
 
-           if(data.status == "increment" && data.name == name.name){
+           if(data.status == "increment" && data.name == document.getElementById("myName").innerHTML){
                document.getElementById("myScore").innerHTML = data.score;
            }
 

@@ -100,7 +100,7 @@
 
 			<div id="gameplay" style="display: none">
 				<div id="score">
-					<p>Your name : <fest:value>name.name</fest:value>. Your score : <span id="myScore">0</span></p>
+					<p>Your name : <span id="myName"><fest:value>name.name</fest:value></span>. Your score : <span id="myScore">0</span></p>
 
 					<p>Enemy name : <span id="enemyName"></span>. Enemy score : <span id="enemyScore">0</span></p>
 
@@ -124,7 +124,7 @@
 			</div>
 
 			<div id="gameOver" style="display: none">
-				<p>Game over! You are <span id="win"></span></p>
+				<p>Game over! You are <fest:space/><span id="win"></span></p>
 			</div>
 
 
