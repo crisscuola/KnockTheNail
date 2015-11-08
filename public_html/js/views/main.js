@@ -17,7 +17,7 @@ define([
         collection: logged,
         model: null,
         events: {
-            "click .menu__item.button:lt(3)": "hide",
+            "click .menu__item:first-child": "game",
             "click .menu__item_logout": "logout"
         },
         initialize: function () {
@@ -37,6 +37,13 @@ define([
         },
         logout: function() {
             this.model.trigger('logout');
+        },
+        game: function(event){
+            console.log("TEEEST");
+            if(!this.model.get("logged")){
+                event.preventDefault();
+                alert("Please log in to play!");
+            }
         }
     });
 
