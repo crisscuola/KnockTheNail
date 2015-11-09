@@ -17,6 +17,11 @@ import base.WebSocketService;
 import frontend.WebSocketGameServlet;
 import frontend.WebSocketServiceImpl;
 import mechanics.GameMechanicsImpl;
+import org.jetbrains.annotations.Nullable;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 
 
 public class Main {
@@ -24,14 +29,13 @@ public class Main {
     public static final int DEF_PORT = 8080;
 
     public static void main(@NotNull String[] args) throws Exception {
-        int port = DEF_PORT;
-        if (args.length == 1) {
-            String portString = args[0];
-            if ((Integer.valueOf(portString) >= 1024) && (Integer.valueOf(portString) <= 49151))
-                port = Integer.valueOf(portString);
-            else {
-                System.out.append("Incorrect port").append('\n');
-            }
+        Integer port = getPort();
+        if (port == null){
+            port = DEF_PORT;
+        }
+        else if ((port < 1024) && (port > 49151)){
+            System.out.append("Incorrect port").append('\n');
+            return;
         }
 
         System.out.append("Starting at port: ").append(String.valueOf(port)).append('\n');
@@ -69,5 +73,17 @@ public class Main {
 
         server.start();
         gameMechanics.run();
+    }
+
+    @Nullable
+    private static Integer getPort() {
+        try (final FileInputStream fis = new FileInputStream("cfg/server.cfg")) {
+            final Properties properties = new Properties();
+            properties.load(fis);
+            return Integer.valueOf(properties.getProperty("port"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
