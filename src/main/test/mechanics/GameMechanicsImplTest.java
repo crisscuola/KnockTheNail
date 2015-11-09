@@ -22,4 +22,15 @@ public class GameMechanicsImplTest {
     @NotNull
     private final GameMechanics gameMechanics = new GameMechanicsImpl(webSocketService);
 
+    @Test
+    public void testAddUser() throws Exception{
+        UserProfile user = new UserProfile("1","1");
+        user.setId(1);
+        boolean result = gameMechanics.addUser(user);
+        assertTrue(result);
+        boolean result2 = gameMechanics.addUser(user);
+        assertFalse(result2);
+        boolean result3 = gameMechanics.removeUserToGame(user);
+        assertTrue(result3);
+    }
 }
