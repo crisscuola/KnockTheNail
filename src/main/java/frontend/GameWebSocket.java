@@ -11,6 +11,8 @@ import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
 import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 import org.jetbrains.annotations.NotNull;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 
@@ -65,8 +67,27 @@ public class GameWebSocket {
 
     @OnWebSocketMessage
     public void onMessage(String data) {
+        JSONParser parser = new JSONParser();
+
+        Object obj = null;
+        try {
+            obj = parser.parse(data);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        JSONObject jsonObj = (JSONObject) obj;
+
+
+        //JSONObject jo = JSONObject.get("data");
+        System.out.println(jsonObj.get("force"));
+
+        String x = String.valueOf(jsonObj.get("force"));
+
+        int force = Integer.valueOf(x);
+
+
         System.out.print("SocketMessage " + data);
-        gameMechanics.incrementScore(user.getId(), 2);
+        gameMechanics.incrementScore(user.getId(), force);
     }
 
     @OnWebSocketConnect

@@ -58,7 +58,7 @@ public class GameMechanicsImpl implements GameMechanics {
         GameUser enemyUser = myGameSession.getEnemy(id);
         enemyUser.incrementEnemyScore(force);
 
-        myGameSession.incrementCommonScore();
+        myGameSession.incrementCommonScore(force);
         myGameSession.setLastClick(myUser);
 
 
@@ -68,7 +68,7 @@ public class GameMechanicsImpl implements GameMechanics {
         webSocketService.notifyCommonScore(enemyUser);
 
 
-        if(myGameSession.getCommonScore() >= 20){
+        if(myGameSession.getCommonScore() >= 100){
             boolean firstWin = myGameSession.isFirstWin();
             webSocketService.notifyGameOver(myGameSession.getFirst(), firstWin);
             webSocketService.notifyGameOver(myGameSession.getSecond(), !firstWin);

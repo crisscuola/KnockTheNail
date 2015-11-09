@@ -53,8 +53,8 @@ public class GameSession {
         return lastClick == first;
     }
 
-    public void incrementCommonScore(){
-        commonScore++;
+    public void incrementCommonScore(int force){
+        commonScore+=force;
     }
 
     public int getCommonScore() {
