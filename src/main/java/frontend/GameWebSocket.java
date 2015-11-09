@@ -65,7 +65,7 @@ public class GameWebSocket {
 
     @OnWebSocketMessage
     public void onMessage(String data) {
-        System.out.print("SocketMessage " + data);
+        System.out.println("SocketMessage " + data);
         gameMechanics.incrementScore(user.getId());
     }
 
@@ -117,7 +117,7 @@ public class GameWebSocket {
     }
 
     @OnWebSocketClose
-    public void onClose(int statusCode, String reason) {
+    public void onClose(Session session, int statusCode, String reason) {
         gameMechanics.removeUserToGame(user);
         gameMechanics.removeUserInGame(user);
         System.out.println("Closed by " + user.getName());
