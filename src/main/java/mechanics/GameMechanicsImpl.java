@@ -70,7 +70,7 @@ public class GameMechanicsImpl implements GameMechanics {
         GameUser enemyUser = myGameSession.getEnemy(id);
         enemyUser.incrementEnemyScore(force);
 
-        myGameSession.incrementCommonScore();
+        myGameSession.incrementCommonScore(force);
         myGameSession.setLastClick(myUser);
 
 
@@ -78,6 +78,7 @@ public class GameMechanicsImpl implements GameMechanics {
         webSocketService.notifyEnemyNewScore(enemyUser);
         webSocketService.notifyCommonScore(myUser);
         webSocketService.notifyCommonScore(enemyUser);
+
 
 
         if(myGameSession.getCommonScore() >= nail.getHealth()){
