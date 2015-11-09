@@ -49,14 +49,14 @@ public class GameMechanicsImpl implements GameMechanics {
     }
 
     @Override
-    public void incrementScore(int id) {
+    public void incrementScore(int id, int force) {
         GameSession myGameSession = usersInGame.get(id);
 
         GameUser myUser = myGameSession.getSelf(id);
-        myUser.incrementMyScore();
+        myUser.incrementMyScore(force);
 
         GameUser enemyUser = myGameSession.getEnemy(id);
-        enemyUser.incrementEnemyScore();
+        enemyUser.incrementEnemyScore(force);
 
         myGameSession.incrementCommonScore();
         myGameSession.setLastClick(myUser);

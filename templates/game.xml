@@ -31,10 +31,6 @@
 
 				</div>
 
-				<input id="test1" type="text"/>
-				<input id="test2" type="text"/>
-				<input id="test3" type="text"/>
-
 				<form class="game-form" action="">
 					<input class="game-form__btn1" type="button" name="submit" value="Force = 1H"/>
 					<input class="game-form__btn2" type="button" name="submit" value="Force = 2H"/>

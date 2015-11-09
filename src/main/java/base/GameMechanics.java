@@ -11,7 +11,7 @@ public interface GameMechanics {
 
     public  void removeUserInGame(UserProfile user);
 
-    public void incrementScore(int userName);
+    public void incrementScore(int userName, int force);
 
     public void run();
 }
