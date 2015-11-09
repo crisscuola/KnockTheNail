@@ -47,9 +47,9 @@ define(function(){
                document.getElementById("commonScore").innerHTML = data.score;
            }
 
-           document.getElementById("test1").value ="Btn1 = " + data.button1;
-           document.getElementById("test2").value ="Btn2 =  " + data.button2;
-           document.getElementById("test3").value ="Btn3 =  " + data.button3;
+        //   document.getElementById("test1").value ="Btn1 = " + data.button1;
+        //   document.getElementById("test2").value ="Btn2 =  " + data.button2;
+        //   document.getElementById("test3").value ="Btn3 =  " + data.button3;
 
         }
 

@@ -108,9 +108,9 @@
 
 				</div>
 
-				<input id="test1" type="text"/>
-				<input id="test2" type="text"/>
-				<input id="test3" type="text"/>
+				<!--<input id="test1" type="text"/>-->
+				<!--<input id="test2" type="text"/>-->
+				<!--<input id="test3" type="text"/>-->
 
 				<form class="game-form" action="">
 					<input type="button" name="submit" value="Force = 1H"/>

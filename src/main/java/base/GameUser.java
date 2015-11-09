@@ -36,9 +36,9 @@ public class GameUser {
 
     public int getEnemyScore() { return enemyScore; }
 
-    public void incrementMyScore() { myScore++; }
+    public void incrementMyScore(int force) { myScore+=force; }
 
-    public void incrementEnemyScore() { enemyScore++; }
+    public void incrementEnemyScore(int force) { enemyScore+=force; }
 
     public void setEnemyName(String enemyName) { this.enemyName = enemyName; }
 }
