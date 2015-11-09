@@ -1,7 +1,7 @@
 <fest:template xmlns:fest="http://fest.mail.ru" context_name="name">
 	<a class="button button_back" href="#">Back</a>
 	<div class="header">
-		<h1 class="header__title">Epic Game</h1>
+		<h1 class="header__title">Knock the Nail</h1>
 	</div>
 		<div class="square square_game">
 			<!--<div class="square__nail"></div>-->
