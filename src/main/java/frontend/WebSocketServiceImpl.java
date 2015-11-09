@@ -28,6 +28,9 @@ public class WebSocketServiceImpl implements WebSocketService {
     @Override
     public  void notifyCommonScore(GameUser user) {userSockets.get(user.getMyId()).setCommonScore(user);}
 
+//    @Override
+//    public void notifyFrictionRate(GameUser user) {userSockets.get(user.getMyId()).setFrictionRate(user);}
+
     @Override
     public void notifyStartGame(GameUser user) {
         GameWebSocket gameWebSocket = userSockets.get(user.getMyId());

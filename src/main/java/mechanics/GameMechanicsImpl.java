@@ -64,6 +64,8 @@ public class GameMechanicsImpl implements GameMechanics {
     public void incrementScore(int id, int force) {
         GameSession myGameSession = usersInGame.get(id);
 
+       // myGameSession.changeFrictionRate();
+
         GameUser myUser = myGameSession.getSelf(id);
         myUser.incrementMyScore(force);
 
@@ -79,6 +81,8 @@ public class GameMechanicsImpl implements GameMechanics {
         webSocketService.notifyCommonScore(myUser);
         webSocketService.notifyCommonScore(enemyUser);
 
+//        webSocketService.notifyFrictionRate(myUser);
+//        webSocketService.notifyFrictionRate(enemyUser);
 
 
         if(myGameSession.getCommonScore() >= nail.getHealth()){

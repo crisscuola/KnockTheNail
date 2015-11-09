@@ -2,13 +2,17 @@ package mechanics;
 
 import base.GameUser;
 import main.UserProfile;
+import base.Nail;
 
 
 public class GameSession {
     private final GameUser first;
     private final GameUser second;
     private int commonScore;
+    private  int frictionRate;
     private GameUser lastClick;
+
+    private Nail nail;
 
     public GameSession(UserProfile user1, UserProfile user2) {
         int id1 = user1.getId();
@@ -29,6 +33,8 @@ public class GameSession {
         this.second = gameUser2;
 
         commonScore = 0;
+
+        frictionRate = 1;
 
         System.out.println("Game Session OK");
     }
@@ -53,13 +59,21 @@ public class GameSession {
         return lastClick == first;
     }
 
+    public void changeFrictionRate() {
+        frictionRate += commonScore/nail.getHealth();
+    }
+
     public void incrementCommonScore(int force){
-        commonScore+=force;
+        //changeFrictionRate();
+        //commonScore+= (force/frictionRate);
+        commonScore+= force ;
     }
 
     public int getCommonScore() {
         return commonScore;
     }
+
+    public  int getFrictionRate() { return  frictionRate; }
 
     public void setLastClick(GameUser user) {
         lastClick = user;

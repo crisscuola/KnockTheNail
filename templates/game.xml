@@ -27,7 +27,9 @@
 
 					<p>Enemy name : <span id="enemyName"></span>. Enemy score : <span id="enemyScore">0</span></p>
 
-					<p> <span> commonScore </span> <span id="commonScore">0</span></p>
+					<p> <span> commonScore : </span> <span id="commonScore">0</span></p>
+
+					<p> <span> frictionRate : </span> <span id="frictionRate">0</span></p>
 
 				</div>
 

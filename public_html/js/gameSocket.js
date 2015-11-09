@@ -37,14 +37,17 @@ define(function(){
 
            if(data.status == "increment" && data.name == document.getElementById("myName").innerHTML){
                document.getElementById("myScore").innerHTML = data.score;
+
            }
 
            if(data.status == "increment" && data.name == document.getElementById("enemyName").innerHTML){
                document.getElementById("enemyScore").innerHTML = data.score;
+
            }
 
            if (data.status == "increment" ){
                document.getElementById("commonScore").innerHTML = data.score;
+               //document.getElementById("frictionRate").innerHTML = data.frictionRate;
            }
 
         //   document.getElementById("test1").value ="Btn1 = " + data.button1;
