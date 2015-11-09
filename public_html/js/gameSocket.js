@@ -47,9 +47,9 @@ define(function(){
                document.getElementById("commonScore").innerHTML = data.score;
            }
 
-           document.getElementById("test1").value ="Btn1 = " + data.button1;
-           document.getElementById("test2").value ="Btn2 =  " + data.button2;
-           document.getElementById("test3").value ="Btn3 =  " + data.button3;
+        //   document.getElementById("test1").value ="Btn1 = " + data.button1;
+        //   document.getElementById("test2").value ="Btn2 =  " + data.button2;
+        //   document.getElementById("test3").value ="Btn3 =  " + data.button3;
 
         }
 
@@ -60,9 +60,10 @@ define(function(){
 
         };
 
-        this.sendMessage = function() {
-            var message = {"force": '5'};
+        this.sendForce = function(force) {
+            var message = {"force": force};
             ws.send(JSON.stringify(message));
+            console.log(message);
         }
 
         this.onGameStart = function() {
