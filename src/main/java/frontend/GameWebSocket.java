@@ -67,6 +67,7 @@ public class GameWebSocket {
 
     @OnWebSocketMessage
     public void onMessage(String data) {
+
         JSONParser parser = new JSONParser();
 
         Object obj = null;
@@ -88,6 +89,7 @@ public class GameWebSocket {
 
         System.out.print("SocketMessage " + data);
         gameMechanics.incrementScore(user.getId(), force);
+
     }
 
     @OnWebSocketConnect
@@ -138,7 +140,7 @@ public class GameWebSocket {
     }
 
     @OnWebSocketClose
-    public void onClose(int statusCode, String reason) {
+    public void onClose(Session session, int statusCode, String reason) {
         gameMechanics.removeUserToGame(user);
         gameMechanics.removeUserInGame(user);
         System.out.println("Closed by " + user.getName());

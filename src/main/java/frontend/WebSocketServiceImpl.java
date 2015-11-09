@@ -40,6 +40,7 @@ public class WebSocketServiceImpl implements WebSocketService {
         userSockets.get(user.getMyId()).gameOver(user, win);
     }
 
+    @Override
     public  void notifyDisconnect(GameUser user) { userSockets.get(user.getMyId()).disconnect(user);
         System.out.println("disconnect");
     }

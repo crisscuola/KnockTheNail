@@ -5,9 +5,9 @@ import main.UserProfile;
 
 public interface GameMechanics {
 
-    public void addUser(UserProfile user);
+    public boolean addUser(UserProfile user);
 
-    public void removeUserToGame(UserProfile user);
+    public boolean removeUserToGame(UserProfile user);
 
     public  void removeUserInGame(UserProfile user);
 
