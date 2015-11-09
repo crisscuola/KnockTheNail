@@ -2,7 +2,9 @@ package mechanics;
 
 import base.GameMechanics;
 import base.GameUser;
+import base.Nail;
 import base.WebSocketService;
+import example.ReadXMLFileSAX;
 import example.TimeHelper;
 import main.UserProfile;
 
@@ -15,6 +17,7 @@ public class GameMechanicsImpl implements GameMechanics {
 
     private WebSocketService webSocketService;
 
+    private Nail nail;
 
 
     private Map<Integer, GameSession> usersInGame = new HashMap<>();
@@ -23,6 +26,7 @@ public class GameMechanicsImpl implements GameMechanics {
 
     public GameMechanicsImpl(WebSocketService webSocketService) {
         this.webSocketService = webSocketService;
+        this.nail = (Nail) ReadXMLFileSAX.readXML("nail.xml");
     }
 
     @Override
@@ -76,7 +80,7 @@ public class GameMechanicsImpl implements GameMechanics {
         webSocketService.notifyCommonScore(enemyUser);
 
 
-        if(myGameSession.getCommonScore() >= 20){
+        if(myGameSession.getCommonScore() >= nail.getHealth()){
             boolean firstWin = myGameSession.isFirstWin();
             webSocketService.notifyGameOver(myGameSession.getFirst(), firstWin);
             webSocketService.notifyGameOver(myGameSession.getSecond(), !firstWin);
