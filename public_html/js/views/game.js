@@ -19,7 +19,9 @@ define([
             'click .button-group__button:nth-child(2)': 'knock2',
             'click .button-group__button:nth-child(3)': 'knock3',
             'click .square__reset': 'reset',
-            'click .game-form input': 'btn1Clicked',
+            'click .game-form .game-form__btn1': 'btn1Click',
+            'click .game-form .game-form__btn2': 'btn2Click',
+            'click .game-form .game-form__btn3': 'btn3Click',
             'click .button_back': 'backClick'
         },
         initialize: function () {
@@ -74,9 +76,14 @@ define([
             $nail = this.$el.find('.square__nail').animate({ top: '110px'}, 'fast');
             this.$el.find('.square__button-group').attr("disabled", false);
         },
-        btn1Clicked: function() {
-            var message = {"force": '5'};
-            ws.send(JSON.stringify(message));
+        btn1Click: function() {
+            this.socket.sendForce(5);
+        },
+        btn2Click: function() {
+            this.socket.sendForce(10);
+        },
+        btn3Click: function() {
+            this.socket.sendForce(20);
         },
         backClick: function(){
             ws.close();

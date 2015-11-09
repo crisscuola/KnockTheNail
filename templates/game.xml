@@ -13,83 +13,6 @@
 			<!--<div class="square__table"></div>-->
 
 
-
-			<!--<script type="text/javascript">-->
-				<!--var ws;-->
-				<!--var started = false;-->
-				<!--var finished = false;-->
-
-				<!--var myName = "${myName}";-->
-				<!--var enemyName = "";-->
-				<!--init = function () {-->
-				<!--ws = new WebSocket("ws://localhost:8080/gameplay");-->
-				<!--console.log("INIT:" + ws);-->
-				<!--ws.onopen = function (event) {-->
-				<!--console.log("Web Socket opened");-->
-				<!--}-->
-
-
-
-				<!--ws.onmessage = function (event) {-->
-				<!--var data = JSON.parse(event.data);-->
-				<!--if(data.status == "start"){-->
-				<!--document.getElementById("wait").style.display = "none";-->
-				<!--document.getElementById("gameplay").style.display = "block";-->
-				<!--document.getElementById("enemyName").innerHTML = data.enemyName;-->
-				<!--}-->
-
-				<!--if(data.status == "disconnect"){-->
-				<!--document.getElementById("disconnect").style.display = "block";-->
-				<!--document.getElementById("gameplay").style.display = "none";-->
-				<!--}-->
-
-				<!--if(data.status == "finish"){-->
-				<!--document.getElementById("gameOver").style.display = "block";-->
-				<!--document.getElementById("gameplay").style.display = "none";-->
-
-				<!--if(data.win)-->
-				<!--document.getElementById("win").innerHTML = "winner!";-->
-				<!--else-->
-				<!--document.getElementById("win").innerHTML = "loser!";-->
-				<!--}-->
-
-				<!--if(data.status == "increment" && data.name == <fest:value>name.name</fest:value>){-->
-				<!--document.getElementById("myScore").innerHTML = data.score;-->
-				<!--}-->
-
-				<!--if(data.status == "increment" && data.name == document.getElementById("enemyName").innerHTML){-->
-				<!--document.getElementById("enemyScore").innerHTML = data.score;-->
-				<!--}-->
-
-				<!--if (data.status == "increment" )-->
-				<!--{-->
-				<!--document.getElementById("commonScore").innerHTML = data.score;-->
-				<!--}-->
-
-				<!--document.getElementById("test1").value ="Btn1 = " + data.button1;-->
-				<!--document.getElementById("test2").value ="Btn2 =  " + data.button2;-->
-				<!--document.getElementById("test3").value ="Btn3 =  " + data.button3;-->
-
-				<!--}-->
-
-
-
-				<!--ws.onclose = function (event) {-->
-					<!--console.log("WebSocket closed");-->
-					<!--ws.close();-->
-				<!--}-->
-
-				<!--};-->
-
-				<!--function sendMessage() {-->
-				<!--var message = {"force": '5'};-->
-				<!--ws.send(JSON.stringify(message));-->
-				<!--}-->
-
-				<!--$("body").find(".square_game").load(init());-->
-			<!--</script>-->
-
-
 			<div id="game">
 				<p>Hello, <fest:value>name.name</fest:value>!</p>
 			</div>
@@ -113,9 +36,9 @@
 				<input id="test3" type="text"/>
 
 				<form class="game-form" action="">
-					<input type="button" name="submit" value="Force = 1H"/>
-					<input type="button" name="submit" value="Force = 2H"/>
-					<input type="button" name="submit" value="Force = 5H"/>
+					<input class="game-form__btn1" type="button" name="submit" value="Force = 1H"/>
+					<input class="game-form__btn2" type="button" name="submit" value="Force = 2H"/>
+					<input class="game-form__btn3" type="button" name="submit" value="Force = 5H"/>
 				</form>
 			</div>
 
@@ -126,10 +49,6 @@
 			<div id="gameOver" style="display: none">
 				<p>Game over! You are <fest:space/><span id="win"></span></p>
 			</div>
-
-
-
-
 
 			<!--<button class="square__reset">Reset</button>-->
 		</div>

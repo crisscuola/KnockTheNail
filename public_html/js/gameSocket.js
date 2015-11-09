@@ -60,9 +60,10 @@ define(function(){
 
         };
 
-        this.sendMessage = function() {
-            var message = {"force": '5'};
+        this.sendForce = function(force) {
+            var message = {"force": force};
             ws.send(JSON.stringify(message));
+            console.log(message);
         }
 
         this.onGameStart = function() {
