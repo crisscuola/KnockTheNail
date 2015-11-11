@@ -89,6 +89,7 @@ public class GameWebSocket {
 
 
         System.out.print("SocketMessage " + data);
+        System.out.print("Force " + force);
         gameMechanics.incrementScore(user.getId(), force);
 
     }
@@ -132,7 +133,8 @@ public class GameWebSocket {
         jsonStart.put("button1", "10");
         jsonStart.put("button2", "20");
         jsonStart.put("button3", "50");
-        jsonStart.put("score", user.getMyScore()+user.getEnemyScore());
+        jsonStart.put("commonScore", user.getMyScore()+user.getEnemyScore());
+        jsonStart.put("frictionRate", user.getFrictionRate());
         try {
             session.getRemote().sendString(jsonStart.toJSONString());
         } catch (IOException e) {

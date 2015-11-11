@@ -15,6 +15,9 @@ define(function(){
 
         ws.onmessage = function (event) {
            var data = JSON.parse(event.data);
+           console.log(data);
+           console.log("common: "+data.commonScore);
+           console.log("friction: "+data.frictionRate);
            if(data.status == "start"){
            document.getElementById("wait").style.display = "none";
            document.getElementById("gameplay").style.display = "block";
@@ -46,8 +49,8 @@ define(function(){
            }
 
            if (data.status == "increment" ){
-               document.getElementById("commonScore").innerHTML = data.score;
-               //document.getElementById("frictionRate").innerHTML = data.frictionRate;
+               document.getElementById("commonScore").innerHTML = data.commonScore;
+               document.getElementById("frictionRate").innerHTML = data.frictionRate;
            }
 
         //   document.getElementById("test1").value ="Btn1 = " + data.button1;

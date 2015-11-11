@@ -8,7 +8,7 @@ public class GameUser {
     private String enemyName;
     private int myScore = 0;
     private int enemyScore = 0;
-    private  int frictionRate = 1;
+    private  double frictionRate = 1;
 
 
     public GameUser(String myName, int id) {
@@ -36,7 +36,9 @@ public class GameUser {
 
     public int getEnemyScore() { return enemyScore; }
 
-    public  int getFrictionRate() { return  frictionRate; }
+    public  double getFrictionRate() { return  frictionRate; }
+
+    public double changeFrictionRate() { return frictionRate++;}
 
 
     public void incrementMyScore(int force) { myScore+=force; }
