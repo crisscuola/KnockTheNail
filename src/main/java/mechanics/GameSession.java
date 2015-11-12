@@ -8,7 +8,7 @@ import base.Nail;
 public class GameSession {
     private final GameUser first;
     private final GameUser second;
-    private int commonScore;
+    private float commonScore;
     private int  frictionRate;
     private GameUser lastClick;
 
@@ -65,15 +65,14 @@ public class GameSession {
 
     }
 
-    public void incrementCommonScore(int force){
-        changeFrictionRate();
+    public void incrementCommonScore(float force){
 
-       // commonScore+= (force/frictionRate);
-       // commonScore+= force ;
+        commonScore+= (force/frictionRate);
+        //commonScore+= force ;
         System.out.println("CommonScore inc "+commonScore);
     }
 
-    public int getCommonScore() {
+    public float getCommonScore() {
         return commonScore;
     }
 

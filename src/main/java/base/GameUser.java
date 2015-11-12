@@ -6,8 +6,8 @@ public class GameUser {
     private int enemyId;
     private final String myName;
     private String enemyName;
-    private int myScore = 0;
-    private int enemyScore = 0;
+    private float myScore = 0;
+    private float enemyScore = 0;
     private  double frictionRate = 1;
 
 
@@ -32,18 +32,18 @@ public class GameUser {
 
     public void setEnemyId(int id) { this.enemyId = id;}
 
-    public int getMyScore() {return myScore;}
+    public float getMyScore() {return myScore;}
 
-    public int getEnemyScore() { return enemyScore; }
+    public float getEnemyScore() { return enemyScore; }
 
     public  double getFrictionRate() { return  frictionRate; }
 
     public double changeFrictionRate() { return frictionRate++;}
 
 
-    public void incrementMyScore(int force) { myScore+=force; }
+    public void incrementMyScore(int force) { myScore += force/frictionRate; }
 
-    public void incrementEnemyScore(int force) { enemyScore+=force; }
+    public void incrementEnemyScore(int force) { enemyScore+=force/frictionRate; }
 
     public void setEnemyName(String enemyName) { this.enemyName = enemyName; }
 }
