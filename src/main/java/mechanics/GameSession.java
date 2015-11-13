@@ -9,7 +9,7 @@ public class GameSession {
     private final GameUser first;
     private final GameUser second;
     private float commonScore;
-    private int  frictionRate;
+    private float  frictionRate;
     private GameUser lastClick;
 
     private Nail nail;
@@ -61,14 +61,16 @@ public class GameSession {
 
     public void changeFrictionRate() {
 
-        frictionRate++;
+        frictionRate+=commonScore/100;
+
+        //frictionRate+=5;
 
     }
 
     public void incrementCommonScore(float force){
 
         commonScore+= (force/frictionRate);
-        //commonScore+= force ;
+
         System.out.println("CommonScore inc "+commonScore);
     }
 
@@ -76,7 +78,7 @@ public class GameSession {
         return commonScore;
     }
 
-    public  int getFrictionRate() { return  frictionRate; }
+    public  float getFrictionRate() { return  frictionRate; }
 
     public void setLastClick(GameUser user) {
         lastClick = user;

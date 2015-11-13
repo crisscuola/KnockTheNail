@@ -64,16 +64,15 @@ public class GameMechanicsImpl implements GameMechanics {
     public void incrementScore(int id, int force) {
         GameSession myGameSession = usersInGame.get(id);
 
-
-
         GameUser myUser = myGameSession.getSelf(id);
+      //  myGameSession.incrementCommonScore(force);
         myUser.incrementMyScore(force);
         myUser.changeFrictionRate();
 
         GameUser enemyUser = myGameSession.getEnemy(id);
+        //myGameSession.incrementCommonScore(force);
         enemyUser.incrementEnemyScore(force);
         enemyUser.changeFrictionRate();
-
 
         myGameSession.incrementCommonScore(force);
         myGameSession.changeFrictionRate();
