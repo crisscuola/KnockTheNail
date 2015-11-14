@@ -10,6 +10,7 @@ public class GameUser {
     private float myScore = 0;
     private float enemyScore = 0;
     private  double frictionRate = 1;
+    private boolean shouldClick = false;
     private Nail nail;
 
 
@@ -47,4 +48,8 @@ public class GameUser {
     public void incrementEnemyScore(int force) { enemyScore+=force/frictionRate; }
 
     public void setEnemyName(String enemyName) { this.enemyName = enemyName; }
+
+    public void setShouldClick(boolean currentClick) { this.shouldClick = currentClick;}
+
+    public boolean getShouldClick() {return shouldClick;}
 }

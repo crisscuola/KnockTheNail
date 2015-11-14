@@ -40,7 +40,7 @@ define([
             this.$el.find('.square__button-group').attr("disabled", false);
         },
         btn1Click: function() {
-            this.socket.sendForce(5);
+            this.socket.sendForce(5, this.model.get('name'));
         },
         btn2Click: function() {
             this.socket.sendForce(10);
@@ -50,7 +50,7 @@ define([
         },
         backClick: function(){
             ws.close();
-        }
+        },
 
     });
 

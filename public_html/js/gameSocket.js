@@ -31,6 +31,10 @@ define(function(){
                     document.getElementById("wait").style.display = "none";
                     document.getElementById("gameplay").style.display = "block";
                     document.getElementById("enemyName").innerHTML = data.enemyName;
+//                    if(data.shouldClick)
+//                        document.getElementById("waitOpponent").style.display = "none";
+//                    else
+//                        document.getElementsByClassName("game-form").style.display = "none";
                 }
 
                 if(data.status == "disconnect"){
@@ -48,18 +52,29 @@ define(function(){
                 }
 
                 if(data.status == "increment_myscore"){
+                    console.log(data);
                     document.getElementById("myScore").innerHTML = data.score;
+                    if(data.shouldClick){
+                        document.getElementById("info").innerHTML = "Your turn!";
+                    } else {
+                        document.getElementById("info").innerHTML = "Enemy's turn!";
+                    }
                 }
 
                 if(data.status == "increment_enemyscore"){
+                    console.log(data);
                     document.getElementById("enemyScore").innerHTML = data.score;
+                    if(!data.shouldClick){
+                        document.getElementById("info").innerHTML = "Your turn!";
+                    } else {
+                        document.getElementById("info").innerHTML = "Enemy's turn!";
+                    }
                 }
 
                 if (data.status == "increment" ){
                     document.getElementById("commonScore").innerHTML = data.commonScore;
                     document.getElementById("frictionRate").innerHTML = data.frictionRate;
                     var movement = data.button1;
-                    console.log(data.button1);
                     that.knock(movement);
                 }
 
@@ -72,8 +87,8 @@ define(function(){
 
         };
 
-        this.sendForce = function(force) {
-            var message = {"force": force};
+        this.sendForce = function(force, name) {
+            var message = {"force": force, "name": name};
             ws.send(JSON.stringify(message));
         }
 

@@ -32,10 +32,10 @@ public class WebSocketServiceImpl implements WebSocketService {
      //public void notifyFrictionRate(GameUser user) {userSockets.get(user.getMyId()).setFrictionRate(user);}
 
     @Override
-    public void notifyStartGame(GameUser user) {
+    public void notifyStartGame(GameUser user, boolean shouldClick) {
         GameWebSocket gameWebSocket = userSockets.get(user.getMyId());
         System.out.println("notifyStartGame");
-        gameWebSocket.startGame(user);
+        gameWebSocket.startGame(user, shouldClick);
     }
 
     @Override

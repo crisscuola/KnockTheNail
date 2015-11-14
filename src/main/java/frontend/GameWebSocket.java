@@ -34,11 +34,12 @@ public class GameWebSocket {
         return user.getId();
     }
 
-    public void startGame(GameUser user) {
+    public void startGame(GameUser user, boolean shouldClick) {
         try {
             JSONObject jsonStart = new JSONObject();
             jsonStart.put("status", "start");
             jsonStart.put("enemyName", user.getEnemyName());
+            jsonStart.put("shouldClick", shouldClick);
             session.getRemote().sendString(jsonStart.toJSONString());
         } catch (IOException e) {
             System.out.print(e.toString());
@@ -108,6 +109,7 @@ public class GameWebSocket {
         jsonStart.put("status", "increment_myscore");
         jsonStart.put("name", user.getMyName());
         jsonStart.put("score", user.getMyScore());
+        jsonStart.put("shouldClick", user.getShouldClick());
         try {
             session.getRemote().sendString(jsonStart.toJSONString());
         } catch (IOException e) {
@@ -120,6 +122,7 @@ public class GameWebSocket {
         jsonStart.put("status", "increment_enemyscore");
         jsonStart.put("name", user.getEnemyName());
         jsonStart.put("score", user.getEnemyScore());
+        jsonStart.put("shouldClick", !user.getShouldClick());
         try {
             session.getRemote().sendString(jsonStart.toJSONString());
         } catch (IOException e) {
@@ -135,6 +138,7 @@ public class GameWebSocket {
         jsonStart.put("button3", 20 - (1/user.getFrictionRate()));
         jsonStart.put("commonScore", user.getMyScore()+user.getEnemyScore());
         jsonStart.put("frictionRate", user.getFrictionRate());
+
         try {
             session.getRemote().sendString(jsonStart.toJSONString());
         } catch (IOException e) {

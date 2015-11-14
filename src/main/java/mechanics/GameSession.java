@@ -11,6 +11,7 @@ public class GameSession {
     private float commonScore;
     private float  frictionRate;
     private GameUser lastClick;
+    private boolean shouldClick;
 
     private Nail nail;
 
@@ -24,10 +25,13 @@ public class GameSession {
         GameUser gameUser1 = new GameUser(name1,id1);
         gameUser1.setEnemyName(name2);
         gameUser1.setEnemyId(id2);
+        gameUser1.setShouldClick(true);
+
 
         GameUser gameUser2 = new GameUser(name2,id2);
         gameUser2.setEnemyName(name1);
         gameUser2.setEnemyId(id1);
+        gameUser2.setShouldClick(false);
 
         this.first = gameUser1;
         this.second = gameUser2;
@@ -79,6 +83,11 @@ public class GameSession {
     }
 
     public  float getFrictionRate() { return  frictionRate; }
+
+    public void changeShouldClick() {
+        this.first.setShouldClick(!this.first.getShouldClick());
+        this.second.setShouldClick(!this.second.getShouldClick());
+    }
 
     public void setLastClick(GameUser user) {
         lastClick = user;

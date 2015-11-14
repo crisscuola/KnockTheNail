@@ -8,7 +8,8 @@ define([
     base
 ){
     var Model = Backbone.Model.extend({
-        url: '/check',
+        url: '/logout',
+        logoutUrl: '/logout',
         defaults: {
             name: "def",
             password: "",
@@ -16,9 +17,20 @@ define([
             logged: false,
             view: base,
             isMain: null,
+            shouldClick: true
+        },
+
+        sync: function(method, model) {
+            console.log(method +': ' +model.url);
+        },
+
+        save: function(attributes, options){
+                this.set(attributes);
+            return Backbone.Model.prototype.save.call(this, attributes, options);
         },
 
         initialize: function() {
+            //this.save({},{success:function(model,response){console.log(response);}, error:function(model,response){console.log(response);}});
             $.ajax({
                 type: "POST",
                 url: "/check",
@@ -36,6 +48,7 @@ define([
 
             this.on('logout', function() {
                 this.logout();
+                //this.save({url: '/logout', logged: false}, {success: function(){alert(response);}});
             });
         },
 

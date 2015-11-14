@@ -1,4 +1,4 @@
-<fest:template xmlns:fest="http://fest.mail.ru" context_name="name">
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="user">
 	<a class="button button_back" href="#">Back</a>
 	<div class="header">
 		<h1 class="header__title">Knock the Nail</h1>
@@ -14,16 +14,18 @@
 
 
 			<div id="game">
-				<p>Hello, <fest:value>name.name</fest:value>!</p>
+				<p>Hello, <fest:value>user.name</fest:value>!</p>
 			</div>
 
 			<div id="wait">
 				<p>Prepare yourself. Wait for enemy!</p>
 			</div>
 
+			<p id="info"></p>
+
 			<div id="gameplay" style="display: none">
 				<div id="score">
-					<p>Your name : <span id="myName"><fest:value>name.name</fest:value></span>. Your score : <span id="myScore">0</span></p>
+					<p>Your name : <span id="myName"><fest:value>user.name</fest:value></span>. Your score : <span id="myScore">0</span></p>
 
 					<p>Enemy name : <span id="enemyName"></span>. Enemy score : <span id="enemyScore">0</span></p>
 
@@ -34,13 +36,13 @@
 					<canvas id="canvas"></canvas>
 
 				</div>
+					<form class="game-form" action="">
+						<label>Your turn!</label>
+						<input class="game-form__btn1" type="button" name="submit" value="Force=5"/>
+						<input class="game-form__btn2" type="button" name="submit" value="Force=10"/>
+						<input class="game-form__btn3" type="button" name="submit" value="Force=20"/><br/>
+					</form>
 
-
-				<form class="game-form" action="">
-					<input class="game-form__btn1" type="button" name="submit" value="Force=5"/>
-					<input class="game-form__btn2" type="button" name="submit" value="Force=10"/>
-					<input class="game-form__btn3" type="button" name="submit" value="Force=20"/>
-				</form>
 			</div>
 
 			<div id="disconnect" style="display: none">

@@ -11,7 +11,7 @@ public interface WebSocketService {
 
     void notifyEnemyNewScore(GameUser user);
 
-    void notifyStartGame(GameUser user);
+    void notifyStartGame(GameUser user, boolean shouldClick);
 
     void notifyCommonScore(GameUser user);
 

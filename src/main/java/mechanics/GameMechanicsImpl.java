@@ -65,17 +65,17 @@ public class GameMechanicsImpl implements GameMechanics {
         GameSession myGameSession = usersInGame.get(id);
 
         GameUser myUser = myGameSession.getSelf(id);
-      //  myGameSession.incrementCommonScore(force);
         myUser.incrementMyScore(force);
         myUser.changeFrictionRate();
 
         GameUser enemyUser = myGameSession.getEnemy(id);
-        //myGameSession.incrementCommonScore(force);
         enemyUser.incrementEnemyScore(force);
         enemyUser.changeFrictionRate();
 
         myGameSession.incrementCommonScore(force);
         myGameSession.changeFrictionRate();
+
+        myGameSession.changeShouldClick();
 
         myGameSession.setLastClick(myUser);
 
@@ -127,7 +127,7 @@ public class GameMechanicsImpl implements GameMechanics {
         usersInGame.put(second.getId(), gameSession);
 
         System.out.println("GameMech StartGame() -> notifyStartGame");
-        webSocketService.notifyStartGame(gameSession.getSelf(first.getId()));
-        webSocketService.notifyStartGame(gameSession.getSelf(second.getId()));
+        webSocketService.notifyStartGame(gameSession.getSelf(first.getId()), true);
+        webSocketService.notifyStartGame(gameSession.getSelf(second.getId()), false);
     }
 }
