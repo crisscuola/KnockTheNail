@@ -37,9 +37,9 @@
 
 
 				<form class="game-form" action="">
-					<input class="game-form__btn1" type="button" name="submit"/>
-					<input class="game-form__btn2" type="button" name="submit"/>
-					<input class="game-form__btn3" type="button" name="submit"/>
+					<input class="game-form__btn1" type="button" name="submit" value="Force=5"/>
+					<input class="game-form__btn2" type="button" name="submit" value="Force=10"/>
+					<input class="game-form__btn3" type="button" name="submit" value="Force=20"/>
 				</form>
 			</div>
 
