@@ -292,3 +292,9 @@ tbody{
 	float: left;
 	margin-left: 20px;
 }
+
+#canvas {
+	border: 1px black dashed;
+	background: #fff;
+	height: 300px;
+}

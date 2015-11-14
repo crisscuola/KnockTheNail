@@ -7,73 +7,103 @@ define(function(){
         this.myName = "";
         this.enemyName = "";
 
+        var canvas = null;
+        var context =null;
+
+
         this.init = function () {
-           ws = new WebSocket("ws://localhost:8080/gameplay");
-           ws.onopen = function (event) {
-           console.log("Web Socket opened");
-        }
+            ws = new WebSocket("ws://localhost:8080/gameplay");
+            this.nail_y = 20;
+            this.nail_dy = 10;
+            this.nail(this.nail_y);
 
-        ws.onmessage = function (event) {
-           var data = JSON.parse(event.data);
-           console.log(data);
-           console.log("common: "+data.commonScore);
-           console.log("friction: "+data.frictionRate);
-           if(data.status == "start"){
-           document.getElementById("wait").style.display = "none";
-           document.getElementById("gameplay").style.display = "block";
-           document.getElementById("enemyName").innerHTML = data.enemyName;
-           }
+            var that = this;
 
-           if(data.status == "disconnect"){
-               document.getElementById("disconnect").style.display = "block";
-               document.getElementById("gameplay").style.display = "none";
-           }
+            ws.onopen = function (event) {
+                console.log("Web Socket opened");
+            }
 
-           if(data.status == "finish"){
-               document.getElementById("gameOver").style.display = "block";
-               document.getElementById("gameplay").style.display = "none";
-               if(data.win)
-                   document.getElementById("win").innerHTML = "winner!";
-               else
-                   document.getElementById("win").innerHTML = "loser!";
-           }
+            ws.onmessage = function (event) {
+                var data = JSON.parse(event.data);
+                //console.log(data);
 
-           if(data.status == "increment" && data.name == document.getElementById("myName").innerHTML){
-               document.getElementById("myScore").innerHTML = data.score;
+                if(data.status == "start"){
+                    document.getElementById("wait").style.display = "none";
+                    document.getElementById("gameplay").style.display = "block";
+                    document.getElementById("enemyName").innerHTML = data.enemyName;
+                }
 
-           }
+                if(data.status == "disconnect"){
+                    document.getElementById("disconnect").style.display = "block";
+                    document.getElementById("gameplay").style.display = "none";
+                }
 
-           if(data.status == "increment" && data.name == document.getElementById("enemyName").innerHTML){
-               document.getElementById("enemyScore").innerHTML = data.score;
+                if(data.status == "finish"){
+                    document.getElementById("gameOver").style.display = "block";
+                    document.getElementById("gameplay").style.display = "none";
+                    if(data.win)
+                       document.getElementById("win").innerHTML = "winner!";
+                    else
+                       document.getElementById("win").innerHTML = "loser!";
+                }
 
-           }
+                if(data.status == "increment_myscore"){
+                    document.getElementById("myScore").innerHTML = data.score;
+                }
 
-           if (data.status == "increment" ){
-               document.getElementById("commonScore").innerHTML = data.commonScore;
-               document.getElementById("frictionRate").innerHTML = data.frictionRate;
-           }
+                if(data.status == "increment_enemyscore"){
+                    document.getElementById("enemyScore").innerHTML = data.score;
+                }
 
-        //   document.getElementById("test1").value ="Btn1 = " + data.button1;
-        //   document.getElementById("test2").value ="Btn2 =  " + data.button2;
-        //   document.getElementById("test3").value ="Btn3 =  " + data.button3;
+                if (data.status == "increment" ){
+                    document.getElementById("commonScore").innerHTML = data.commonScore;
+                    document.getElementById("frictionRate").innerHTML = data.frictionRate;
+                    var movement = data.button1;
+                    console.log(data.button1);
+                    that.knock(movement);
+                }
 
-        }
+            }
 
-        ws.onclose = function (event) {
-           console.log("WebSocket closed");
-           ws.close();
-        }
+            ws.onclose = function (event) {
+               console.log("WebSocket closed");
+               ws.close();
+            }
 
         };
 
         this.sendForce = function(force) {
             var message = {"force": force};
             ws.send(JSON.stringify(message));
-            console.log(message);
         }
 
         this.onGameStart = function() {
             $("body").find(".square_game").load(this.init());
+        }
+
+        this.clearCanvas = function() {
+            canvas = document.getElementById('canvas');
+            context = canvas.getContext('2d');
+            context.clearRect(0,0,canvas.width,canvas.height);
+        }
+
+        this.nail = function(y) {
+            canvas = document.getElementById('canvas');
+            context = canvas.getContext('2d');
+            context.fillStyle = '#000';
+            context.beginPath();
+            context.rect(50,y,5,30);
+            context.fill();
+        }
+
+        this.knock = function(y) {
+            canvas = document.getElementById('canvas');
+            context = canvas.getContext('2d');
+            this.clearCanvas();
+            this.nail_y += y;
+            if(this.nail_y > 150)
+                this.nail_y = 20;
+            this.nail(this.nail_y);
         }
 
     }

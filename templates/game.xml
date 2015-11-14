@@ -31,12 +31,15 @@
 
 					<p> <span> frictionRate : </span> <span id="frictionRate">1</span></p>
 
+					<canvas id="canvas"></canvas>
+
 				</div>
 
+
 				<form class="game-form" action="">
-					<input class="game-form__btn1" type="button" name="submit" value="Force = 5H"/>
-					<input class="game-form__btn2" type="button" name="submit" value="Force = 10H"/>
-					<input class="game-form__btn3" type="button" name="submit" value="Force = 20H"/>
+					<input class="game-form__btn1" type="button" name="submit"/>
+					<input class="game-form__btn2" type="button" name="submit"/>
+					<input class="game-form__btn3" type="button" name="submit"/>
 				</form>
 			</div>
 

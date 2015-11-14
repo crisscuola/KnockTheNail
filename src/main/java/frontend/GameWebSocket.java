@@ -105,7 +105,7 @@ public class GameWebSocket {
 
     public void setMyScore(GameUser user) {
         JSONObject jsonStart = new JSONObject();
-        jsonStart.put("status", "increment");
+        jsonStart.put("status", "increment_myscore");
         jsonStart.put("name", user.getMyName());
         jsonStart.put("score", user.getMyScore());
         try {
@@ -117,7 +117,7 @@ public class GameWebSocket {
 
     public void setEnemyScore(GameUser user) {
         JSONObject jsonStart = new JSONObject();
-        jsonStart.put("status", "increment");
+        jsonStart.put("status", "increment_enemyscore");
         jsonStart.put("name", user.getEnemyName());
         jsonStart.put("score", user.getEnemyScore());
         try {
@@ -130,9 +130,9 @@ public class GameWebSocket {
     public void setCommonScore(GameUser user) {
         JSONObject jsonStart = new JSONObject();
         jsonStart.put("status", "increment");
-        jsonStart.put("button1", "10");
-        jsonStart.put("button2", "20");
-        jsonStart.put("button3", "50");
+        jsonStart.put("button1", 5 - (1/user.getFrictionRate()));
+        jsonStart.put("button2", 10 - (1/user.getFrictionRate()));
+        jsonStart.put("button3", 20 - (1/user.getFrictionRate()));
         jsonStart.put("commonScore", user.getMyScore()+user.getEnemyScore());
         jsonStart.put("frictionRate", user.getFrictionRate());
         try {

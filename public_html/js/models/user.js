@@ -34,8 +34,7 @@ define([
                 location.href = "#";
             });
 
-            this.on('logout', function(){
-                console.log('LOGOUT EVENT');
+            this.on('logout', function() {
                 this.logout();
             });
         },
