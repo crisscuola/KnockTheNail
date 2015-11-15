@@ -103,7 +103,6 @@ define([
             sendForce: function(force, name) {
                 var message = {"force": force, "name": name};
                 this.ws.send(JSON.stringify(message));
-                console.log(this);
             },
 
             onGameStart: function() {

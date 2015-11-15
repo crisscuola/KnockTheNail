@@ -17,13 +17,21 @@ define([
         player: player,
         name: 'scoreboard',
         initialize: function () {
-            for (var i = 0; i < 10; i++) {
-            var rand_name = Math.random().toString(36).substr(2, 5);
-            var rand_score = Math.floor(Math.random()*(100));
-            this.collection.push(new this.player({name: rand_name, score: rand_score}));
+            if (!localStorage.top10 || localStorage.top10.length == 0) {
+                for (var i = 0; i < 10; i++) {
+                    var rand_name = Math.random().toString(36).substr(2, 5);
+                    var rand_score = Math.floor(Math.random()*(100));
+                    this.collection.push(new this.player({name: rand_name, score: rand_score}));
+                }
+                this.collection.sort('score');
+            } else {
+                var top10 = JSON.parse(localStorage['top10']);
+                _.each(top10, function(element){
+                    this.collection.push(new this.player({name: element.name, score: element.score}));
+                }, this);
             }
+
             this.on('hide', this.saveLocalStorage);
-            this.on('show', this.getLocaStorage);
         },
         render: function () {
             this.$el.html(this.template(this.collection.toJSON()));
@@ -36,19 +44,22 @@ define([
         hide: function () {
             this.$el.hide();
             this.trigger('hide');
-        },
-        saveLocalStorage: function(){
-        if(!localStorage.test)
-            localStorage.test = JSON.stringify([]);
-            //localStorage.setItem('test', this.name);
+            this.collection.sort();
             _.each(this.collection, function(element, index){
-                    //console.log(this.collection.at(index));
-                  localStorage.setItem(index, this.collection.at(index).get('name'));
+                    this.collection.remove(element);
             }, this);
         },
-        getLocaStorage: function(){
-            localStorage.getItem('test');
-        }
+        saveLocalStorage: function(){
+            if(!localStorage.top10) {
+                localStorage.top10 = JSON.stringify([]);
+                var top10 = JSON.parse(localStorage['top10']);
+                this.collection.sort();
+                _.each(this.collection, function(element, index){
+                        top10.push({'name': this.collection.at(index).get('name'), 'score': this.collection.at(index).get('score')});
+                }, this);
+                localStorage["top10"] = JSON.stringify(top10);
+            }
+        },
 
     });
 

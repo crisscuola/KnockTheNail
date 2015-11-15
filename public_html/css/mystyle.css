@@ -225,6 +225,16 @@ tbody tr th, thead tr th {
 	width: 70px;
 }
 
+@-moz-document url-prefix() {
+  tbody {
+    margin-top: 52px;
+  }
+
+  thead {
+  	height: 1px;
+  }
+}
+
 tbody tr td:nth-child(2), thead tr td:nth-child(2) {
 	text-align: center;
 	width: 260px;
