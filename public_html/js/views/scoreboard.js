@@ -22,6 +22,8 @@ define([
             var rand_score = Math.floor(Math.random()*(100));
             this.collection.push(new this.player({name: rand_name, score: rand_score}));
             }
+            this.on('hide', this.saveLocalStorage);
+            this.on('show', this.getLocaStorage);
         },
         render: function () {
             this.$el.html(this.template(this.collection.toJSON()));
@@ -33,6 +35,19 @@ define([
         },
         hide: function () {
             this.$el.hide();
+            this.trigger('hide');
+        },
+        saveLocalStorage: function(){
+        if(!localStorage.test)
+            localStorage.test = JSON.stringify([]);
+            //localStorage.setItem('test', this.name);
+            _.each(this.collection, function(element, index){
+                    //console.log(this.collection.at(index));
+                  localStorage.setItem(index, this.collection.at(index).get('name'));
+            }, this);
+        },
+        getLocaStorage: function(){
+            localStorage.getItem('test');
         }
 
     });

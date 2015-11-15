@@ -1,8 +1,7 @@
 define(function(){
 
     function Socket(){
-
-        ws = null;
+        this.ws = null;
 
         this.myName = "";
         this.enemyName = "";
@@ -12,21 +11,20 @@ define(function(){
 
 
         this.init = function () {
-            ws = new WebSocket("ws://localhost:8080/gameplay");
+            this.ws = new WebSocket("ws://localhost:8080/gameplay");
             this.nail_y = 20;
             this.nail_dy = 10;
             this.nail(this.nail_y);
 
             var that = this;
 
-            ws.onopen = function (event) {
+            this.ws.onopen = function (event) {
                 console.log("Web Socket opened");
             }
 
-            ws.onmessage = function (event) {
+            this.ws.onmessage = function (event) {
                 var data = JSON.parse(event.data);
                 //console.log(data);
-
                 if(data.status == "start"){
                     document.getElementById("wait").style.display = "none";
                     document.getElementById("gameplay").style.display = "block";
@@ -80,16 +78,16 @@ define(function(){
 
             }
 
-            ws.onclose = function (event) {
+            this.ws.onclose = function (event) {
                console.log("WebSocket closed");
-               ws.close();
+               that.ws.close();
             }
 
         };
 
         this.sendForce = function(force, name) {
             var message = {"force": force, "name": name};
-            ws.send(JSON.stringify(message));
+            this.ws.send(JSON.stringify(message));
         }
 
         this.onGameStart = function() {

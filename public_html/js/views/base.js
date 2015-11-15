@@ -23,7 +23,6 @@ define([
         },
         check: function() {
             if (!userLogged.get("logged")) {
-            //if (this.collection.length == 0) {
                 this.$el.find(".corner__btn_reg").show();
                 this.$el.find(".corner__btn_logout").hide();
                 this.$el.find(".corner__username").hide();

@@ -1,11 +1,13 @@
 define([
     'backbone',
     'tmpl/game',
-    'gameSocket'
+    'gameSocket',
+    'views/gameSocket'
 ], function(
     Backbone,
     tmpl,
-    gameSocket
+    gameSocket,
+    gamesocket
 ){
 
     var View = Backbone.View.extend({
@@ -14,6 +16,7 @@ define([
         name: 'game',
         model: null,
         socket: new gameSocket(),
+        gamesocket: new gamesocket({model: this.model}),
         events: {
             'click .square__reset': 'reset',
             'click .game-form .game-form__btn1': 'btn1Click',
@@ -22,6 +25,10 @@ define([
             'click .button_back': 'backClick'
         },
         initialize: function () {
+//            this.gamesocket.on('message', function(){
+//                        console.log('EVENTTTTTTTTT');
+//                    });
+            //this.gamesocket.trigger('message');
         },
         render: function () {
             this.$el.html(this.template(this.model.toJSON()));
@@ -30,7 +37,10 @@ define([
         },
         show: function () {
             this.trigger("show", this);
-            this.socket.onGameStart();
+            //this.socket.onGameStart();
+            this.gamesocket = new gamesocket({model: this.model});
+            this.gamesocket.onGameStart();
+
         },
         hide: function () {
             this.$el.hide();
@@ -40,17 +50,17 @@ define([
             this.$el.find('.square__button-group').attr("disabled", false);
         },
         btn1Click: function() {
-            this.socket.sendForce(5, this.model.get('name'));
+            this.gamesocket.sendForce(5, this.model.get('name'));
         },
         btn2Click: function() {
-            this.socket.sendForce(10);
+            this.gamesocket.sendForce(10);
         },
         btn3Click: function() {
-            this.socket.sendForce(20);
+            this.gamesocket.sendForce(20);
         },
         backClick: function(){
-            ws.close();
-        },
+            this.gamesocket.ws.close();
+        }
 
     });
 
