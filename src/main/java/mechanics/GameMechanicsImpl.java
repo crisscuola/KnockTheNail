@@ -26,7 +26,7 @@ public class GameMechanicsImpl implements GameMechanics {
 
     public GameMechanicsImpl(WebSocketService webSocketService) {
         this.webSocketService = webSocketService;
-        this.nail = (Nail) ReadXMLFileSAX.readXML("nail.xml");
+        this.nail = (Nail) ReadXMLFileSAX.readXML("data/nail.xml");
     }
 
     @Override
