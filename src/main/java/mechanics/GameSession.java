@@ -15,20 +15,20 @@ public class GameSession {
 
     private Nail nail;
 
-    public GameSession(UserProfile user1, UserProfile user2) {
+    public GameSession(UserProfile user1, UserProfile user2, Nail nail) {
         int id1 = user1.getId();
         int id2 = user2.getId();
 
         String name1 = user1.getName();
         String name2 = user2.getName();
 
-        GameUser gameUser1 = new GameUser(name1,id1);
+        GameUser gameUser1 = new GameUser(name1,id1,nail);
         gameUser1.setEnemyName(name2);
         gameUser1.setEnemyId(id2);
         gameUser1.setShouldClick(true);
 
 
-        GameUser gameUser2 = new GameUser(name2,id2);
+        GameUser gameUser2 = new GameUser(name2,id2,nail);
         gameUser2.setEnemyName(name1);
         gameUser2.setEnemyId(id1);
         gameUser2.setShouldClick(false);
@@ -41,6 +41,8 @@ public class GameSession {
         frictionRate = 1;
 
         System.out.println("Game Session OK");
+
+        this.nail=nail;
     }
 
     public GameUser getEnemy(int id) {
@@ -65,7 +67,7 @@ public class GameSession {
 
     public void changeFrictionRate() {
 
-        frictionRate+=commonScore/100;
+        frictionRate+=commonScore/nail.getHealth();
 
         //frictionRate+=5;
 

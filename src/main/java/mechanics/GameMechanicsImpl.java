@@ -109,7 +109,7 @@ public class GameMechanicsImpl implements GameMechanics {
 
 
     private void starGame(UserProfile first, UserProfile second) {
-        GameSession gameSession = new GameSession(first, second);
+        GameSession gameSession = new GameSession(first, second,nail);
 
         usersInGame.put(first.getId(), gameSession);
         usersInGame.put(second.getId(), gameSession);

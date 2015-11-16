@@ -14,9 +14,11 @@ public class GameUser {
     private Nail nail;
 
 
-    public GameUser(String myName, int id) {
+    public GameUser(String myName, int id, Nail nail) {
         this.myName = myName;
         this.myId = id;
+
+        this.nail = nail;
     }
 
     public String getMyName() {
@@ -41,7 +43,7 @@ public class GameUser {
 
     public  double getFrictionRate() { return  frictionRate; }
 
-    public double changeFrictionRate() { return frictionRate+=(getMyScore()+getEnemyScore())/100;}
+    public double changeFrictionRate() { return frictionRate+=(getMyScore()+getEnemyScore())/nail.getHealth();}
 
     public void incrementMyScore(int force) { myScore += force/frictionRate; }
 
