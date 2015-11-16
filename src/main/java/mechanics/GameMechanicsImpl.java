@@ -30,25 +30,13 @@ public class GameMechanicsImpl implements GameMechanics {
     }
 
     @Override
-    public boolean addUser(UserProfile user) {
-        if (usersToGame.contains(user)){
-            return false;
-        }
+    public void notifyUserConnected(UserProfile user){
         usersToGame.add(user);
-        return true;
     }
 
     @Override
-    public boolean removeUserToGame(UserProfile user){
-        if(usersToGame.contains(user)){
-            usersToGame.remove(user);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public  void removeUserInGame(UserProfile user) {
+    public void notifyUserDisconnected(UserProfile user){
+        usersToGame.remove(user);
         int id = user.getId();
         usersInGame.keySet().forEach(System.out::println);
         GameSession myGameSession = usersInGame.get(id);
