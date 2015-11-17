@@ -100,7 +100,7 @@ public class GameWebSocket {
         System.out.println("GameWebSocket Connect first");
         this.session = s;
         webSocketService.addUser(this);
-        gameMechanics.addUser(user);
+        gameMechanics.notifyUserConnected(user);
         System.out.println("GameWebSocket Connect second");
     }
 
@@ -161,8 +161,7 @@ public class GameWebSocket {
 
     @OnWebSocketClose
     public void onClose(Session session, int statusCode, String reason) {
-        gameMechanics.removeUserToGame(user);
-        gameMechanics.removeUserInGame(user);
+        gameMechanics.notifyUserDisconnected(user);
         System.out.println("Closed by " + user.getName());
 
     }

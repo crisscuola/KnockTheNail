@@ -26,29 +26,17 @@ public class GameMechanicsImpl implements GameMechanics {
 
     public GameMechanicsImpl(WebSocketService webSocketService) {
         this.webSocketService = webSocketService;
-        this.nail = (Nail) ReadXMLFileSAX.readXML("nail.xml");
+        this.nail = (Nail) ReadXMLFileSAX.readXML("data/nail.xml");
     }
 
     @Override
-    public boolean addUser(UserProfile user) {
-        if (usersToGame.contains(user)){
-            return false;
-        }
+    public void notifyUserConnected(UserProfile user){
         usersToGame.add(user);
-        return true;
     }
 
     @Override
-    public boolean removeUserToGame(UserProfile user){
-        if(usersToGame.contains(user)){
-            usersToGame.remove(user);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public  void removeUserInGame(UserProfile user) {
+    public void notifyUserDisconnected(UserProfile user){
+        usersToGame.remove(user);
         int id = user.getId();
         usersInGame.keySet().forEach(System.out::println);
         GameSession myGameSession = usersInGame.get(id);
@@ -121,7 +109,7 @@ public class GameMechanicsImpl implements GameMechanics {
 
 
     private void starGame(UserProfile first, UserProfile second) {
-        GameSession gameSession = new GameSession(first, second);
+        GameSession gameSession = new GameSession(first, second,nail);
 
         usersInGame.put(first.getId(), gameSession);
         usersInGame.put(second.getId(), gameSession);
