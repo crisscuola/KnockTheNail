@@ -13,7 +13,8 @@ define([
         defaults: {
             name: "def",
             password: "",
-            score: 0,
+            win: 0,
+            lose: 0,
             logged: false,
             view: base,
             isMain: null,
@@ -69,6 +70,12 @@ define([
                     alert(answer.message);
                 }
             });
+        },
+        winGame: function(){
+            this.set({'win': this.get('win') + 1});
+        },
+        loseGame: function(){
+            this.set({'lose': this.get('lose') + 1});
         }
 
     });

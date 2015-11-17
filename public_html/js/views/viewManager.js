@@ -30,6 +30,8 @@ define([
         add: function(view){
             this.views.push(view);
             view.render();
+            if (view.name != 'base' && view.name != 'main')
+                view.hide();
         },
 
         hideLogout: function(view){
@@ -41,7 +43,14 @@ define([
         },
 
         hideExceptOne: function(view){
-            console.log("hide");
+            if (view.name == 'game'){
+                if (view.model.get('logged') == true)
+                    view.trigger('allowedToPlay', view)
+                else {
+                    alert('Please log in to play.');
+                    return;
+                }
+            }
             _.each(this, function(iterView){
                 if (iterView.name != 'base'){
                     if(iterView.name != view.name)

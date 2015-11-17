@@ -49,7 +49,8 @@
 			</div>
 
 			<div id="gameOver" style="display: none">
-				<p>Game over! You are <fest:space/><span id="win"></span></p>
+				<p>Game over! You <fest:space/><span id="win"></span></p>
+				<label>Play again?</label> <button>Yes!</button>
 			</div>
 
 			<!--<button class="square__reset">Reset</button>-->

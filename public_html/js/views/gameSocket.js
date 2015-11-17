@@ -8,13 +8,9 @@ define([
             el: '.game',
             name: 'name',
             initialize: function(){
-                this.getName();
             },
             model: null,
             ws: null,
-            getName: function(){
-                this.trigger("message", this);
-            },
             init: function(){
                 this.ws = new WebSocket("ws://localhost:8080/gameplay");
                 this.nail_y = 20;
@@ -55,13 +51,13 @@ define([
                         document.getElementById("game").style.display = "none";
                         document.getElementById("gameplay").style.display = "none";
                         if(data.win) {
-                           document.getElementById("win").innerHTML = "winner!";
-                           console.log(that.model.get('name'));
+                           document.getElementById("win").innerHTML = "win!";
+                           that.model.winGame();
                         } else {
-                            document.getElementById("win").innerHTML = "loser!";
-                            console.log(that.model.get('name'));
+                            document.getElementById("win").innerHTML = "lose.";
+                            that.model.loseGame();
                         }
-
+                        console.log(that.model.toJSON());
                     }
 
                     if(data.status == "increment_myscore"){

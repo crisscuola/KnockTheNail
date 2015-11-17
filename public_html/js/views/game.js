@@ -1,13 +1,11 @@
 define([
     'backbone',
     'tmpl/game',
-    'gameSocket',
     'views/gameSocket'
 ], function(
     Backbone,
     tmpl,
-    gameSocket,
-    gamesocket
+    gameSocket
 ){
 
     var View = Backbone.View.extend({
@@ -15,8 +13,7 @@ define([
         template: tmpl,
         name: 'game',
         model: null,
-        socket: new gameSocket(),
-        gamesocket: new gamesocket({model: this.model}),
+        gameSocket: new gameSocket({model: this.model}),
         events: {
             'click .square__reset': 'reset',
             'click .game-form .game-form__btn1': 'btn1Click',
@@ -25,10 +22,7 @@ define([
             'click .button_back': 'backClick'
         },
         initialize: function () {
-//            this.gamesocket.on('message', function(){
-//                        console.log('EVENTTTTTTTTT');
-//                    });
-            //this.gamesocket.trigger('message');
+            this.on('allowedToPlay', this.startGameSocket);
         },
         render: function () {
             this.$el.html(this.template(this.model.toJSON()));
@@ -37,29 +31,32 @@ define([
         },
         show: function () {
             this.trigger("show", this);
-            //this.socket.onGameStart();
-            this.gamesocket = new gamesocket({model: this.model});
-            this.gamesocket.onGameStart();
+//            this.gameSocket = new gameSocket({model: this.model});
+//            this.gameSocket.onGameStart();
 
         },
         hide: function () {
             this.$el.hide();
+        },
+        startGameSocket: function() {
+            this.gameSocket = new gameSocket({model: this.model});
+            this.gameSocket.onGameStart();
         },
         reset: function() {
             $nail = this.$el.find('.square__nail').animate({ top: '110px'}, 'fast');
             this.$el.find('.square__button-group').attr("disabled", false);
         },
         btn1Click: function() {
-            this.gamesocket.sendForce(5, this.model.get('name'));
+            this.gameSocket.sendForce(5, this.model.get('name'));
         },
         btn2Click: function() {
-            this.gamesocket.sendForce(10);
+            this.gameSocket.sendForce(10);
         },
         btn3Click: function() {
-            this.gamesocket.sendForce(20);
+            this.gameSocket.sendForce(20);
         },
         backClick: function(){
-            this.gamesocket.ws.close();
+            this.gameSocket.ws.close();
         }
 
     });
