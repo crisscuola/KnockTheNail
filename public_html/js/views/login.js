@@ -1,18 +1,15 @@
 define([
     'backbone',
-    'tmpl/login',
-    'collections/logged'
+    'tmpl/login'
 ], function(
     Backbone,
-    tmpl,
-    logged
+    tmpl
 ){
 
     var View = Backbone.View.extend({
         el: '.login',
         name: 'login',
         template: tmpl,
-        collection: logged,
         model: null,
         events: {
             'submit': 'onSubmit',

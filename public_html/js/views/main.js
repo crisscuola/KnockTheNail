@@ -1,12 +1,10 @@
 define([
     'backbone',
     'tmpl/main',
-    'collections/logged',
     'views/base'
 ], function(
     Backbone,
     tmpl,
-    logged,
     base
 ){
 
@@ -14,7 +12,6 @@ define([
         el: '.main',
         name: "main",
         template: tmpl,
-        collection: logged,
         model: null,
         events: {
             "click .menu__item:first-child": "game",

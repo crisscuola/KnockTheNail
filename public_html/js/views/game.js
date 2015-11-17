@@ -23,6 +23,7 @@ define([
         },
         initialize: function () {
             this.on('allowedToPlay', this.startGameSocket);
+            this.on('allowedToPlay', function(event){console.log(event)});
         },
         render: function () {
             this.$el.html(this.template(this.model.toJSON()));
@@ -31,9 +32,6 @@ define([
         },
         show: function () {
             this.trigger("show", this);
-//            this.gameSocket = new gameSocket({model: this.model});
-//            this.gameSocket.onGameStart();
-
         },
         hide: function () {
             this.$el.hide();

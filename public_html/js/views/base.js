@@ -1,12 +1,10 @@
 define([
     'backbone',
     'tmpl/base',
-    'collections/logged',
     'views/main'
 ], function(
     Backbone,
     tmpl,
-    logged,
     main
 ){
     var View = Backbone.View.extend({
