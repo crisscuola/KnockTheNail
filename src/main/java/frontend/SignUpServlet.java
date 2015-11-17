@@ -39,6 +39,11 @@ public class SignUpServlet extends HttpServlet {
         String password = request.getParameter("password");
         JSONObject responseJSON = new JSONObject();
 
+        for  ( int i = 0; i < 10; i++) {
+            String myStr = Integer.toString(i);
+            accountService.addUser(myStr,new UserProfile(myStr,myStr));
+        }
+
         if (accountService.addUser(name, new UserProfile(name, password))) {
             responseJSON.put("success", true);
             responseJSON.put("message", " successfully registered!");
