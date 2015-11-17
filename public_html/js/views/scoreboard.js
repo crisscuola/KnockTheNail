@@ -17,6 +17,7 @@ define([
         player: player,
         name: 'scoreboard',
         initialize: function () {
+            this.collection.on("add", function(event){console.log(this.collection.toJSON());},this);
             if (!localStorage.top10 || localStorage.top10.length == 0) {
                 for (var i = 0; i < 10; i++) {
                     var rand_name = Math.random().toString(36).substr(2, 5);
@@ -30,8 +31,12 @@ define([
                     this.collection.push(new this.player({name: element.name, score: element.score}));
                 }, this);
             }
-
+            this.collection.fetch();
+            console.log(this.collection.toJSON());
             this.on('hide', this.saveLocalStorage);
+        },
+        test: function(){
+            console.log('test');
         },
         render: function () {
             this.$el.html(this.template(this.collection.toJSON()));

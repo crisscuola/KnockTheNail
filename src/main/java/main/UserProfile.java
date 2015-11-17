@@ -10,11 +10,11 @@ public class UserProfile {
     private  int lose;
     private int id;
 
-    public UserProfile(String login, String password) {
+    public UserProfile(String login, String password, int win, int lose) {
         this.name = login;
         this.password = password;
-        this.win = 0;
-        this.lose = 0;
+        this.win = win;
+        this.lose = lose;
 
     }
 
@@ -27,6 +27,10 @@ public class UserProfile {
     public String getPassword() {
         return password;
     }
+
+    public  int getWin() {return win; }
+
+    public int getLose() {return  lose; }
 
     public void setId(int id){
         this.id = id;

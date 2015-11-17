@@ -1,9 +1,11 @@
 package frontend;
 
-import org.json.JSONObject;
+
+import com.sun.deploy.net.HttpRequest;
 import main.AccountService;
 import main.UserProfile;
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONObject;
 import templater.PageGenerator;
 
 import javax.servlet.ServletException;
@@ -11,14 +13,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.Map;
 
 
-public class SignUpServlet extends HttpServlet {
+public class ScoreboardServlet extends HttpServlet{
     private AccountService accountService;
 
-    public SignUpServlet(AccountService accountService) {
+    public ScoreboardServlet(AccountService accountService) {
         this.accountService = accountService;
     }
 
@@ -28,19 +31,38 @@ public class SignUpServlet extends HttpServlet {
 
         Map<String, Object> pageVariables = new HashMap<>();
 
-        response.getWriter().println(PageGenerator.getPage("signup.html", pageVariables));
-        response.setStatus(HttpServletResponse.SC_OK);
+        JSONObject scores[] = new JSONObject[10];
+
+        for (int i = 0; i < 5; i++) {
+            String myStr = Integer.toString(i);
+
+            UserProfile testUser = accountService.getUser(myStr);
+
+            JSONObject responseJSON = new JSONObject();
+
+            responseJSON.put("name", testUser.getName());
+            responseJSON.put("win", testUser.getWin());
+            responseJSON.put("lose", testUser.getLose());
+
+            scores[i] = responseJSON;
+            //response.getWriter().println(scores[i].toString());
+        }
+            String test = scores[0].toString();
+
+            response.getWriter().println(scores[1]);
+
     }
 
+
     @Override public void doPost(@NotNull HttpServletRequest request,
-        @NotNull HttpServletResponse response) throws ServletException, IOException {
+                                 @NotNull HttpServletResponse response) throws ServletException, IOException {
 
         String name = request.getParameter("name");
         String password = request.getParameter("password");
         JSONObject responseJSON = new JSONObject();
 
 
-        if (accountService.addUser(name, new UserProfile(name, password,0,0))) {
+        if (accountService.addUser(name, new UserProfile(name, password,1,1))) {
             responseJSON.put("success", true);
             responseJSON.put("message", " successfully registered!");
             responseJSON.put("name", name);

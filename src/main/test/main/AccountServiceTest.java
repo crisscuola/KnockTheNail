@@ -14,7 +14,7 @@ public class AccountServiceTest {
     @NotNull
     private final AccountService accountService = new AccountService();
     @NotNull
-    private final UserProfile userProfile = new UserProfile("1","1");
+    private final UserProfile userProfile = new UserProfile("1","1",0,0);
 
 
     @Test
@@ -72,7 +72,7 @@ public class AccountServiceTest {
     public void testCountSignIn() throws Exception {
         String sessionId = "session";
         accountService.addSessions(sessionId, userProfile);
-        UserProfile user2 = new UserProfile("2","2");
+        UserProfile user2 = new UserProfile("2","2",0,0);
         accountService.addSessions("session2",user2);
         int result = accountService.countSignIn();
         assertEquals(2,result);
@@ -81,7 +81,7 @@ public class AccountServiceTest {
     @Test
     public void testCountSignUp() throws Exception {
         accountService.addUser("1",userProfile);
-        UserProfile user2 = new UserProfile("2","2");
+        UserProfile user2 = new UserProfile("2","2",0,0);
         accountService.addUser("2", user2);
         int result = accountService.countSignUp();
         assertEquals(2,result);

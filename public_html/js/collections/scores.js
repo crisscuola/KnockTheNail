@@ -11,6 +11,10 @@ define([
     	url: '/scores',
     	comparator: function(player) {
             return -player.get("score");
+        },
+        parse: function(response) {
+            console.log(response.name);
+            return response;
         }
     });
 

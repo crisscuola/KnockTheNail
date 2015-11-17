@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 
 public class UserProfileTest {
-    private UserProfile userProfile = new UserProfile("1","1");
+    private UserProfile userProfile = new UserProfile("1","1",0,0);
 
     @Test
     public void testGetName() throws Exception {

@@ -31,7 +31,7 @@ public class AccountService {
         Integer randInt = random.nextInt();
         String name = randInt.toString();
         int id = users.size();
-        UserProfile user = new UserProfile(name,"");
+        UserProfile user = new UserProfile(name,"",1,1);
         user.setId(id);
         users.put(name,user);
         return user;
