@@ -17,34 +17,31 @@ define([
         player: player,
         name: 'scoreboard',
         initialize: function () {
-            //this.collection.on("add", function(event){console.log(event);},this);
-            var that = this;
-            //this.getScoreboard();
-
-
-            //console.log(this.collection.toJSON());
-            //this.on('hide', this.saveLocalStorage);
         },
+
         render: function () {
             this.$el.html(this.template(this.collection.toJSON()));
             this.delegateEvents();
             return this;
         },
+
         show: function () {
             this.getScoreboard();
             this.trigger("show", this);
         },
+
         hide: function () {
             this.$el.hide();
             this.saveLocalStorage();
             if (this.collection.length != 0)
                 this.collection.reset();
         },
+
         getScoreboard: function(){
             if (!localStorage.top10 || localStorage.top10.length < 3) {
                 var that = this;
                 this.collection.fetch({success: function(){console.log('Fetched!'); that.render();}});
-//                            this.collection.sort('win');
+                //this.collection.sort('win');
             } else {
                 var top10 = JSON.parse(localStorage['top10']);
                 _.each(top10, function(element){
@@ -53,6 +50,7 @@ define([
                 this.render();
             }
         },
+
         saveLocalStorage: function(){
             if(!localStorage.top10 || localStorage.top10.length < 3) {
                 if(this.collection.length != 0) {

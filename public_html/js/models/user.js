@@ -8,8 +8,7 @@ define([
     base
 ){
     var Model = Backbone.Model.extend({
-        url: '/logout',
-        logoutUrl: '/logout',
+        url: '/game',
         defaults: {
             name: "def",
             password: "",

@@ -51,7 +51,8 @@ define([
                     alert('Please log in to play.');
                     return;
                 }
-            }
+            } else if ((view.model.get("logged") == true) && (view.name == "login" || view.name == "registration"))
+                return;
             _.each(this, function(iterView){
                 if (iterView.name != 'base'){
                     if(iterView.name != view.name)
