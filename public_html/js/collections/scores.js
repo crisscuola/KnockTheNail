@@ -3,22 +3,15 @@ define([
     'models/score'
 ], function(
     Backbone,
-    player
+    score
 ){
 
     var Players = Backbone.Collection.extend({
-    	model: player,
+    	model: score,
     	url: '/scores',
-    	comparator: function(player) {
-            return -player.get("win");
+    	comparator: function(score) {
+            return -score.get("win");
         },
-        parse: function(response) {
-//            _.each(response, function(element, index){
-//                this.push(new this.model({name: element.name, win: element.win, lose: element.lose}));
-//                }, this);
-                console.log(response);
-            return response;
-        }
     });
 
     return Players;

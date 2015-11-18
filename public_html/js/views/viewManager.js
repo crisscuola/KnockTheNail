@@ -29,7 +29,8 @@ define([
 
         add: function(view){
             this.views.push(view);
-            view.render();
+            if (view.name != 'scoreboard')
+                view.render();
             if (view.name != 'base' && view.name != 'main')
                 view.hide();
         },
