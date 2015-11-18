@@ -13,13 +13,13 @@ define([
             return -player.get("win");
         },
         parse: function(response) {
-            console.log(response[1]);
-            _.each(response, function(element, index){
-                this.push({'name': index.name, 'win': index.win,'lose': index.lose});
-                }, this);
+//            _.each(response, function(element, index){
+//                this.push(new this.model({name: element.name, win: element.win, lose: element.lose}));
+//                }, this);
+                console.log(response);
             return response;
         }
     });
 
-    return new Players();
+    return Players;
 });

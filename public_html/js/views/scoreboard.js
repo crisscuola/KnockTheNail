@@ -13,30 +13,30 @@ define([
     var View = Backbone.View.extend({
         el: '.scoreboard',
         template: tmpl,
-        collection: players,
+        collection: new players(),
         player: player,
         name: 'scoreboard',
         initialize: function () {
-            this.collection.on("add", function(event){console.log(this.collection.toJSON());},this);
-            this.collection.fetch();
-            if (!localStorage.top10 || localStorage.top10.length == 0) {
-                for (var i = 0; i < 10; i++) {
-                    var rand_name = Math.random().toString(36).substr(2, 5);
-                    var rand_score = Math.floor(Math.random()*(100));
-                    this.collection.push(new this.player({name: rand_name, win: rand_score, lose: rand_score}));
-                }
-                this.collection.sort('win');
+            //this.collection.on("add", function(event){console.log(event);},this);
+
+            if (!localStorage.top10 || localStorage.top10.length < 2) {
+//                for (var i = 0; i < 10; i++) {
+//                    var rand_name = Math.random().toString(36).substr(2, 5);
+//                    var rand_score = Math.floor(Math.random()*(100));
+//                    this.collection.push(new this.player({name: rand_name, win: rand_score, lose: rand_score}));
+//                }
+                //this.collection.fetch();
+//                this.collection.sort('win');
+//                console.log(this.collection.toJSON());
             } else {
-                var top10 = JSON.parse(localStorage['top10']);
-                _.each(top10, function(element){
-                    this.collection.push(new this.player({name: element.name, win: element.win, lose: element.lose}));
-                }, this);
+//                var top10 = JSON.parse(localStorage['top10']);
+//                _.each(top10, function(element){
+//                    this.collection.push(new this.player({name: element.name, win: element.win, lose: element.lose}));
+//                }, this);
             }
-            console.log(this.collection.toJSON());
-            this.on('hide', this.saveLocalStorage);
-        },
-        test: function(){
-            console.log('test');
+
+            //console.log(this.collection.toJSON());
+            //this.on('hide', this.saveLocalStorage);
         },
         render: function () {
             this.$el.html(this.template(this.collection.toJSON()));
@@ -45,17 +45,39 @@ define([
         },
         show: function () {
             this.trigger("show", this);
+            console.log(this.collection);
+            this.render();
+            if (!localStorage.top10 || localStorage.top10.length <= 2) {
+//                            for (var i = 0; i < 10; i++) {
+//                                var rand_name = Math.random().toString(36).substr(2, 5);
+//                                var rand_score = Math.floor(Math.random()*(100));
+//                                this.collection.push(new this.player({name: rand_name, win: rand_score, lose: rand_score}));
+//                            }
+                            this.collection.fetch();
+                            console.log(this);
+//                            this.collection.sort('win');
+//                            console.log(this.collection.toJSON());
+                        } else {
+                            var top10 = JSON.parse(localStorage['top10']);
+                            _.each(top10, function(element){
+                                this.collection.push(new this.player({name: element.name, win: element.win, lose: element.lose}));
+                            }, this);
+                        }
+            var that  = this;
+            this.collection.fetch({success: function(){console.log('Success');}});
+            console.log(this.collection);
         },
         hide: function () {
+            this.saveLocalStorage();
             this.$el.hide();
-            this.trigger('hide');
             this.collection.sort();
-            _.each(this.collection, function(element, index){
-                    this.collection.remove(element);
-            }, this);
+//            _.each(this.collection, function(element, index){
+//                    this.collection.remove(element);
+//            }, this);
         },
         saveLocalStorage: function(){
-            if(!localStorage.top10) {
+            if(!localStorage.top10 || localStorage.top10.length <= 2) {
+                console.log(this.collection);
                 localStorage.top10 = JSON.stringify([]);
                 var top10 = JSON.parse(localStorage['top10']);
                 this.collection.sort();
