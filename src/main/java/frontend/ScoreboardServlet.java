@@ -5,6 +5,7 @@ import com.sun.deploy.net.HttpRequest;
 import main.AccountService;
 import main.UserProfile;
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import templater.PageGenerator;
 
@@ -29,11 +30,10 @@ public class ScoreboardServlet extends HttpServlet{
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response) throws ServletException, IOException {
 
-        Map<String, Object> pageVariables = new HashMap<>();
 
-        JSONObject scores[] = new JSONObject[10];
+        JSONArray users = new JSONArray();
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             String myStr = Integer.toString(i);
 
             UserProfile testUser = accountService.getUser(myStr);
@@ -44,12 +44,10 @@ public class ScoreboardServlet extends HttpServlet{
             responseJSON.put("win", testUser.getWin());
             responseJSON.put("lose", testUser.getLose());
 
-            scores[i] = responseJSON;
-            //response.getWriter().println(scores[i].toString());
+            users.put(responseJSON);
         }
-            String test = scores[0].toString();
 
-            response.getWriter().println(scores[1]);
+        response.getWriter().println(users);
 
     }
 
