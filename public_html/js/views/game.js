@@ -23,7 +23,6 @@ define([
         },
         initialize: function () {
             this.on('allowedToPlay', this.startGameSocket);
-            this.on('allowedToPlay', function(event){console.log(event)});
         },
         render: function () {
             this.$el.html(this.template(this.model.toJSON()));

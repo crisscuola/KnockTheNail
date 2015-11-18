@@ -8,14 +8,14 @@ define([
     base
 ){
     var Model = Backbone.Model.extend({
-        url: '/game',
+        url: '/scores',
         defaults: {
             name: "def",
             password: "",
             win: 0,
             lose: 0,
             logged: false,
-            view: base,
+            //view: base,
             isMain: null,
             shouldClick: true
         },
@@ -25,12 +25,15 @@ define([
         },
 
         save: function(attributes, options){
-                this.set(attributes);
+                console.log(options);
+                console.log("Saved?");
             return Backbone.Model.prototype.save.call(this, attributes, options);
         },
 
         initialize: function() {
             //this.save({},{success:function(model,response){console.log(response);}, error:function(model,response){console.log(response);}});
+//            this.on("change:win", function(){console.log('Win changed?')});
+//            this.on("change:lose", this.save());
             $.ajax({
                 type: "POST",
                 url: "/check",
@@ -48,7 +51,6 @@ define([
 
             this.on('logout', function() {
                 this.logout();
-                //this.save({url: '/logout', logged: false}, {success: function(){alert(response);}});
             });
         },
 
@@ -62,7 +64,9 @@ define([
             }).done(function(obj) {
                 var answer = JSON.parse(obj);
                 if (answer.success) {
-                    this.set({name: "", logged: false});
+                    this.save({name:"", logged:false}, {success:{}});
+                    console.log(this);
+                    //this.set({name: "", logged: false});
                     location.href = "#";
                     alert(data + answer.message);
                 } else {

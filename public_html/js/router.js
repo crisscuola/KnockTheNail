@@ -60,15 +60,14 @@ define([
 
         defaultActions: function () {
             mainView.show();
-            baseView.logoutBtnHide();
+            //baseView.logoutBtnHide();
         },
         scoreboardAction: function () {
             scoreboardView.show();
-            baseView.logoutBtnShow();
+            //baseView.logoutBtnShow();
         },
         gameAction: function () {
             gameView.show();
-            gameView.render();
         },
         loginAction: function () {
             loginView.show();

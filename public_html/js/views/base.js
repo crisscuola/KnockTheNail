@@ -17,9 +17,10 @@ define([
         },
         initialize: function () {
             var that = this;
-            this.model.on('change', that.render.bind(that));
+            this.model.on('change:logged', that.render.bind(that));
         },
         render: function () {
+            console.log('base render');
             this.$el.html(this.template(this.model.toJSON()));
             this.delegateEvents();
             return this;

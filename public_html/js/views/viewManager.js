@@ -37,22 +37,30 @@ define([
 
         hideLogout: function(view){
             view.model.set({isMain: true});
+            view.render();
         },
 
         showLogout: function(view){
             view.model.set({isMain: false});
+            view.render();
         },
 
         hideExceptOne: function(view){
             if (view.name == 'game'){
-                if (view.model.get('logged') == true)
-                    view.trigger('allowedToPlay', view)
-                else {
+                if (view.model.get('logged') == true) {
+                    view.trigger('allowedToPlay', view);
+                    view.render();
+                } else {
                     alert('Please log in to play.');
                     return;
                 }
-            } else if ((view.model.get("logged") == true) && (view.name == "login" || view.name == "registration"))
+            } else if ((view.model.get("logged") == true) && (view.name == "login" || view.name == "registration")) {
                 return;
+            } else if (view.name == "main") {
+                this[5].logoutBtnHide();
+            } else {
+                this[5].logoutBtnShow();
+            }
             _.each(this, function(iterView){
                 if (iterView.name != 'base'){
                     if(iterView.name != view.name)
