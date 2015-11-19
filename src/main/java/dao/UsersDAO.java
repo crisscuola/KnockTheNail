@@ -2,24 +2,28 @@ package dao;
 
 import dataSets.UsersDataSet;
 import executor.TExecutor;
+import handlers.TResultHandler;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
 public class UsersDAO {
 
-    private Connection con;
+    private Connection connection;
 
-    public UsersDAO(Connection con) {
-        this.con = con;
+    public UsersDAO(Connection connection) {
+        this.connection = connection;
     }
 
     public UsersDataSet get(long id) throws SQLException {
         TExecutor exec = new TExecutor();
-        return exec.execQuery(con, "select * from users where id=" + id, result -> {
+        return exec.execQuery(connection, "select * from users where id=" + id, result -> {
             result.next();
-            return new UsersDataSet(result.getLong(1), result.getString(2));
+            return new UsersDataSet(result.getLong(1), result.getString(2), result.getString(3));
         });
     }
+
+
 }

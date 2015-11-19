@@ -48,7 +48,7 @@ define([
                     var answer = JSON.parse(obj);
                     if (answer.success) {
                         this.model.save({name: answer.name, logged: true});
-                        console.log(this.model);
+                        //console.log(this.model);
                         //this.model.set({name: answer.name, logged: true});
                         location.href = "#";
                         alert(answer.name + " " + answer.message);

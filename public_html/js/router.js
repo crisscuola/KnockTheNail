@@ -60,11 +60,9 @@ define([
 
         defaultActions: function () {
             mainView.show();
-            //baseView.logoutBtnHide();
         },
         scoreboardAction: function () {
             scoreboardView.show();
-            //baseView.logoutBtnShow();
         },
         gameAction: function () {
             gameView.show();

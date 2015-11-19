@@ -30,7 +30,7 @@ define([
                 this.ws.onmessage = function (event) {
                     var data = JSON.parse(event.data);
                     if(data.status == "start"){
-                        console.log(that.model);
+                        //console.log(that.model);
                         document.getElementById("wait").style.display = "none";
                         document.getElementById("gameplay").style.display = "block";
                         document.getElementById("enemyName").innerHTML = data.enemyName;
