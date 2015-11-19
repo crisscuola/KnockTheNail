@@ -4,9 +4,7 @@ import dataSets.UsersDataSet;
 import executor.TExecutor;
 import handlers.TResultHandler;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 
 public class UsersDAO {
@@ -24,6 +22,6 @@ public class UsersDAO {
             return new UsersDataSet(result.getLong(1), result.getString(2), result.getString(3));
         });
     }
-
+    
 
 }

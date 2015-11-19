@@ -24,22 +24,22 @@ define([
             console.log(method +': ' +model.url);
             var data = this.toJSON();
             if (method == "create" && model.url != "/score") {
-            var xhr = $.ajax({
-                type: "POST",
-                url: "/scores",
-                data: data,
-                context: this
-            }).done(function(obj) {
-                var answer = JSON.parse(obj);
-                if (answer.success) {
-                    //this.save({'win': this.get('win') + 1}, {success:{}});
-                    console.log(this);
-                    //this.set({name: "", logged: false});
-                    alert(data + answer.status);
-                } else {
-                    alert(answer.status);
-                }
-            });
+                var xhr = $.ajax({
+                    type: "POST",
+                    url: "/scores",
+                    data: data,
+                    context: this
+                }).done(function(obj) {
+                    var answer = JSON.parse(obj);
+                    if (answer.success) {
+                        //this.save({'win': this.get('win') + 1}, {success:{}});
+                        console.log(this);
+                        //this.set({name: "", logged: false});
+                        alert(data + answer.status);
+                    } else {
+                        alert(answer.status);
+                    }
+                });
             }
         },
 
