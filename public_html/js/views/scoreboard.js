@@ -40,12 +40,12 @@ define([
         getScoreboard: function(){
             if (!localStorage.top10 || localStorage.top10.length < 3) {
                 var that = this;
-                this.collection.fetch({success: function(){console.log('Fetched!'); that.render();}});
+                this.collection.fetch({success: function(response){console.log('Fetched!'); console.log(response); that.render();}});
                 //this.collection.sort('win');
             } else {
                 var top10 = JSON.parse(localStorage['top10']);
                 _.each(top10, function(element){
-                    this.collection.push(new this.player({name: element.name, win: element.win, lose: element.lose}));
+                    this.collection.push(new this.player({name: element.name, win: element.win, lose: element.lose, id: element.id}));
                 }, this);
                 this.render();
             }
@@ -59,7 +59,7 @@ define([
                     this.collection.sort();
                     _.each(this.collection, function(element, index){
                             top10.push({'name': this.collection.at(index).get('name'), 'win': this.collection.at(index).get('win'),
-                            'lose': this.collection.at(index).get('lose')});
+                            'lose': this.collection.at(index).get('lose'), 'id': this.collection.at(index).get('id')});
                     }, this);
                     localStorage["top10"] = JSON.stringify(top10);
                 }

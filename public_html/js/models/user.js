@@ -10,6 +10,7 @@ define([
     var Model = Backbone.Model.extend({
         url: '/scores',
         defaults: {
+            id: null,
             name: "def",
             password: "",
             win: 0,
@@ -20,10 +21,16 @@ define([
             shouldClick: true
         },
 
+        parse: function(response){
+            console.log(response);
+        },
+
         sync: function(method, model,options) {
             console.log(method +': ' +model.url);
             var data = this.toJSON();
-            if (method == "create" && model.url != "/score") {
+            console.log(data.url);
+
+            if (method == "create" && data.url == "/score") {
                 var xhr = $.ajax({
                     type: "POST",
                     url: "/scores",
@@ -33,11 +40,45 @@ define([
                     var answer = JSON.parse(obj);
                     if (answer.success) {
                         //this.save({'win': this.get('win') + 1}, {success:{}});
-                        console.log(this);
+                        console.log(answer);
                         //this.set({name: "", logged: false});
-                        alert(data + answer.status);
                     } else {
                         alert(answer.status);
+                    }
+                });
+            } else if (method == "update" && data.url == "/score"){
+                var xhr = $.ajax({
+                    type: "PUT",
+                    url: "/scores",
+                    data: data,
+                    context: this
+                }).done(function(obj) {
+                    var answer = JSON.parse(obj);
+                    if (answer.success) {
+                        //this.save({'win': this.get('win') + 1}, {success:{}});
+                        console.log(answer);
+                        //this.set({name: "", logged: false});
+                    } else {
+                        alert(answer.status);
+                    }
+                });
+            } else if (data.url == "/logout") {
+                console.log("from /logout sync");
+                var data = this.get("name");
+                $.ajax({
+                    type: "POST",
+                    url: "/scores",
+                    data: {name: data},
+                    context: this
+                }).done(function(obj) {
+                    var answer = JSON.parse(obj);
+                    if (answer.success) {
+                        //this.save({name:"", logged:false}, {success:{}});
+                        console.log(answer);
+                        //this.set({name: "", logged: false});
+                        location.href = "#";
+                    } else {
+                        alert(answer.message);
                     }
                 });
             }
@@ -68,7 +109,9 @@ define([
             });
 
             this.on('logout', function() {
-                this.logout();
+                //this.logout();
+                this.save({url: "/logout"});
+                console.log(this);
             });
         },
 
@@ -94,7 +137,7 @@ define([
         },
         winGame: function(){
             //this.set({'win': this.get('win') + 1});
-            this.save({'win': this.get('win') + 1}, {
+            this.save({'win': this.get('win') + 1, url: '/score'}, {
                 success: function(model, response) {
                     console.log('SUCCESS:');
                     console.log(response);
@@ -122,8 +165,8 @@ define([
 //            });
         },
         loseGame: function(){
-            //this.set({'lose': this.get('lose') + 1});
-            this.save({'lose': this.get('lose') + 1});
+            //this.set({'lose': this.get('lose') + 1, url: '/scores'});
+            this.save({'lose': this.get('lose') + 1, url: '/scores'});
         }
 
     });

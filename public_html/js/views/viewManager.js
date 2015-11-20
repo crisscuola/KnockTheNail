@@ -48,7 +48,8 @@ define([
         hideExceptOne: function(view){
             if (view.name == 'game'){
                 if (view.model.get('logged') == true) {
-                    view.trigger('allowedToPlay', view);
+                    //view.trigger('allowedToPlay', view);
+                    view.startGameSocket();
                     view.render();
                 } else {
                     alert('Please log in to play.');

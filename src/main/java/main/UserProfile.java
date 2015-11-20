@@ -8,7 +8,7 @@ public class UserProfile {
     private String password;
     private  int win;
     private  int lose;
-    private int id;
+    private Integer id;
 
     public UserProfile(String login, String password, int win, int lose) {
         this.name = login;
