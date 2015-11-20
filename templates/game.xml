@@ -4,14 +4,6 @@
 		<h1 class="header__title">Knock the Nail</h1>
 	</div>
 		<div class="square square_game">
-			<!--<div class="square__nail"></div>-->
-			<!--<div class="square__button-group">-->
-				<!--<button class="button-group__button">F=1</button>-->
-				<!--<button class="button-group__button">F=2</button>-->
-				<!--<button class="button-group__button">F=5</button>-->
-			<!--</div>-->
-			<!--<div class="square__table"></div>-->
-
 
 			<div id="game">
 				<p>Hello, <fest:value>user.name</fest:value>!</p>
@@ -49,7 +41,8 @@
 			</div>
 
 			<div id="gameOver" style="display: none">
-				<p>Game over! You are <fest:space/><span id="win"></span></p>
+				<p>Game over! You <fest:space/><span id="win"></span></p>
+				<label>Play again?</label> <button>Yes!</button>
 			</div>
 
 			<!--<button class="square__reset">Reset</button>-->

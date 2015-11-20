@@ -26,7 +26,6 @@ define([
     'backbone',
     'router',
     'models/user',
-    'collections/logged',
     'views/main',
     'views/base',
     'cookie'
@@ -34,7 +33,6 @@ define([
     Backbone,
     router,
     user,
-    logged,
     main,
     base,
     cookie

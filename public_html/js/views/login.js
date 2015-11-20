@@ -1,18 +1,15 @@
 define([
     'backbone',
-    'tmpl/login',
-    'collections/logged'
+    'tmpl/login'
 ], function(
     Backbone,
-    tmpl,
-    logged
+    tmpl
 ){
 
     var View = Backbone.View.extend({
         el: '.login',
         name: 'login',
         template: tmpl,
-        collection: logged,
         model: null,
         events: {
             'submit': 'onSubmit',
@@ -50,7 +47,9 @@ define([
                     console.log("SERVER ANSWER : " + obj);
                     var answer = JSON.parse(obj);
                     if (answer.success) {
-                        this.model.set({name: answer.name, logged: true});
+                        //this.model.save({id: answer.id, name: answer.name, logged: true});
+                        //console.log(this.model);
+                        this.model.set({id: answer.id, name: answer.name, logged: true});
                         location.href = "#";
                         alert(answer.name + " " + answer.message);
                     } else {

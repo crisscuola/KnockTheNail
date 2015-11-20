@@ -8,14 +8,13 @@ define([
             el: '.game',
             name: 'name',
             initialize: function(){
-                this.getName();
+
             },
             model: null,
             ws: null,
-            getName: function(){
-                this.trigger("message", this);
-            },
             init: function(){
+                this.model.on("change:win", function(){console.log('Win changed?'); this.model.save();}, this);
+                this.model.on("change:lose", function(){console.log('Lse changed?'); this.model.save();}, this);
                 this.ws = new WebSocket("ws://localhost:8080/gameplay");
                 this.nail_y = 20;
                 this.nail_dy = 10;
@@ -31,7 +30,7 @@ define([
                 this.ws.onmessage = function (event) {
                     var data = JSON.parse(event.data);
                     if(data.status == "start"){
-                        console.log(that.model);
+                        //console.log(that.model);
                         document.getElementById("wait").style.display = "none";
                         document.getElementById("gameplay").style.display = "block";
                         document.getElementById("enemyName").innerHTML = data.enemyName;
@@ -55,13 +54,13 @@ define([
                         document.getElementById("game").style.display = "none";
                         document.getElementById("gameplay").style.display = "none";
                         if(data.win) {
-                           document.getElementById("win").innerHTML = "winner!";
-                           console.log(that.model.get('name'));
+                           document.getElementById("win").innerHTML = "win!";
+                           that.model.winGame();
                         } else {
-                            document.getElementById("win").innerHTML = "loser!";
-                            console.log(that.model.get('name'));
+                            document.getElementById("win").innerHTML = "lose.";
+                            that.model.loseGame();
                         }
-
+                        console.log(that.model.toJSON());
                     }
 
                     if(data.status == "increment_myscore"){

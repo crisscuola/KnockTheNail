@@ -47,6 +47,7 @@ public class Main {
         Servlet logout = new LogOutServlet(accountService);
         Servlet admin = new AdminPageServlet(accountService);
         Servlet check = new CheckingSessionServlet(accountService);
+        Servlet scoreboard = new ScoreboardServlet(accountService);
 
         WebSocketService webSocketService = new WebSocketServiceImpl();
         GameMechanics gameMechanics = new GameMechanicsImpl(webSocketService);
@@ -57,6 +58,7 @@ public class Main {
         context.addServlet(new ServletHolder(logout), "/logout");
         context.addServlet(new ServletHolder(admin), "/admin");
         context.addServlet(new ServletHolder(check), "/check");
+        context.addServlet(new ServletHolder(scoreboard), "/scores");
 
         context.addServlet(new ServletHolder(new WebSocketGameServlet(accountService, gameMechanics, webSocketService)), "/gameplay");
 
@@ -66,6 +68,11 @@ public class Main {
 
         HandlerList handlers = new HandlerList();
         handlers.setHandlers(new Handler[]{resource_handler, context});
+
+        for  ( int i = 0; i < 10; i++) {
+            String myStr = Integer.toString(i);
+            accountService.addUser(myStr,new UserProfile(myStr,myStr,i,i));
+        }
 
 
         Server server = new Server(port);

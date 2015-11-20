@@ -50,7 +50,9 @@ public class SignInServlet extends HttpServlet {
                 responseJSON.put("success", true);
                 responseJSON.put("message", " successfully logged in!");
                 responseJSON.put("name", name);
+                responseJSON.put("id", profile.getId());
             } else {
+                System.out.println("disconnect");
                 responseJSON.put("success", false);
                 responseJSON.put("message", " login failed");
             }

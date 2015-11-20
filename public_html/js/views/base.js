@@ -1,12 +1,10 @@
 define([
     'backbone',
     'tmpl/base',
-    'collections/logged',
     'views/main'
 ], function(
     Backbone,
     tmpl,
-    logged,
     main
 ){
     var View = Backbone.View.extend({
@@ -19,22 +17,9 @@ define([
         },
         initialize: function () {
             var that = this;
-            this.model.on('change', that.render.bind(that));
-        },
-        check: function() {
-            if (!userLogged.get("logged")) {
-                this.$el.find(".corner__btn_reg").show();
-                this.$el.find(".corner__btn_logout").hide();
-                this.$el.find(".corner__username").hide();
-            } else {
-                this.$el.find(".corner__btn_reg").hide();
-                this.$el.find(".corner__btn_logout").show();
-                this.$el.find(".corner__username").show();
-                this.$el.find(".corner__username").text("You are logged as " + userLogged.get("name"));
-            }
+            this.model.on('change:logged', that.render.bind(that));
         },
         render: function () {
-            console.log("base render ");
             this.$el.html(this.template(this.model.toJSON()));
             this.delegateEvents();
             return this;

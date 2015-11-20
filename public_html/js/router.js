@@ -22,7 +22,6 @@ define([
     user
 ){
 
-    //var socketView = new socket();
     var mainView = new main({model: user});
     var gameView = new game({model: user});
     var loginView = new login({model: user});
@@ -56,21 +55,17 @@ define([
             scoreboardView.on("show", this.manager.hideExceptOne.bind(this.manager.views));
             baseView.on("hideLogout", this.manager.hideLogout);
             baseView.on("showLogout", this.manager.showLogout);
-            gameView.on("message", function(){console.log(gameView.socket);});
 
          },
 
         defaultActions: function () {
             mainView.show();
-            baseView.logoutBtnHide();
         },
         scoreboardAction: function () {
             scoreboardView.show();
-            baseView.logoutBtnShow();
         },
         gameAction: function () {
             gameView.show();
-            gameView.render();
         },
         loginAction: function () {
             loginView.show();

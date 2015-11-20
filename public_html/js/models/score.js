@@ -4,10 +4,10 @@ define([
     Backbone
 ){
     var Player = Backbone.Model.extend({
-    	urlRoot: '/player',
     	defaults: {
     		name: '',
-    		score: 0
+    		win: 0,
+    		lose: 0
     	},
     	initialize: function(){
     	},

@@ -1,12 +1,10 @@
 define([
     'backbone',
     'tmpl/main',
-    'collections/logged',
     'views/base'
 ], function(
     Backbone,
     tmpl,
-    logged,
     base
 ){
 
@@ -14,7 +12,6 @@ define([
         el: '.main',
         name: "main",
         template: tmpl,
-        collection: logged,
         model: null,
         events: {
             "click .menu__item:first-child": "game",
@@ -22,7 +19,7 @@ define([
         },
         initialize: function () {
             var that = this;
-            this.model.on('change', that.render.bind(that));
+            this.model.on('change:logged', that.render.bind(that));
         },
         render: function () {
             this.$el.html(this.template(this.model.toJSON()));
