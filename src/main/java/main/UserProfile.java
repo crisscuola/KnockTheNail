@@ -8,7 +8,7 @@ public class UserProfile {
     private String password;
     private  int win;
     private  int lose;
-    private Integer id;
+    private long id;
 
     public UserProfile(String login, String password, int win, int lose) {
         this.name = login;
@@ -32,11 +32,11 @@ public class UserProfile {
 
     public int getLose() {return  lose; }
 
-    public void setId(int id){
+    public void setId(long id){
         this.id = id;
     }
 
-    public int getId(){
+    public long getId(){
         return id;
     }
 }
