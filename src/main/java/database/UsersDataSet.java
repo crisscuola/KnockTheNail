@@ -1,4 +1,4 @@
-package dataSets;
+package database;
 
 public class UsersDataSet {
     private  long id;

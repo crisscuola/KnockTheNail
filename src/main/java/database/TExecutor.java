@@ -1,8 +1,5 @@
-package executor;
+package database;
 
-
-
-import handlers.TResultHandler;
 
 
 import java.sql.*;
