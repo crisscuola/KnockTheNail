@@ -11,7 +11,6 @@ public class GameSession {
     private float commonScore;
     private float  frictionRate;
     private GameUser lastClick;
-    private boolean shouldClick;
 
     private Nail nail;
 
@@ -66,17 +65,11 @@ public class GameSession {
     }
 
     public void changeFrictionRate() {
-
         frictionRate+=commonScore/nail.getHealth();
-
-        //frictionRate+=5;
-
     }
 
     public void incrementCommonScore(float force){
-
         commonScore+= (force/frictionRate);
-
         System.out.println("CommonScore inc "+commonScore);
     }
 

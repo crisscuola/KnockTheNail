@@ -73,10 +73,6 @@ public class GameMechanicsImpl implements GameMechanics {
         webSocketService.notifyCommonScore(myUser);
         webSocketService.notifyCommonScore(enemyUser);
 
-//        webSocketService.notifyFrictionRate(myUser);
-//        webSocketService.notifyFrictionRate(enemyUser);
-
-
         if(myGameSession.getCommonScore() >= nail.getHealth()){
             boolean firstWin = myGameSession.isFirstWin();
             webSocketService.notifyGameOver(myGameSession.getFirst(), firstWin);

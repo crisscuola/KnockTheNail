@@ -1,7 +1,6 @@
 package main;
 
 
-import base.GameUser;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,7 +25,7 @@ public class AccountService {
         return true;
     }
 
-    public UserProfile createRandomUser(){
+    /*public UserProfile createRandomUser(){
         Random random = new Random();
         Integer randInt = random.nextInt();
         String name = randInt.toString();
@@ -35,7 +34,7 @@ public class AccountService {
         user.setId(id);
         users.put(name,user);
         return user;
-    }
+    }*/
 
     public void addSessions(String sessionId, UserProfile userProfile) {
         sessions.put(sessionId, userProfile);

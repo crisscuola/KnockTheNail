@@ -15,8 +15,6 @@ public interface WebSocketService {
 
     void notifyCommonScore(GameUser user);
 
-   // void notifyFrictionRate(GameUser user);
-
     void notifyGameOver(GameUser user, boolean win);
 
     void notifyDisconnect(GameUser user);
