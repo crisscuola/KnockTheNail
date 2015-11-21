@@ -30,6 +30,7 @@ public class LogOutServlet extends HttpServlet {
         if ((accountService.isSignedIn(sessionCurrent) != null)) {
             if (accountService.removeSession(sessionCurrent)) {
                 responseJSON.put("success", true);
+                responseJSON.put("method", "logout");
                 responseJSON.put("name", name);
                 responseJSON.put("message", " successfully logged out");
             } else {

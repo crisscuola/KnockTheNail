@@ -28,6 +28,27 @@ public class CheckingSessionServlet extends HttpServlet {
 
         if ((user != null)) {
             responseJSON.put("success", true);
+            responseJSON.put("method", "check");
+            responseJSON.put("id", user.getId());
+            responseJSON.put("name", user.getName());
+        } else {
+            responseJSON.put("success", false);
+        }
+        response.getWriter().println(responseJSON.toString());
+    }
+
+    @Override public void doGet(@NotNull HttpServletRequest request,
+                                 @NotNull HttpServletResponse response) throws ServletException, IOException {
+
+        JSONObject responseJSON = new JSONObject();
+
+        String sessionCurrent = request.getSession().getId();
+        UserProfile user = accountService.getUserBySession(sessionCurrent);
+
+        if ((user != null)) {
+            responseJSON.put("success", true);
+            responseJSON.put("method", "check");
+
             responseJSON.put("name", user.getName());
         } else {
             responseJSON.put("success", false);

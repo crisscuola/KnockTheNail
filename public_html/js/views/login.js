@@ -30,7 +30,6 @@ define([
         },
 
         onSubmit: function(event) {
-            console.log("onSubmit");
             var $loginForm = $('.login-form__input');
             if (!$loginForm[0].checkValidity() ||
                 !$loginForm[1].checkValidity()) {
@@ -38,24 +37,7 @@ define([
             } else {
                 event.preventDefault();
                 var data =  $(".login-form").serialize();
-                $.ajax({
-                    type: "POST",
-                    url: "/signin",
-                    context: this,
-                    data: data
-                }).done(function(obj) {
-                    console.log("SERVER ANSWER : " + obj);
-                    var answer = JSON.parse(obj);
-                    if (answer.success) {
-                        //this.model.save({id: answer.id, name: answer.name, logged: true});
-                        //console.log(this.model);
-                        this.model.set({id: answer.id, name: answer.name, logged: true});
-                        location.href = "#";
-                        alert(answer.name + " " + answer.message);
-                    } else {
-                        alert(answer.message);
-                    }
-                });
+                this.model.save({}, {url: "/signin",data: data});
             }
             $(".login-form")[0].reset();
         }

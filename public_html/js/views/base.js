@@ -34,7 +34,8 @@ define([
         },
 
         logout: function(event){
-            this.model.trigger('logout');
+            //this.model.trigger('logout');
+            this.model.save({}, {url: "/logout"});
         }
     });
 
