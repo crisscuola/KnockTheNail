@@ -2,6 +2,9 @@
 /node_modules/
 /target/
 *.jar
+.sass_cache
+*.scss
+*.css.map
 
 workspace.xml
 tasks.xml

@@ -37,7 +37,7 @@ define([
             } else {
                 event.preventDefault();
                 var data =  $(".login-form").serialize();
-                this.model.save({}, {url: "/signin",data: data});
+                this.model.save({}, {url: "/signin", data: data});
             }
             $(".login-form")[0].reset();
         }

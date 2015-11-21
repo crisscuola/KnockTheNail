@@ -40,26 +40,44 @@ module.exports = function (grunt) {
             server: {
                 files: [
                     'public_html/js/**/*.js',
-                    'public_html/css/**/*.css'
+                    //'public_html/css/**/*.css'
                 ],
                 options: {
                     livereload: true
                 }
-            }
+            },
+	    sass: {
+		files: ['public_html/**/*.css'],
+		tasks: ['sass'],
+		options: {
+		    livereload: true
+		}
+	    }
         },
         concurrent: {
             target: ['watch', 'shell'],
             options: {
                 logConcurrentOutput: true
             }
-        }
+        },
+	sass: {
+	    dist: {
+	        files: [{
+		    expand: true,
+		    cwd: 'public_html/css',
+		    src: ['*.scss'],
+		    dest: 'public_html/css',
+		    ext: '.css'
+	        }]
+	    }
+	}
     });
 
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-fest');
-
-    grunt.registerTask('default', ['concurrent']);
+    grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.registerTask('default', ['concurrent', 'sass']);
 
 };
