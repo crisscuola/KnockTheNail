@@ -29,7 +29,7 @@ public class UsersDAO {
     public UsersDataSet get(String name) {
         TExecutor exec = new TExecutor();
         try {
-            return exec.execQuery(connection, "select * from users where name=" + name, result -> {
+            return exec.execQuery(connection, "select * from users where name='" + name + "'", result -> {
                 result.next();
                 return new UsersDataSet(result.getLong(1), result.getString(2), result.getString(3), result.getInt(4), result.getInt(5));
             });
