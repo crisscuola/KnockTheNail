@@ -15,8 +15,8 @@ public class GameSession {
     private Nail nail;
 
     public GameSession(UserProfile user1, UserProfile user2, Nail nail) {
-        int id1 = user1.getId();
-        int id2 = user2.getId();
+        long id1 = user1.getId();
+        long id2 = user2.getId();
 
         String name1 = user1.getName();
         String name2 = user2.getName();
@@ -44,11 +44,11 @@ public class GameSession {
         this.nail=nail;
     }
 
-    public GameUser getEnemy(int id) {
+    public GameUser getEnemy(long id) {
         return first.getMyId() == id ? second : first;
     }
 
-    public GameUser getSelf(int id) {
+    public GameUser getSelf(long id) {
         return first.getMyId() == id ? first : second;
     }
 

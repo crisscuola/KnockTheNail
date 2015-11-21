@@ -1,5 +1,6 @@
 package frontend;
 
+import database.DBService;
 import main.AccountService;
 import org.jetbrains.annotations.NotNull;
 //import org.junit.Rule;
@@ -17,7 +18,9 @@ import static org.mockito.Mockito.*;
 
 public class AdminPageServletTest {
     @NotNull
-    private final AccountService accountService = new AccountService();
+    private final DBService dbService = new DBService();
+    @NotNull
+    private final AccountService accountService = new AccountService(dbService);
     @Rule
     public final ExpectedSystemExit exit = ExpectedSystemExit.none();
     @Test

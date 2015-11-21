@@ -1,32 +1,40 @@
 package main;
 
-import database.DBService;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
-/**
- * Created by Сергей on 20.11.2015.
- */
-public class AccountService {
+
+public class AccountServiceShit {
 
     @NotNull
-    private DBService dbService;
+    private Map<String, UserProfile> users = new HashMap<>();
     @NotNull
     private Map<String, UserProfile> sessions = new HashMap<>();
 
-    public AccountService(DBService dbService){
-        this.dbService = dbService;
-    }
     public boolean addUser(String userName, UserProfile userProfile) {
-        if (dbService.isUserExist(userName)){
+        if (users.containsKey(userName))
             return false;
-        }
-        dbService.createUser(userName, userProfile.getPassword());
+        int id = users.size();
+        userProfile.setId(id);
+        users.put(userName, userProfile);
         return true;
     }
+
+    /*public UserProfile createRandomUser(){
+        Random random = new Random();
+        Integer randInt = random.nextInt();
+        String name = randInt.toString();
+        int id = users.size();
+        UserProfile user = new UserProfile(name,"",1,1);
+        user.setId(id);
+        users.put(name,user);
+        return user;
+    }*/
 
     public void addSessions(String sessionId, UserProfile userProfile) {
         sessions.put(sessionId, userProfile);
@@ -34,7 +42,7 @@ public class AccountService {
 
     @Nullable
     public UserProfile getUser(String userName) {
-        return dbService.getUser(userName);
+        return users.get(userName);
     }
 
     @Nullable
@@ -66,8 +74,9 @@ public class AccountService {
     }
 
     public int countSignUp() {
-        return dbService.getUsersCount();
+        return users.size();
     }
 
 
 }
+

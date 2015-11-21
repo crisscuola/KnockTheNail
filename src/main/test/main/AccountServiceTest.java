@@ -1,5 +1,6 @@
 package main;
 
+import database.DBService;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
@@ -12,7 +13,9 @@ import static org.junit.Assert.*;
 
 public class AccountServiceTest {
     @NotNull
-    private final AccountService accountService = new AccountService();
+    private final DBService dbService = new DBService();
+    @NotNull
+    private final AccountService accountService = new AccountService(dbService);
     @NotNull
     private final UserProfile userProfile = new UserProfile("1","1",0,0);
 

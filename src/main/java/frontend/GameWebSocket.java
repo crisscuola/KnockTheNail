@@ -30,7 +30,7 @@ public class GameWebSocket {
         this.webSocketService = webSocketService;
     }
 
-    public Integer getMyId() {
+    public long getMyId() {
         return user.getId();
     }
 

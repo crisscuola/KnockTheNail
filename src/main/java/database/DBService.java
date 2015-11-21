@@ -62,4 +62,17 @@ public class DBService {
         userProfile.setId(usersDataSet.getId());
         return userProfile;
     }
+
+    public UserProfile getUser(String name){
+        UsersDAO usersDAO = new UsersDAO(connection);
+        UsersDataSet usersDataSet = usersDAO.get(name);
+        UserProfile userProfile = new UserProfile(usersDataSet.getName(),usersDataSet.getPassword(),usersDataSet.getWin(),usersDataSet.getLose());
+        userProfile.setId(usersDataSet.getId());
+        return userProfile;
+    }
+
+    public int getUsersCount(){
+        UsersDAO usersDAO = new UsersDAO(connection);
+        return usersDAO.getUsersCount();
+    }
 }

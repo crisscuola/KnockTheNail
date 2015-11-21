@@ -5,7 +5,7 @@ import main.UserProfile;
 
 public interface GameMechanics {
 
-    public void incrementScore(int userName, int force);
+    public void incrementScore(long id, int force);
 
     public void notifyUserConnected(UserProfile user);
 

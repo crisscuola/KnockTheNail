@@ -26,9 +26,22 @@ public class UsersDAO {
         return  null;
     }
 
+    public UsersDataSet get(String name) {
+        TExecutor exec = new TExecutor();
+        try {
+            return exec.execQuery(connection, "select * from users where name=" + name, result -> {
+                result.next();
+                return new UsersDataSet(result.getLong(1), result.getString(2), result.getString(3), result.getInt(4), result.getInt(5));
+            });
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return  null;
+    }
+
     public void createUser(String name, String password) {
         TExecutor exec = new TExecutor();
-        final String query = "insert into users (username, password) values(?,?)";
+        final String query = "insert into users (name, password) values(?,?)";
         final String[] params = {name, password};
         try {
             exec.execUpdate(connection, query, params);
@@ -62,6 +75,20 @@ public class UsersDAO {
         }
         return false;
     }
-    
+
+    public int getUsersCount() {
+        final String query = "select count(*) from users";
+        TExecutor executor = new TExecutor();
+        int usersCount = 0;
+        try {
+            usersCount = executor.execQuery(connection, query, result -> {
+                result.next();
+                return result.getInt(1);
+            });
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return usersCount;
+    }
 
 }

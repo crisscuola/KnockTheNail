@@ -8,7 +8,7 @@ import java.util.Map;
 
 
 public class WebSocketServiceImpl implements WebSocketService {
-    private Map<Integer, GameWebSocket> userSockets = new HashMap<>();
+    private Map<Long, GameWebSocket> userSockets = new HashMap<>();
 
     @Override
     public void addUser(GameWebSocket user) {

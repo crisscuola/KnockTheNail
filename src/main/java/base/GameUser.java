@@ -3,8 +3,8 @@ import base.Nail;
 
 
 public class GameUser {
-    private int myId;
-    private int enemyId;
+    private long myId;
+    private long enemyId;
     private final String myName;
     private String enemyName;
     private float myScore = 0;
@@ -14,7 +14,7 @@ public class GameUser {
     private Nail nail;
 
 
-    public GameUser(String myName, int id, Nail nail) {
+    public GameUser(String myName, long id, Nail nail) {
         this.myName = myName;
         this.myId = id;
 
@@ -25,7 +25,7 @@ public class GameUser {
         return myName;
     }
 
-    public int getMyId(){
+    public long getMyId(){
         return this.myId;
     }
 
@@ -33,9 +33,9 @@ public class GameUser {
         return enemyName;
     }
 
-    public int getEnemyId() { return enemyId;}
+    public long getEnemyId() { return enemyId;}
 
-    public void setEnemyId(int id) { this.enemyId = id;}
+    public void setEnemyId(long id) { this.enemyId = id;}
 
     public float getMyScore() {return myScore;}
 

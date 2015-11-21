@@ -20,7 +20,7 @@ public class GameMechanicsImpl implements GameMechanics {
     private Nail nail;
 
 
-    private Map<Integer, GameSession> usersInGame = new HashMap<>();
+    private Map<Long, GameSession> usersInGame = new HashMap<>();
 
     private Queue<UserProfile> usersToGame = new ConcurrentLinkedQueue<>();
 
@@ -37,7 +37,7 @@ public class GameMechanicsImpl implements GameMechanics {
     @Override
     public void notifyUserDisconnected(UserProfile user){
         usersToGame.remove(user);
-        int id = user.getId();
+        long id = user.getId();
         usersInGame.keySet().forEach(System.out::println);
         GameSession myGameSession = usersInGame.get(id);
         if(myGameSession != null){
@@ -49,7 +49,7 @@ public class GameMechanicsImpl implements GameMechanics {
     }
 
     @Override
-    public void incrementScore(int id, int force) {
+    public void incrementScore(long id, int force) {
         GameSession myGameSession = usersInGame.get(id);
 
         GameUser myUser = myGameSession.getSelf(id);
