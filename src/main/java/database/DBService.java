@@ -75,4 +75,14 @@ public class DBService {
         UsersDAO usersDAO = new UsersDAO(connection);
         return usersDAO.getUsersCount();
     }
+
+    public void incrementWons(long id){
+        UsersDAO usersDAO = new UsersDAO(connection);
+        usersDAO.incrementWons(id);
+    }
+
+    public void incrementLoses(long id){
+        UsersDAO usersDAO = new UsersDAO(connection);
+        usersDAO.incrementLoses(id);
+    }
 }

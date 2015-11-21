@@ -4,6 +4,7 @@ import base.GameMechanics;
 import base.GameUser;
 import base.Nail;
 import base.WebSocketService;
+import database.DBService;
 import example.ReadXMLFileSAX;
 import example.TimeHelper;
 import main.UserProfile;
@@ -19,14 +20,17 @@ public class GameMechanicsImpl implements GameMechanics {
 
     private Nail nail;
 
+    private DBService dbService;
+
 
     private Map<Long, GameSession> usersInGame = new HashMap<>();
 
     private Queue<UserProfile> usersToGame = new ConcurrentLinkedQueue<>();
 
-    public GameMechanicsImpl(WebSocketService webSocketService) {
+    public GameMechanicsImpl(WebSocketService webSocketService, DBService dbService) {
         this.webSocketService = webSocketService;
         this.nail = (Nail) ReadXMLFileSAX.readXML("data/nail.xml");
+        this.dbService = dbService;
     }
 
     @Override
@@ -77,6 +81,14 @@ public class GameMechanicsImpl implements GameMechanics {
             boolean firstWin = myGameSession.isFirstWin();
             webSocketService.notifyGameOver(myGameSession.getFirst(), firstWin);
             webSocketService.notifyGameOver(myGameSession.getSecond(), !firstWin);
+            if (firstWin){
+                dbService.incrementWons(myGameSession.getFirst().getMyId());
+                dbService.incrementLoses(myGameSession.getFirst().getEnemyId());
+            }
+            else {
+                dbService.incrementWons(myGameSession.getFirst().getEnemyId());
+                dbService.incrementLoses(myGameSession.getFirst().getMyId());
+            }
             usersInGame.remove(id);
             usersInGame.remove(enemyUser.getMyId());
         }

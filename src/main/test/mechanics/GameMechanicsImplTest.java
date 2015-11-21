@@ -3,6 +3,7 @@ package mechanics;
 import base.GameMechanics;
 import base.GameUser;
 import base.WebSocketService;
+import database.DBService;
 import frontend.WebSocketServiceImpl;
 import main.UserProfile;
 import org.jetbrains.annotations.NotNull;
@@ -18,8 +19,10 @@ import static org.mockito.Mockito.*;
  */
 public class GameMechanicsImplTest {
     @NotNull
+    private final DBService dbService = new DBService();
+    @NotNull
     private final WebSocketService webSocketService= new WebSocketServiceImpl();
     @NotNull
-    private final GameMechanics gameMechanics = new GameMechanicsImpl(webSocketService);
+    private final GameMechanics gameMechanics = new GameMechanicsImpl(webSocketService,dbService);
 
 }

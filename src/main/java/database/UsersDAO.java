@@ -78,10 +78,10 @@ public class UsersDAO {
 
     public int getUsersCount() {
         final String query = "select count(*) from users";
-        TExecutor executor = new TExecutor();
+        TExecutor exec = new TExecutor();
         int usersCount = 0;
         try {
-            usersCount = executor.execQuery(connection, query, result -> {
+            usersCount = exec.execQuery(connection, query, result -> {
                 result.next();
                 return result.getInt(1);
             });
@@ -89,6 +89,26 @@ public class UsersDAO {
             e.printStackTrace();
         }
         return usersCount;
+    }
+
+    public void incrementWons(long id) {
+        final String query = "update users set wons=wons+1 where id =" + id;
+        TExecutor exec = new TExecutor();
+        try {
+            exec.execUpdate(connection, query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void incrementLoses(long id) {
+        final String query = "update users set loses=loses+1 where id =" + id;
+        TExecutor exec = new TExecutor();
+        try {
+            exec.execUpdate(connection, query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

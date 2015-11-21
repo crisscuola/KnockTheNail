@@ -53,7 +53,7 @@ public class Main {
         Servlet scoreboard = new ScoreboardServlet(accountService);
 
         WebSocketService webSocketService = new WebSocketServiceImpl();
-        GameMechanics gameMechanics = new GameMechanicsImpl(webSocketService);
+        GameMechanics gameMechanics = new GameMechanicsImpl(webSocketService, dbService);
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(signIn), "/signin");
