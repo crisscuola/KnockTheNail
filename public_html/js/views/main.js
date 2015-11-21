@@ -33,7 +33,7 @@ define([
             this.$el.hide();
         },
         logout: function() {
-            this.model.trigger('logout');
+            this.model.save({},{url: "/logout"});
         },
         game: function(event){
             if(!this.model.get("logged")){

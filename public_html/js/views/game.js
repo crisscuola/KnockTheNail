@@ -15,7 +15,6 @@ define([
         model: null,
         gameSocket: new gameSocket({model: this.model}),
         events: {
-            'click .square__reset': 'reset',
             'click .game-form .game-form__btn1': 'btn1Click',
             'click .game-form .game-form__btn2': 'btn2Click',
             'click .game-form .game-form__btn3': 'btn3Click',
@@ -38,10 +37,6 @@ define([
         startGameSocket: function() {
             this.gameSocket = new gameSocket({model: this.model});
             this.gameSocket.onGameStart();
-        },
-        reset: function() {
-            $nail = this.$el.find('.square__nail').animate({ top: '110px'}, 'fast');
-            this.$el.find('.square__button-group').attr("disabled", false);
         },
         btn1Click: function() {
             this.gameSocket.sendForce(5, this.model.get('name'));

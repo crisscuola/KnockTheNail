@@ -48,6 +48,7 @@ public class SignInServlet extends HttpServlet {
             if (profile != null && password.equals(profile.getPassword())) {
                 accountService.addSessions(String.valueOf(sessionCurrent), profile);
                 responseJSON.put("success", true);
+                responseJSON.put("method", "signin");
                 responseJSON.put("message", " successfully logged in!");
                 responseJSON.put("name", name);
                 responseJSON.put("id", profile.getId());
