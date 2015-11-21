@@ -2,7 +2,7 @@
 /node_modules/
 /target/
 *.jar
-.sass_cache
+.sass_cache/
 *.scss
 *.css.map
 
