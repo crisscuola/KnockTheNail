@@ -59,7 +59,7 @@ public class SignInServlet extends HttpServlet {
             }
         } else {
             responseJSON.put("name", name);
-            responseJSON.put("success", true);
+            responseJSON.put("success", false);
             responseJSON.put("message", " already logged in");
         }
         response.getWriter().println(responseJSON.toString());

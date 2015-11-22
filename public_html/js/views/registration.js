@@ -36,21 +36,22 @@ define([
             } else {
                 event.preventDefault();
                 var data =  $(".register-form").serialize();
-                $.ajax({
-                    type: "POST",
-                    url: "/signup",
-                    data: data
-                }).done(function(obj) {
-                    console.log("SERVER ANSWER : " + obj);
-                    var answer = JSON.parse(obj);
-                    if (answer.success) {
-                        location.href = "#";
-                        alert(answer.name +" " +answer.message);
-                        console.log(data)
-                    } else {
-                        alert(answer.name + " " +answer.message);
-                    }
-                });
+                this.model.save({}, {url: "/signup", data: data})
+//                $.ajax({
+//                    type: "POST",
+//                    url: "/signup",
+//                    data: data
+//                }).done(function(obj) {
+//                    console.log("SERVER ANSWER : " + obj);
+//                    var answer = JSON.parse(obj);
+//                    if (answer.success) {
+//                        location.href = "#";
+//                        alert(answer.name +" " +answer.message);
+//                        console.log(data)
+//                    } else {
+//                        alert(answer.name + " " +answer.message);
+//                    }
+//                });
             }
             $(".register-form")[0].reset();
         }

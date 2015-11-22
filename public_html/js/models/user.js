@@ -41,6 +41,8 @@ define([
                     return "POST"
                 case "/check":
                     return "POST"
+                case "/signup":
+                    return "POST"
             }
         },
         parse: function(response){
@@ -67,17 +69,26 @@ define([
                     if (answer.method == "logout") {
                         this.set({name: "", logged: false});
                         location.href = "#";
-                        alert(answer.name + " " + answer.message);
+                        notie.alert(1, answer.name + " " + answer.message, 2 );
+                        //alert(answer.name + " " + answer.message);
+                    } else if (answer.method == "logout") {
+                        this.set({name: "", logged: false});
+                        location.href = "#";
+                        notie.alert(1, answer.name + " " + answer.message, 2 );
+                        //alert(answer.name + " " + answer.message);
                     } else if (answer.method == "signin") {
-                          this.set({id: answer.id, name: answer.name, logged: true});
-                          location.href = "#";
-                          alert(answer.name + " " + answer.message);
+                        this.set({id: answer.id, name: answer.name, logged: true});
+                        location.href = "#";
+                        notie.alert(1, answer.name + " " + answer.message, 2);
+                        //alert(answer.name + " " + answer.message);
                     } else if (answer.method == "check"){
                             this.set({id: answer.id, name: answer.name, logged: true});
                             location.href = "#";
-                    } else {
-                        alert(answer.status);
                     }
+                } else {
+                    if (answer.method != "check")
+                    notie.alert(3, answer.name + " " + answer.message, 2.5);
+                    //alert(answer.status);
                 }
             });
         },
