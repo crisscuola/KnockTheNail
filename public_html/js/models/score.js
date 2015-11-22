@@ -5,9 +5,10 @@ define([
 ){
     var Player = Backbone.Model.extend({
     	defaults: {
+    		id: null,
     		name: '',
-    		win: 0,
-    		lose: 0
+    		wons: 0,
+    		loses: 0
     	},
     	initialize: function(){
     	},

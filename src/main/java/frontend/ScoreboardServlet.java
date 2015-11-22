@@ -45,8 +45,8 @@ public class ScoreboardServlet extends HttpServlet{
             JSONObject responseJSON = new JSONObject();
 
             responseJSON.put("name", user.getName());
-            responseJSON.put("win", user.getWin());
-            responseJSON.put("lose", user.getLose());
+            responseJSON.put("wons", user.getWin());
+            responseJSON.put("loses", user.getLose());
             responseJSON.put("id", user.getId());
 
             users.put(responseJSON);

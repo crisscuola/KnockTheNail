@@ -24,10 +24,10 @@
                             <fest:value>player.name</fest:value>
                         </td>
                         <td>
-                            <fest:value>player.win</fest:value>
+                            <fest:value>player.wons</fest:value>
                         </td>
                         <td>
-                            <fest:value>player.lose</fest:value>
+                            <fest:value>player.loses</fest:value>
                         </td>
                     </tr>
                 </fest:each>

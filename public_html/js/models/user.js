@@ -13,8 +13,8 @@ define([
             id: null,
             name: "",
             password: "",
-            win: 0,
-            lose: 0,
+            wons: 0,
+            loses: 0,
             logged: false,
             isMain: null,
             shouldClick: true
@@ -81,10 +81,12 @@ define([
         },
 
         winGame: function(){
-            this.save({}, {'win': this.get('win') + 1, url: '/scores'});
+            this.save({}, {'wons': this.get('wons') + 1, url: '/scores'});
+            localStorage.clear();
         },
         loseGame: function(){
-            this.save({}, {'lose': this.get('lose') + 1, url: '/scores'});
+            this.save({}, {'loses': this.get('loses') + 1, url: '/scores'});
+            localStorage.clear();
         }
 
     });
