@@ -56,7 +56,7 @@ define([
                 if(this.collection.length != 0) {
                     localStorage.top10 = JSON.stringify([]);
                     var top10 = JSON.parse(localStorage['top10']);
-                    this.collection.sort();
+                    //this.collection.sort();
                     _.each(this.collection, function(element, index){
                             top10.push({'name': this.collection.at(index).get('name'), 'win': this.collection.at(index).get('win'),
                             'lose': this.collection.at(index).get('lose'), 'id': this.collection.at(index).get('id')});

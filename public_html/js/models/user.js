@@ -65,30 +65,22 @@ define([
                 console.log("SERVER ANSWER : " + obj);
                 var answer = JSON.parse(obj);
                 if (answer.success) {
-                    console.log(answer);
-                    if (answer.method == "logout") {
-                        this.set({name: "", logged: false});
-                        location.href = "#";
-                        notie.alert(1, answer.name + " " + answer.message, 2 );
-                        //alert(answer.name + " " + answer.message);
+                    if (answer.method == "check") {
+                        this.set({id: answer.id, name: answer.name, logged: true});
                     } else if (answer.method == "logout") {
                         this.set({name: "", logged: false});
-                        location.href = "#";
-                        notie.alert(1, answer.name + " " + answer.message, 2 );
-                        //alert(answer.name + " " + answer.message);
+                    } else if (answer.method == "logout") {
+                        this.set({name: "", logged: false});
                     } else if (answer.method == "signin") {
                         this.set({id: answer.id, name: answer.name, logged: true});
-                        location.href = "#";
-                        notie.alert(1, answer.name + " " + answer.message, 2);
-                        //alert(answer.name + " " + answer.message);
-                    } else if (answer.method == "check"){
-                            this.set({id: answer.id, name: answer.name, logged: true});
-                            location.href = "#";
                     }
+                    notie.alert(1, answer.name + " " + answer.message, 2);
+                    location.href = "#";
                 } else {
-                    if (answer.method != "check")
-                    notie.alert(3, answer.name + " " + answer.message, 2.5);
-                    //alert(answer.status);
+                    if (answer.method != "check" && answer.method != "signin")
+                        notie.alert(3, answer.name + " " + answer.message, 2.5);
+                    else if (answer.method == "signin")
+                        notie.alert(3, answer.message, 2.5);
                 }
             });
         },

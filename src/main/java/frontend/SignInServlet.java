@@ -54,11 +54,13 @@ public class SignInServlet extends HttpServlet {
                 responseJSON.put("id", profile.getId());
             } else {
                 System.out.println("disconnect");
+                responseJSON.put("method", "signin");
                 responseJSON.put("success", false);
                 responseJSON.put("message", " login failed");
             }
         } else {
             responseJSON.put("name", name);
+            responseJSON.put("method", "signin");
             responseJSON.put("success", false);
             responseJSON.put("message", " already logged in");
         }
