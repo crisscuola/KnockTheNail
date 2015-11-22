@@ -60,43 +60,22 @@ public class ScoreboardServlet extends HttpServlet{
     @Override public void doPost(@NotNull HttpServletRequest request,
                                  @NotNull HttpServletResponse response) throws ServletException, IOException {
 
-        //String name = request.getParameter("name");
-        //String password = request.getParameter("password");
         JSONObject responseJSON = new JSONObject();
         responseJSON.put("status", "OK");
         responseJSON.put("method", "scores");
 
-//        if (accountService.addUser(name, new UserProfile(name, password,1,1))) {
-//            responseJSON.put("success", true);
-//            responseJSON.put("message", " successfully registered!");
-//            responseJSON.put("name", name);
-//        } else {
-//            responseJSON.put("success", false);
-//            responseJSON.put("name", name);
-//            responseJSON.put("message", "is already signed up");
-//        }
         response.getWriter().println(responseJSON.toString());
     }
 
     @Override public void doPut(@NotNull HttpServletRequest request,
                                  @NotNull HttpServletResponse response) throws ServletException, IOException {
 
-        //String name = request.getParameter("name");
-        //String password = request.getParameter("password");
+
         JSONObject responseJSON = new JSONObject();
         System.out.println(request.getParameter("id") + " " + request.getParameter("name"));
         System.out.println("PUT /SCORES");
         responseJSON.put("status", "OK");
 
-//        if (accountService.addUser(name, new UserProfile(name, password,1,1))) {
-//            responseJSON.put("success", true);
-//            responseJSON.put("message", " successfully registered!");
-//            responseJSON.put("name", name);
-//        } else {
-//            responseJSON.put("success", false);
-//            responseJSON.put("name", name);
-//            responseJSON.put("message", "is already signed up");
-//        }
         response.getWriter().println(responseJSON.toString());
     }
 }
