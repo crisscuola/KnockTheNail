@@ -33,6 +33,7 @@ public class CheckingSessionServlet extends HttpServlet {
             responseJSON.put("name", user.getName());
         } else {
             responseJSON.put("success", false);
+            responseJSON.put("method", "check");
         }
         response.getWriter().println(responseJSON.toString());
     }
