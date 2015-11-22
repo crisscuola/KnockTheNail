@@ -2,10 +2,8 @@ package database;
 
 import main.UserProfile;
 
-import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 
 /**
  * Created by Сергей on 20.11.2015.
@@ -91,5 +89,30 @@ public class DBService {
     public void clearUserTable() {
         UsersDAO usersDAO = new UsersDAO(connection);
         usersDAO.clear();
+    }
+
+    public ArrayList<UserProfile> getUsersScoreboard(int limit) {
+        UsersDAO usersDAO = new UsersDAO(connection);
+        ArrayList<UsersDataSet> users = usersDAO.getUsersScoreboard(limit);
+        ArrayList<UserProfile> userProfiles = new ArrayList<>();
+        for (int i = 0; i < users.size(); i++) {
+            UsersDataSet user = users.get(i);
+            UserProfile userProfile = new UserProfile(user.getName(),user.getPassword(),user.getWin(),user.getLose());
+            userProfile.setId(user.getId());
+            userProfiles.add(userProfile);
+        }
+        return userProfiles;
+    }
+
+    public ArrayList<UserProfile> getUsersScoreboard() {
+        UsersDAO usersDAO = new UsersDAO(connection);
+        ArrayList<UsersDataSet> users = usersDAO.getUsersScoreboard();
+        ArrayList<UserProfile> userProfiles = new ArrayList<>();
+        for (UsersDataSet user: users) {
+            UserProfile userProfile = new UserProfile(user.getName(),user.getPassword(),user.getWin(),user.getLose());
+            userProfile.setId(user.getId());
+            userProfiles.add(userProfile);
+        }
+        return userProfiles;
     }
 }

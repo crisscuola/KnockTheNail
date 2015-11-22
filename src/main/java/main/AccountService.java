@@ -4,6 +4,7 @@ import database.DBService;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -69,5 +70,12 @@ public class AccountService {
         return dbService.getUsersCount();
     }
 
+    public ArrayList<UserProfile> getUsersScoreBoard(int limit) {
+        return dbService.getUsersScoreboard(limit);
+    }
+
+    public ArrayList<UserProfile> getUsersScoreBoard() {
+        return dbService.getUsersScoreboard();
+    }
 
 }

@@ -3,6 +3,7 @@ package database;
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 
 public class UsersDAO {
@@ -34,7 +35,8 @@ public class UsersDAO {
                 return new UsersDataSet(result.getLong(1), result.getString(2), result.getString(3), result.getInt(4), result.getInt(5));
             });
         } catch (SQLException e){
-            e.printStackTrace();
+            System.out.println("User with name " + name + " doesn't exist");
+            //e.printStackTrace();
         }
         return  null;
     }
@@ -120,5 +122,48 @@ public class UsersDAO {
             e.printStackTrace();
         }
     }
+
+    public ArrayList<UsersDataSet> getUsersScoreboard(int limit){
+        final String query = "select * from users order by wons desc, loses asc limit " + String.valueOf(limit);
+        TExecutor exec = new TExecutor();
+        ArrayList<UsersDataSet> usersDataSets = new ArrayList<>();
+        try {
+            return exec.execQuery(connection, query, result -> {
+                while(true){
+                    if (result.next()){
+                            usersDataSets.add(new UsersDataSet(result.getLong(1), result.getString(2), result.getString(3), result.getInt(4), result.getInt(5)));
+                    } else {
+                        break;
+                    }
+                }
+                return usersDataSets;
+            });
+        } catch (SQLException e){
+            //e.printStackTrace();
+        }
+        return  null;
+    }
+
+    public ArrayList<UsersDataSet> getUsersScoreboard(){
+        final String query = "select * from users order by wons desc, loses asc";
+        TExecutor exec = new TExecutor();
+        ArrayList<UsersDataSet> usersDataSets = new ArrayList<>();
+        try {
+            return exec.execQuery(connection, query, result -> {
+                while(true){
+                    if (result.next()){
+                        usersDataSets.add(new UsersDataSet(result.getLong(1), result.getString(2), result.getString(3), result.getInt(4), result.getInt(5)));
+                    } else {
+                        break;
+                    }
+                }
+                return usersDataSets;
+            });
+        } catch (SQLException e){
+            //e.printStackTrace();
+        }
+        return  null;
+    }
+
 
 }

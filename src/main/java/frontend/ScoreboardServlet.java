@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,19 +33,21 @@ public class ScoreboardServlet extends HttpServlet{
 
 
         JSONArray users = new JSONArray();
-
-        for (int i = 0; i < 10; i++) {
-            String myStr = Integer.toString(i);
-
-            UserProfile testUser = accountService.getUser(myStr);
-            System.out.printf(String.valueOf(testUser.getId()));
-
+        String limit = request.getParameter("limit");
+        ArrayList<UserProfile> userProfiles;
+        if(limit != null) {
+            System.out.println("Nigga");
+            userProfiles = accountService.getUsersScoreBoard(Integer.valueOf(limit));
+        } else {
+            userProfiles = accountService.getUsersScoreBoard();
+        }
+        for (UserProfile user: userProfiles) {
             JSONObject responseJSON = new JSONObject();
 
-            responseJSON.put("name", testUser.getName());
-            responseJSON.put("win", testUser.getWin());
-            responseJSON.put("lose", testUser.getLose());
-            responseJSON.put("id", testUser.getId());
+            responseJSON.put("name", user.getName());
+            responseJSON.put("win", user.getWin());
+            responseJSON.put("lose", user.getLose());
+            responseJSON.put("id", user.getId());
 
             users.put(responseJSON);
         }
