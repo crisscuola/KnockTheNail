@@ -39,7 +39,7 @@ define([
     Backbone.View.prototype.close = function(){
       this.remove();
     }
-    console.log(notie);
+    //console.log(notie);
 
 
     Backbone.history.start();

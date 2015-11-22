@@ -22,14 +22,11 @@ define([
 
         initialize: function() {
             this.save({}, {url: "/check"});
-            this.on('logout', function() {
-                this.save({url: "/logout"});
-                console.log(this);
+            this.on('logout', function() { this.save({url: "/logout" });
             });
         },
 
         requestType: function(url){
-            console.log(url);
             switch (url) {
                 case "/scores":
                     return "POST"
@@ -45,17 +42,10 @@ define([
                     return "POST"
             }
         },
-        parse: function(response){
-            console.log(response);
-            return response;
-        },
 
         sync: function(method, model, options) {
             if (!options.data)
                 options.data = this.toJSON();
-            console.log(options.url);
-            console.log(options.data);
-            console.log(this.requestType(options.url));
             var xhr = $.ajax({
                 type: this.requestType(options.url),
                 url: options.url,
@@ -67,6 +57,7 @@ define([
                 if (answer.success) {
                     if (answer.method == "check") {
                         this.set({id: answer.id, name: answer.name, logged: true});
+                        return;
                     } else if (answer.method == "logout") {
                         this.set({name: "", logged: false});
                     } else if (answer.method == "logout") {
@@ -77,7 +68,7 @@ define([
                     notie.alert(1, answer.name + " " + answer.message, 2);
                     location.href = "#";
                 } else {
-                    if (answer.method != "check" && answer.method != "signin")
+                    if (answer.method != "check" && answer.method != "signin" && answer.method != "scores")
                         notie.alert(3, answer.name + " " + answer.message, 2.5);
                     else if (answer.method == "signin")
                         notie.alert(3, answer.message, 2.5);
@@ -86,22 +77,11 @@ define([
         },
 
         save: function(attributes, options){
-                console.log(options);
-                console.log(attributes);
             return Backbone.Model.prototype.save.call(this, attributes, options);
         },
 
         winGame: function(){
-            //this.set({'win': this.get('win') + 1});
-            this.save({}, {'win': this.get('win') + 1, url: '/scores',
-                success: function(model, response) {
-                    console.log('SUCCESS:');
-                    console.log(response);
-                },
-                error: function(model, response) {
-                    console.log('FAIL:');
-                    console.log(response);
-            }});
+            this.save({}, {'win': this.get('win') + 1, url: '/scores'});
         },
         loseGame: function(){
             this.save({}, {'lose': this.get('lose') + 1, url: '/scores'});

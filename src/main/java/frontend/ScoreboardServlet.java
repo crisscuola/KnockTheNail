@@ -63,9 +63,8 @@ public class ScoreboardServlet extends HttpServlet{
         //String name = request.getParameter("name");
         //String password = request.getParameter("password");
         JSONObject responseJSON = new JSONObject();
-        System.out.println(request.getParameter("name"));
-        System.out.println("POST /SCORES");
         responseJSON.put("status", "OK");
+        responseJSON.put("method", "scores");
 
 //        if (accountService.addUser(name, new UserProfile(name, password,1,1))) {
 //            responseJSON.put("success", true);
