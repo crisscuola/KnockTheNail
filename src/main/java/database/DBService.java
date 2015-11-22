@@ -66,6 +66,8 @@ public class DBService {
     public UserProfile getUser(String name){
         UsersDAO usersDAO = new UsersDAO(connection);
         UsersDataSet usersDataSet = usersDAO.get(name);
+        if (usersDataSet == null)
+            return null;
         UserProfile userProfile = new UserProfile(usersDataSet.getName(),usersDataSet.getPassword(),usersDataSet.getWin(),usersDataSet.getLose());
         userProfile.setId(usersDataSet.getId());
         return userProfile;
@@ -84,5 +86,10 @@ public class DBService {
     public void incrementLoses(long id){
         UsersDAO usersDAO = new UsersDAO(connection);
         usersDAO.incrementLoses(id);
+    }
+
+    public void clearUserTable() {
+        UsersDAO usersDAO = new UsersDAO(connection);
+        usersDAO.clear();
     }
 }

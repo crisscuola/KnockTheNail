@@ -111,4 +111,14 @@ public class UsersDAO {
         }
     }
 
+    public void clear() {
+        final String query = "truncate table users";
+        TExecutor exec = new TExecutor();
+        try {
+            exec.execUpdate(connection, query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
