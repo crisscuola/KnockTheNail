@@ -1,6 +1,7 @@
 package database;
 
 import main.UserProfile;
+import org.jetbrains.annotations.Nullable;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class DBService {
         connection = getConnection();
     }
 
+    @Nullable
     private static Connection getConnection() {
         try {
             DriverManager.registerDriver((Driver) Class.forName("com.mysql.jdbc.Driver").newInstance());
@@ -29,10 +31,9 @@ public class DBService {
                     append("user=test&").            //login
                     append("password=test");        //password
 
-            System.out.append("URL: " + url + "\n");
+            System.out.append("URL: ").append(url).append('\n');
 
-            Connection connection = DriverManager.getConnection(url.toString());
-            return connection;
+            return DriverManager.getConnection(url.toString());
         } catch (SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -61,6 +62,7 @@ public class DBService {
         return userProfile;
     }
 
+    @Nullable
     public UserProfile getUser(String name){
         UsersDAO usersDAO = new UsersDAO(connection);
         UsersDataSet usersDataSet = usersDAO.get(name);
@@ -95,9 +97,8 @@ public class DBService {
         UsersDAO usersDAO = new UsersDAO(connection);
         ArrayList<UsersDataSet> users = usersDAO.getUsersScoreboard(limit);
         ArrayList<UserProfile> userProfiles = new ArrayList<>();
-        for (int i = 0; i < users.size(); i++) {
-            UsersDataSet user = users.get(i);
-            UserProfile userProfile = new UserProfile(user.getName(),user.getPassword(),user.getWin(),user.getLose());
+        for (UsersDataSet user : users) {
+            UserProfile userProfile = new UserProfile(user.getName(), user.getPassword(), user.getWin(), user.getLose());
             userProfile.setId(user.getId());
             userProfiles.add(userProfile);
         }

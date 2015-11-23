@@ -18,7 +18,7 @@ public class AccountService {
     @NotNull
     private Map<String, UserProfile> sessions = new HashMap<>();
 
-    public AccountService(DBService dbService){
+    public AccountService(@NotNull DBService dbService){
         this.dbService = dbService;
     }
     public boolean addUser(String userName, UserProfile userProfile) {
