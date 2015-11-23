@@ -70,8 +70,8 @@ public class GameMechanicsImpl implements GameMechanics {
                 dbService.incrementWons(gameSession.getFirst().getEnemyId());
                 dbService.incrementLoses(gameSession.getFirst().getMyId());
             }
-            webSocketService.notifyDisconnect(gameSession.getEnemy(id));
-            webSocketService.notifyDisconnect(gameSession.getSelf(id));
+//            webSocketService.notifyDisconnect(gameSession.getEnemy(id));
+//            webSocketService.notifyDisconnect(gameSession.getSelf(id));
             gameSessionManager.removeSessions(id);
         }
     }
