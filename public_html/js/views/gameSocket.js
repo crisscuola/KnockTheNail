@@ -14,7 +14,7 @@ define([
         ws: null,
         init: function(){
             this.model.on("change:win", function(){console.log('Win changed?'); this.model.save();}, this);
-            this.model.on("change:lose", function(){console.log('Lse changed?'); this.model.save();}, this);
+            this.model.on("change:lose", function(){console.log('Lose changed?'); this.model.save();}, this);
             this.ws = new WebSocket("ws://localhost:8080/gameplay");
             this.nail_y = 20;
             this.nail_dy = 10;
