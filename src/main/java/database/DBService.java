@@ -6,9 +6,7 @@ import org.jetbrains.annotations.Nullable;
 import java.sql.*;
 import java.util.ArrayList;
 
-/**
- * Created by Сергей on 20.11.2015.
- */
+
 public class DBService {
     private Connection connection;
 

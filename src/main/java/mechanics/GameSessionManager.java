@@ -8,9 +8,7 @@ import javax.jws.soap.SOAPBinding;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Сергей on 23.11.2015.
- */
+
 public class GameSessionManager {
     private Map<Long, GameSession> usersInGame = new HashMap<>();
 
