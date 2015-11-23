@@ -35,7 +35,8 @@ public class DBService {
 
             return DriverManager.getConnection(url.toString());
         } catch (SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Database connection failed");
+            System.exit(1);
         }
         return null;
     }
