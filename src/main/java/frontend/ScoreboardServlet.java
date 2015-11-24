@@ -30,13 +30,11 @@ public class ScoreboardServlet extends HttpServlet{
     @Override
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response) throws ServletException, IOException {
-
-
+        
         JSONArray users = new JSONArray();
         String limit = request.getParameter("limit");
         ArrayList<UserProfile> userProfiles;
         if(limit != null) {
-            System.out.println("Nigga");
             userProfiles = accountService.getUsersScoreBoard(Integer.valueOf(limit));
         } else {
             userProfiles = accountService.getUsersScoreBoard();

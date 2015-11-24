@@ -4,6 +4,18 @@
         <h1 class="header__title">Knock the Nail</h1>
         <p class="header__par">Scoreboard</p>
     </div>
+
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Get scoreboard
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li id="top10"><a href="#">Top 10</a></li>
+            <li id="all"><a href="#">All</a></li>
+        </ul>
+    </div>
+
     <div class="square square_scoreboard">
         <table class="table table-hover">
             <thead>

@@ -17,20 +17,23 @@ define([
             loses: 0,
             logged: false,
             isMain: null,
-            shouldClick: true
+            shouldClick: true,
+            scoreboardPick: 'all',
         },
 
         initialize: function() {
             this.save({}, {url: "/check"});
             this.on('logout', function() { this.save({url: "/logout" });
             });
+            this.on('change:scoreboardPick',
+                function(){localStorage.setItem('scores', this.get('scoreboardPick'))});
         },
 
         requestType: function(url){
             switch (url) {
                 case "/scores":
                     return "POST"
-                case "/score/"+/.+/:
+                case "/scores/"+/.+/:
                     return "PUT"
                 case "/signin":
                     return "POST"

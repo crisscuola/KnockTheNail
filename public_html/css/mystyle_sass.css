@@ -58,7 +58,7 @@ body, html {
   position: relative;
   width: 350px;
   height: 410px;
-  background-color: #ffd161;
+  background-color: #ffd46d;
   margin: auto;
   text-align: center;
   border-radius: 10px;
@@ -207,6 +207,17 @@ tr {
 
   thead {
     height: 1px; } }
+.dropdown {
+  position: relative;
+  float: right;
+  bottom: 70px;
+  right: 169px; }
+  .dropdown .dropdown-toggle {
+    position: absolute; }
+  .dropdown .dropdown-menu {
+    top: 30px;
+    min-width: 130px; }
+
 /*Game*/
 .square_game {
   width: 1000px;

@@ -29,7 +29,6 @@ define([
 
         add: function(view){
             this.views.push(view);
-            if (view.name != 'scoreboard')
                 view.render();
             if (view.name != 'base' && view.name != 'main')
                 view.hide();
@@ -48,7 +47,6 @@ define([
         hideExceptOne: function(view){
             if (view.name == 'game'){
                 if (view.model.get('logged') == true) {
-                    //view.trigger('allowedToPlay', view);
                     view.startGameSocket();
                     view.render();
                 } else {

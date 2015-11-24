@@ -54,12 +54,9 @@ define([
                     document.getElementById("gameplay").style.display = "none";
                     if(data.win) {
                         document.getElementById("win").innerHTML = "win!";
-                        that.model.winGame();
                     } else {
                         document.getElementById("win").innerHTML = "lose.";
-                        that.model.loseGame();
                     }
-                    console.log(that.model.toJSON());
                 }
 
                 if(data.status == "increment_myscore"){
