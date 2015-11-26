@@ -1,6 +1,6 @@
 package example;
 
-import java.io.Serializable;
+
 import java.lang.reflect.Field;
 
 public class ReflectionHelper {

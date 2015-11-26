@@ -3,7 +3,7 @@ package example;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-import example.ReflectionHelper;
+
 
 public class SaxHandler extends DefaultHandler {
     @SuppressWarnings("FieldCanBeLocal")

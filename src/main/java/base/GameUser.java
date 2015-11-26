@@ -1,5 +1,5 @@
 package base;
-import base.Nail;
+
 
 
 public class GameUser {
