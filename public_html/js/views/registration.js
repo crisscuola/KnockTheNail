@@ -11,18 +11,25 @@ define([
         template: tmpl,
         name: 'registration',
         events: {
-            'submit': 'onSubmit'
+            'submit': 'onSubmit',
+            'keyup .register-form__input': 'saveRegName',
+            'click .button_back': function() { localStorage.setItem('regName', ''); $(".register-form").trigger('reset');}
         },
         initialize: function () {
         },
         render: function () {
             this.$el.html(this.template);
             this.delegateEvents();
+            $(".register-form__input[name='name']").val(localStorage.getItem('regName'));
             return this;
+        },
+        saveRegName: function() {
+            var data =  $(".register-form__input:first-child").val();
+            localStorage.setItem('regName', data);
         },
         show: function () {
             this.trigger('show', this);
-            //this.find(".register-form")[0].reset();
+            $(".corner__btn_reg").hide();
         },
         hide: function () {
             this.$el.hide();
@@ -36,7 +43,10 @@ define([
             } else {
                 event.preventDefault();
                 var data =  $(".register-form").serialize();
-                this.model.save({}, {url: "/signup", data: data})
+                this.model.save({}, {
+                    url: "/signup",
+                    data: data
+                })
             }
             $(".register-form")[0].reset();
         }

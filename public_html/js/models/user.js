@@ -18,7 +18,6 @@ define([
             logged: false,
             isMain: null,
             shouldClick: true,
-            scoreboardPick: 'all',
         },
 
         initialize: function() {
@@ -31,10 +30,6 @@ define([
 
         requestType: function(url){
             switch (url) {
-                case "/scores":
-                    return "POST"
-                case "/scores/"+/.+/:
-                    return "PUT"
                 case "/signin":
                     return "POST"
                 case "/logout":

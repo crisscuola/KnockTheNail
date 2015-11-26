@@ -29,7 +29,7 @@ define([
 
         add: function(view){
             this.views.push(view);
-                view.render();
+            view.render();
             if (view.name != 'base' && view.name != 'main')
                 view.hide();
         },
@@ -50,7 +50,7 @@ define([
                     view.startGameSocket();
                     view.render();
                 } else {
-                    alert('Please log in to play.');
+                    notie.alert(3, 'Please log in to play.', 2);
                     return;
                 }
             } else if ((view.model.get("logged") == true) && (view.name == "login" || view.name == "registration")) {
@@ -65,7 +65,7 @@ define([
                     if(iterView.name != view.name)
                         iterView.hide();
                     else {
-                        iterView.$el.delay(20).show().find(".square").css('bottom', '900px')
+                        iterView.$el.delay(200).show().find(".square").css('bottom', '900px')
                             .animate({bottom: 0});
                     }
                 }

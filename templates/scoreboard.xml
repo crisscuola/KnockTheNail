@@ -16,7 +16,7 @@
         </ul>
     </div>
 
-    <div class="square square_scoreboard">
+    <div class="square_scoreboard square">
         <table class="table table-hover">
             <thead>
                 <tr>

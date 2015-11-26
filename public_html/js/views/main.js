@@ -38,7 +38,7 @@ define([
         game: function(event){
             if(!this.model.get("logged")){
                 event.preventDefault();
-                alert("Please log in to play!");
+                notie.alert(3, "Please log in to play!", 2.5);
             }
         }
     });
