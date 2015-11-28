@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Сергей on 20.11.2015.
- */
+
 public class AccountService {
 
     @NotNull

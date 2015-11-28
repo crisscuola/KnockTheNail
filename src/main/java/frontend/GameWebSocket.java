@@ -146,18 +146,6 @@ public class GameWebSocket {
         }
     }
 
-//    public void setFrictionRate(GameUser user) {
-//        JSONObject jsonStart = new JSONObject();
-//        jsonStart.put("status", "increment");
-//
-//        jsonStart.put("frictionRate", user.getFrictionRate());
-//        try {
-//            session.getRemote().sendString(jsonStart.toJSONString());
-//        } catch (IOException e) {
-//            System.out.print(e.toString());
-//        }
-//
-//    }
 
     @OnWebSocketClose
     public void onClose(Session session, int statusCode, String reason) {

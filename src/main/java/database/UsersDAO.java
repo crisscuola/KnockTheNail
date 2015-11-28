@@ -36,7 +36,7 @@ public class UsersDAO {
             });
         } catch (SQLException e){
             System.out.println("User with name " + name + " doesn't exist");
-            //e.printStackTrace();
+
         }
         return  null;
     }
@@ -139,7 +139,7 @@ public class UsersDAO {
                 return usersDataSets;
             });
         } catch (SQLException e){
-            //e.printStackTrace();
+
         }
         return  null;
     }
@@ -160,7 +160,7 @@ public class UsersDAO {
                 return usersDataSets;
             });
         } catch (SQLException e){
-            //e.printStackTrace();
+
         }
         return  null;
     }

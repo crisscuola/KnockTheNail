@@ -4,7 +4,6 @@ import base.GameUser;
 import base.Nail;
 import main.UserProfile;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.HashMap;
 import java.util.Map;
 
