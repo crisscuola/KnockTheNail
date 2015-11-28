@@ -3,6 +3,8 @@
 /target/
 *.jar
 .sass_cache/
+.sass-cache
+.sass-cache/*
 *.scss
 *.css.map
 

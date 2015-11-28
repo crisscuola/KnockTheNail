@@ -57,6 +57,8 @@ define([
                 return;
             } else if (view.name == "main") {
                 this[5].logoutBtnHide();
+            } else if(view.name == 'registration') {
+                this[5].regBtnHide();
             } else {
                 this[5].logoutBtnShow();
             }

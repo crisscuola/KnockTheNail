@@ -56,6 +56,7 @@ define([
             baseView.on("hideLogout", this.manager.hideLogout);
             baseView.on("showLogout", this.manager.showLogout);
 
+
          },
 
         defaultActions: function () {
