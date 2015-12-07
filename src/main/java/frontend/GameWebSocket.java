@@ -80,6 +80,8 @@ public class GameWebSocket {
         }
         JSONObject jsonObj = (JSONObject) obj;
 
+        if (jsonObj == null)
+            return;
         String x = String.valueOf(jsonObj.get("force"));
 
         int force = Integer.valueOf(x);
