@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
 
 public class AdminPageServletTest {
     @NotNull
-    private final DBService dbService = new DBService(new DataBaseSettings("jdbc:mysql","localhost","db_knock","test","test",3306));
+    private final DBService dbService = new DBService(new DataBaseSettings("jdbc:mysql","localhost","db_knock_test","test","test",3306));
     @NotNull
     private final AccountService accountService = new AccountService(dbService);
     @Rule

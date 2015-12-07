@@ -1,6 +1,5 @@
 package frontend;
 
-import com.sun.deploy.uitoolkit.ui.ConsoleWindow;
 import database.DBService;
 import database.DataBaseSettings;
 import main.AccountService;
@@ -15,8 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import java.io.*;
-import java.util.Objects;
-
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
