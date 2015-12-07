@@ -10,11 +10,11 @@ public class DataBaseSettings {
     private final String password;
 
     public DataBaseSettings() {
-        this.type = "";
-        this.host = "";
-        this.port = 0;
-        this.name = "";
-        this.password = "";
+        this.type = "jdbc:mysql://";
+        this.host = "localhost:";
+        this.port = 3306;
+        this.name = "db_knock";
+        this.password = "test";
     }
 
     public String getType() {
