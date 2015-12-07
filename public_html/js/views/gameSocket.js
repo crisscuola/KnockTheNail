@@ -13,14 +13,11 @@ define([
         model: null,
         ws: null,
         init: function(){
-            this.model.on("change:win", function(){console.log('Win changed?'); this.model.save();}, this);
-            this.model.on("change:lose", function(){console.log('Lose changed?'); this.model.save();}, this);
             this.ws = new WebSocket("ws://localhost:8080/gameplay");
             this.nail_y = 20;
             this.nail_dy = 10;
             this.nail(this.nail_y);
-
-            //save context
+            this.table();
             var that = this;
 
             this.ws.onopen = function (event) {
@@ -29,8 +26,8 @@ define([
 
             this.ws.onmessage = function (event) {
                 var data = JSON.parse(event.data);
+
                 if(data.status == "start"){
-                    //console.log(that.model);
                     document.getElementById("wait").style.display = "none";
                     document.getElementById("gameplay").style.display = "block";
                     document.getElementById("enemyName").innerHTML = data.enemyName;
@@ -54,12 +51,9 @@ define([
                     document.getElementById("gameplay").style.display = "none";
                     if(data.win) {
                         document.getElementById("win").innerHTML = "win!";
-                        that.model.winGame();
                     } else {
                         document.getElementById("win").innerHTML = "lose.";
-                        that.model.loseGame();
                     }
-                    console.log(that.model.toJSON());
                 }
 
                 if(data.status == "increment_myscore"){
@@ -105,6 +99,7 @@ define([
 
         onGameStart: function() {
             $("body").find(".square_game").load(this.init());
+
         },
 
         clearCanvas: function() {
@@ -113,12 +108,21 @@ define([
             context.clearRect(0,0,canvas.width,canvas.height);
         },
 
+        table: function() {
+            canvas = document.getElementById('canvas');
+            context = canvas.getContext('2d');
+            context.fillStyle = '#000';
+            context.beginPath();
+            context.rect(60,140,200,10);
+            context.fill();
+        },
+
         nail: function(y) {
             canvas = document.getElementById('canvas');
             context = canvas.getContext('2d');
             context.fillStyle = '#000';
             context.beginPath();
-            context.rect(50,y,5,30);
+            context.rect(150,y,5,30);
             context.fill();
         },
 
@@ -130,6 +134,7 @@ define([
             if(this.nail_y > 150)
                 this.nail_y = 20;
             this.nail(this.nail_y);
+            this.table();
         }
 
     });

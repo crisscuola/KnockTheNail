@@ -7,6 +7,7 @@ import main.UserProfile;
 import org.eclipse.jetty.websocket.servlet.ServletUpgradeRequest;
 import org.eclipse.jetty.websocket.servlet.ServletUpgradeResponse;
 import org.eclipse.jetty.websocket.servlet.WebSocketCreator;
+import org.jetbrains.annotations.Nullable;
 
 
 public class GameWebSocketCreator implements WebSocketCreator {
@@ -22,15 +23,14 @@ public class GameWebSocketCreator implements WebSocketCreator {
         this.accountService = accountService;
     }
 
+    @Nullable
     @Override
     public Object createWebSocket(ServletUpgradeRequest req, ServletUpgradeResponse resp) {
         String sessionId = req.getHttpServletRequest().getSession().getId();
         System.out.println(sessionId);
         UserProfile player = accountService.getUserBySession(String.valueOf(sessionId));
-//        if(player == null){
-//            player = accountService.createRandomUser();
-//            accountService.addSessions(sessionId,player);
-//        }
+        if(player == null)
+            return null;
         return new GameWebSocket(player, gameMechanics, webSocketService);
     }
 }

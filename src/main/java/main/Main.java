@@ -1,6 +1,7 @@
 package main;
 
 import database.DBService;
+import database.DataBaseSettings;
 import frontend.*;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
@@ -21,6 +22,7 @@ import mechanics.GameMechanicsImpl;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -41,7 +43,7 @@ public class Main {
 
         System.out.append("Starting at port: ").append(String.valueOf(port)).append('\n');
 
-        DBService dbService = new DBService();
+        DBService dbService = new DBService(getDataBaseSettings());
 
         AccountService accountService = new AccountService(dbService);
 
@@ -91,6 +93,31 @@ public class Main {
             final Properties properties = new Properties();
             properties.load(fis);
             return Integer.valueOf(properties.getProperty("port"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Nullable
+    private static DataBaseSettings getDataBaseSettings() {
+        try (final FileInputStream fis = new FileInputStream("cfg/server.cfg")) {
+            final Properties properties = new Properties();
+            properties.load(fis);
+            String type = String.valueOf(properties.getProperty("databaseType"));
+            String host = String.valueOf(properties.getProperty("databaseHost"));
+            String dbname = String.valueOf(properties.getProperty("databaseName"));
+            String user = String.valueOf(properties.getProperty("databaseUser"));
+            String password = String.valueOf(properties.getProperty("databasePassword"));
+            System.out.println(type+host+user+password);
+            int port = Integer.valueOf(properties.getProperty("databasePort"));
+            return new DataBaseSettings(type,host,dbname,user,password,port);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
         } catch (IOException e) {
             e.printStackTrace();
             return null;

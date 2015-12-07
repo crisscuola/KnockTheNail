@@ -1,6 +1,7 @@
 package main;
 
 import database.DBService;
+import database.DataBaseSettings;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
@@ -13,7 +14,7 @@ import static org.junit.Assert.*;
 
 public class AccountServiceTest {
     @NotNull
-    private final DBService dbService = new DBService();
+    private final DBService dbService = new DBService(new DataBaseSettings("jdbc:mysql","localhost","db_knock","test","test",3306));
     @NotNull
     private final AccountService accountService = new AccountService(dbService);
     @NotNull

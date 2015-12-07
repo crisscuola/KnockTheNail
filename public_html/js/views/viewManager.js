@@ -29,8 +29,7 @@ define([
 
         add: function(view){
             this.views.push(view);
-            if (view.name != 'scoreboard')
-                view.render();
+            view.render();
             if (view.name != 'base' && view.name != 'main')
                 view.hide();
         },
@@ -48,17 +47,18 @@ define([
         hideExceptOne: function(view){
             if (view.name == 'game'){
                 if (view.model.get('logged') == true) {
-                    //view.trigger('allowedToPlay', view);
                     view.startGameSocket();
                     view.render();
                 } else {
-                    alert('Please log in to play.');
+                    notie.alert(3, 'Please log in to play.', 2);
                     return;
                 }
             } else if ((view.model.get("logged") == true) && (view.name == "login" || view.name == "registration")) {
                 return;
             } else if (view.name == "main") {
                 this[5].logoutBtnHide();
+            } else if(view.name == 'registration') {
+                this[5].regBtnHide();
             } else {
                 this[5].logoutBtnShow();
             }
@@ -67,7 +67,7 @@ define([
                     if(iterView.name != view.name)
                         iterView.hide();
                     else {
-                        iterView.$el.delay(20).show().find(".square").css('bottom', '900px')
+                        iterView.$el.delay(200).show().find(".square").css('bottom', '900px')
                             .animate({bottom: 0});
                     }
                 }

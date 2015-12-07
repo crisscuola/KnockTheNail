@@ -1,9 +1,12 @@
 package example;
 
-import java.io.Serializable;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.lang.reflect.Field;
 
 public class ReflectionHelper {
+    @Nullable
     public static Object createInstance(String className) {
         try {
             return Class.forName(className).newInstance();
@@ -27,7 +30,7 @@ public class ReflectionHelper {
             }
 
             field.setAccessible(false);
-        } catch (SecurityException | NoSuchFieldException | IllegalArgumentException | IllegalAccessException e) {
+        } catch (SecurityException | NoSuchFieldException | NumberFormatException | IllegalAccessException e) {
             e.printStackTrace();
         }
     }

@@ -1,5 +1,5 @@
 package base;
-import base.Nail;
+
 
 
 public class GameUser {
@@ -43,7 +43,8 @@ public class GameUser {
 
     public  double getFrictionRate() { return  frictionRate; }
 
-    public double changeFrictionRate() { return frictionRate+=(getMyScore()+getEnemyScore())/nail.getHealth();}
+    public double changeFrictionRate() {
+        return frictionRate+=(myScore + enemyScore)/nail.getHealth();}
 
     public void incrementMyScore(int force) { myScore += force/frictionRate; }
 

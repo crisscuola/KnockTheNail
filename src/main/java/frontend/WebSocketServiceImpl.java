@@ -28,8 +28,6 @@ public class WebSocketServiceImpl implements WebSocketService {
     @Override
     public  void notifyCommonScore(GameUser user) {userSockets.get(user.getMyId()).setCommonScore(user);}
 
-   //  @Override
-     //public void notifyFrictionRate(GameUser user) {userSockets.get(user.getMyId()).setFrictionRate(user);}
 
     @Override
     public void notifyStartGame(GameUser user, boolean shouldClick) {
@@ -40,11 +38,11 @@ public class WebSocketServiceImpl implements WebSocketService {
 
     @Override
     public void notifyGameOver(GameUser user, boolean win) {
-        userSockets.get(user.getMyId()).gameOver(user, win);
+        userSockets.get(user.getMyId()).gameOver(win);
     }
 
     @Override
-    public  void notifyDisconnect(GameUser user) { userSockets.get(user.getMyId()).disconnect(user);
+    public  void notifyDisconnect(GameUser user) { userSockets.get(user.getMyId()).disconnect();
         System.out.println("disconnect");
     }
 }

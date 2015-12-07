@@ -5,7 +5,8 @@ require.config({
         jquery: "lib/jquery",
         underscore: "lib/underscore",
         backbone: "lib/backbone",
-        notie: "lib/notie"
+        notie: "lib/notie",
+        bootstrap: "lib/bootstrap.min"
     },
     shim: {
         'backbone': {
@@ -17,30 +18,25 @@ require.config({
         },
         'notie': {
             exports: 'notie'
-        }
+        },
+        'bootstrap': {
+            deps: ['jquery']
+         }
     }
 });
 
 define([
     'backbone',
     'router',
-    'models/user',
-    'views/main',
-    'views/base',
-    'notie'
+    'notie',
+    'jquery',
+    'bootstrap'
 ], function(
-    Backbone,
-    router,
-    user,
-    main,
-    base,
-    notie
+    Backbone
 ){
     Backbone.View.prototype.close = function(){
       this.remove();
     }
-    //console.log(notie);
-
 
     Backbone.history.start();
 });

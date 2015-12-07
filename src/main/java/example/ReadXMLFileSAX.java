@@ -1,9 +1,12 @@
 package example;
 
 import org.jetbrains.annotations.Nullable;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import java.io.IOException;
 
 public class ReadXMLFileSAX {
     @Nullable
@@ -16,7 +19,7 @@ public class ReadXMLFileSAX {
 
             return handler.getObject();
 
-        } catch (Exception e) {
+        } catch (IOException | ParserConfigurationException | SAXException e) {
             e.printStackTrace();
         }
         return null;

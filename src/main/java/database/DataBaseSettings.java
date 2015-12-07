@@ -6,15 +6,17 @@ public class DataBaseSettings {
     private final String type;
     private final String host;
     private final int port;
-    private final String name;
+    private final String dbname;
+    private final String user;
     private final String password;
 
-    public DataBaseSettings() {
-        this.type = "jdbc:mysql://";
-        this.host = "localhost:";
-        this.port = 3306;
-        this.name = "db_knock";
-        this.password = "test";
+    public DataBaseSettings(String type, String host, String dbname, String user, String password, int port) {
+        this.type = type;
+        this.host = host;
+        this.port = port;
+        this.dbname = dbname;
+        this.user = user;
+        this.password = password;
     }
 
     public String getType() {
@@ -29,9 +31,11 @@ public class DataBaseSettings {
         return port;
     }
 
-    public String getName() {
-        return name;
+    public String getDBName() {
+        return dbname;
     }
+
+    public String getUser() { return user;}
 
     public String getPassword() {
         return password;

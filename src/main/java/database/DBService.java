@@ -1,35 +1,42 @@
 package database;
 
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import main.UserProfile;
 import org.jetbrains.annotations.Nullable;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-/**
- * Created by Сергей on 20.11.2015.
- */
-public class DBService {
-    private Connection connection;
 
-    public DBService(){
-        connection = getConnection();
+public class DBService {
+
+    private UsersDAO usersDAO;
+
+    public DBService(@Nullable DataBaseSettings dataBaseSettings){
+        Connection connection = getConnection(dataBaseSettings);
+        usersDAO = new UsersDAO(connection);
     }
 
     @Nullable
-    private static Connection getConnection() {
+    private static Connection getConnection(DataBaseSettings dataBaseSettings) {
         try {
             DriverManager.registerDriver((Driver) Class.forName("com.mysql.jdbc.Driver").newInstance());
 
             StringBuilder url = new StringBuilder();
 
             url.
-                    append("jdbc:mysql://").        //db type
-                    append("localhost:").            //host name
-                    append("3306/").                //port
-                    append("db_knock?").            //db name
-                    append("user=test&").            //login
-                    append("password=test");        //password
+                    append(dataBaseSettings.getType()).
+                    append("://").
+                    append(dataBaseSettings.getHost()).
+                    append(':').
+                    append(String.valueOf(dataBaseSettings.getPort())).
+                    append('/').
+                    append(dataBaseSettings.getDBName()).
+                    append('?').
+                    append("user=").append(dataBaseSettings.getUser()).
+                    append('&').
+                    append("password=").
+                    append(dataBaseSettings.getPassword());
 
             System.out.append("URL: ").append(url).append('\n');
 
@@ -42,22 +49,43 @@ public class DBService {
     }
 
     public void createUser(String name, String password){
-        UsersDAO usersDAO = new UsersDAO(connection);
-        usersDAO.createUser(name,password);
+        try {
+            usersDAO.createUser(name, password);
+        } catch (MySQLIntegrityConstraintViolationException e){
+            System.err.println("User " + name + " is already exists");
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean isUserExist(String name){
-        UsersDAO usersDAO = new UsersDAO(connection);
-        return usersDAO.isUserExist(name);
+        try {
+            return usersDAO.isUserExist(name);
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public boolean checkPassword(String name, String password){
-        UsersDAO usersDAO = new UsersDAO(connection);
-        return usersDAO.checkPassword(name,password);
+        try {
+            return usersDAO.checkPassword(name, password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
+
+    @Nullable
     public UserProfile getUser(long id){
-        UsersDAO usersDAO = new UsersDAO(connection);
-        UsersDataSet usersDataSet = usersDAO.get(id);
+        UsersDataSet usersDataSet;
+        try {
+            usersDataSet = usersDAO.get(id);
+        } catch (SQLException e) {
+            System.out.println("User with id " + String.valueOf(id) + " doesn't exist");
+            return null;
+        }
         UserProfile userProfile = new UserProfile(usersDataSet.getName(),usersDataSet.getPassword(),usersDataSet.getWin(),usersDataSet.getLose());
         userProfile.setId(usersDataSet.getId());
         return userProfile;
@@ -65,8 +93,13 @@ public class DBService {
 
     @Nullable
     public UserProfile getUser(String name){
-        UsersDAO usersDAO = new UsersDAO(connection);
-        UsersDataSet usersDataSet = usersDAO.get(name);
+        UsersDataSet usersDataSet;
+        try {
+            usersDataSet = usersDAO.get(name);
+        } catch (SQLException e) {
+            System.out.println("User with name " + name + " doesn't exist");
+            return null;
+        }
         if (usersDataSet == null)
             return null;
         UserProfile userProfile = new UserProfile(usersDataSet.getName(),usersDataSet.getPassword(),usersDataSet.getWin(),usersDataSet.getLose());
@@ -74,29 +107,47 @@ public class DBService {
         return userProfile;
     }
 
-    public int getUsersCount(){
-        UsersDAO usersDAO = new UsersDAO(connection);
-        return usersDAO.getUsersCount();
+    public int getUsersCount() {
+        try {
+            return usersDAO.getUsersCount();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 
-    public void incrementWons(long id){
-        UsersDAO usersDAO = new UsersDAO(connection);
-        usersDAO.incrementWons(id);
+    public void incrementWons(long id) {
+        try {
+            usersDAO.incrementWons(id);
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
-    public void incrementLoses(long id){
-        UsersDAO usersDAO = new UsersDAO(connection);
-        usersDAO.incrementLoses(id);
+    public void incrementLoses(long id) {
+        try {
+            usersDAO.incrementLoses(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void clearUserTable() {
-        UsersDAO usersDAO = new UsersDAO(connection);
-        usersDAO.clear();
+        try {
+            usersDAO.clear();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     public ArrayList<UserProfile> getUsersScoreboard(int limit) {
-        UsersDAO usersDAO = new UsersDAO(connection);
-        ArrayList<UsersDataSet> users = usersDAO.getUsersScoreboard(limit);
+        ArrayList<UsersDataSet> users;
+        try {
+            users = usersDAO.getUsersScoreboard(limit);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
         ArrayList<UserProfile> userProfiles = new ArrayList<>();
         for (UsersDataSet user : users) {
             UserProfile userProfile = new UserProfile(user.getName(), user.getPassword(), user.getWin(), user.getLose());
@@ -107,8 +158,13 @@ public class DBService {
     }
 
     public ArrayList<UserProfile> getUsersScoreboard() {
-        UsersDAO usersDAO = new UsersDAO(connection);
-        ArrayList<UsersDataSet> users = usersDAO.getUsersScoreboard();
+        ArrayList<UsersDataSet> users;
+        try {
+            users = usersDAO.getUsersScoreboard();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
         ArrayList<UserProfile> userProfiles = new ArrayList<>();
         for (UsersDataSet user: users) {
             UserProfile userProfile = new UserProfile(user.getName(),user.getPassword(),user.getWin(),user.getLose());

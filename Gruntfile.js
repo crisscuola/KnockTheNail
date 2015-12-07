@@ -47,11 +47,11 @@ module.exports = function (grunt) {
                 }
             },
 	    sass: {
-		files: ['public_html/**/*.css'],
-		tasks: ['sass'],
-		options: {
-		    livereload: true
-		}
+            files: ['public_html/**/*.scss'],
+            tasks: ['sass'],
+            options: {
+                livereload: true
+            }
 	    }
         },
         concurrent: {

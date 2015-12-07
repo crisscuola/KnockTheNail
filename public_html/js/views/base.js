@@ -33,6 +33,10 @@ define([
             this.trigger("showLogout", this);
         },
 
+        regBtnHide: function(){
+            this.$el.find(".corner__btn_reg").hide();
+        },
+
         logout: function(event){
             //this.model.trigger('logout');
             this.model.save({}, {url: "/logout"});
