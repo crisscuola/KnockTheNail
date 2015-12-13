@@ -1,6 +1,7 @@
 require.config({
     urlArgs: "_=" + (new Date()).getTime(),
     baseUrl: "js",
+    waitSeconds: 20,
     paths: {
         jquery: "lib/jquery",
         underscore: "lib/underscore",

@@ -62,6 +62,9 @@ module.exports = function (grunt) {
         },
 	sass: {
 	    dist: {
+		options: {
+        	style: 'compressed'
+      	    	},
 	        files: [{
 		    expand: true,
 		    cwd: 'public_html/css',
@@ -69,6 +72,44 @@ module.exports = function (grunt) {
 		    dest: 'public_html/css',
 		    ext: '.css'
 	        }]
+	    }
+	},
+	requirejs: {
+	    build: {
+  		options: {
+    		    almond: true,
+    		    baseUrl: "public_html/js",
+    		    mainConfigFile: "public_html/js/main.js",
+    		    name: "main",
+    		    optimize: "none",
+    		    out: "public_html/js/build/main.js"
+  	   	} 
+	    }
+	},
+	concat: {
+	    build: {
+    		separator: ';\n',
+    		src: [
+          	    'public_html/js/lib/almond.js',
+          	    'public_html/js/build/main.js'
+    		],
+    		dest: 'public_html/js/build.js'
+	    },
+	    css: {
+		separator: ';\n',
+                src: [
+                    'public_html/css/bootstrap.min.css',
+                    'public_html/css/base.css' 
+                ],
+                dest: 'public_html/css/build.css'
+	    }
+	},
+	uglify: {
+	    build: {
+    		files: {
+        	    'public_html/js/build.min.js': 
+              	    ['public_html/js/build.js']
+    		}
 	    }
 	}
     });
@@ -78,6 +119,17 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-fest');
     grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    
     grunt.registerTask('default', ['concurrent', 'sass']);
-
+    grunt.registerTask(
+    	'build',
+    	[
+            'fest', 'requirejs:build',
+            'concat:build', 'concat:css', 
+	    'uglify:build'
+    	]
+    );
 };
