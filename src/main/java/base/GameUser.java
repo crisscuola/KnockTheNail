@@ -44,7 +44,11 @@ public class GameUser {
     public  double getFrictionRate() { return  frictionRate; }
 
     public double changeFrictionRate() {
-        return frictionRate+=(myScore + enemyScore)/nail.getHealth();}
+        if ( frictionRate < 3 ) {
+            frictionRate+=(myScore + enemyScore)/nail.getHealth();
+        }
+        return  frictionRate;
+    }
 
     public void incrementMyScore(int force) { myScore += force/frictionRate; }
 

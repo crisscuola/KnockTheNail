@@ -65,7 +65,9 @@ public class GameSession {
     }
 
     public void changeFrictionRate() {
-        frictionRate+=commonScore/nail.getHealth();
+        if (frictionRate < 3) {
+            frictionRate += commonScore / nail.getHealth();
+        }
     }
 
     public void incrementCommonScore(float force){
