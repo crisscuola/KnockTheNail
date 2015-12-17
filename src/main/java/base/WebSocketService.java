@@ -18,5 +18,6 @@ public interface WebSocketService {
     void notifyGameOver(GameUser user, boolean win);
 
     void notifyDisconnect(GameUser user);
+
 }
 

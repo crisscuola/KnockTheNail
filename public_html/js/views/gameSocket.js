@@ -12,9 +12,10 @@ define([
         },
         model: null,
         ws: null,
+        commonscore: null,
         init: function(){
             this.ws = new WebSocket("ws://localhost:8080/gameplay");
-            this.nail_y = 20;
+            this.nail_y = 0;
             this.nail_dy = 10;
             this.nail(this.nail_y);
             this.table();
@@ -28,6 +29,8 @@ define([
                 var data = JSON.parse(event.data);
 
                 if(data.status == "start"){
+                    that.table();
+                    that.nail(that.nail_y);
                     document.getElementById("wait").style.display = "none";
                     document.getElementById("gameplay").style.display = "block";
                     document.getElementById("enemyName").innerHTML = data.enemyName;
@@ -80,8 +83,10 @@ define([
 
                 if (data.status == "increment" ){
                     document.getElementById("commonScore").innerHTML = data.commonScore;
+                    that.commonscore = data.commonScore;
                     document.getElementById("frictionRate").innerHTML = data.frictionRate;
-                    var movement = data.button1;
+                    var movement = data.commonScore ;
+                    console.log(movement +" "+data.commonScore);
                     that.knock(movement);
                 }
 
@@ -113,7 +118,7 @@ define([
             context = canvas.getContext('2d');
             context.fillStyle = '#000';
             context.beginPath();
-            context.rect(60,140,200,10);
+            context.rect(50,100,200,50);
             context.fill();
         },
 
@@ -122,7 +127,7 @@ define([
             context = canvas.getContext('2d');
             context.fillStyle = '#000';
             context.beginPath();
-            context.rect(150,y,5,30);
+            context.rect(150,y,5,100);
             context.fill();
         },
 
@@ -133,7 +138,9 @@ define([
             this.nail_y += y;
             if(this.nail_y > 150)
                 this.nail_y = 20;
-            this.nail(this.nail_y);
+            //this.nail(this.nail_y);
+            console.log(y);
+            this.nail(y);
             this.table();
         }
 

@@ -30,6 +30,8 @@ public class GameWebSocket {
         this.webSocketService = webSocketService;
     }
 
+
+
     public long getMyId() {
         return user.getId();
     }
@@ -83,6 +85,7 @@ public class GameWebSocket {
         if (jsonObj == null)
             return;
         String x = String.valueOf(jsonObj.get("force"));
+
 
         int force = Integer.valueOf(x);
 
