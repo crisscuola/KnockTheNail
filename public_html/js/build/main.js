@@ -13565,7 +13565,7 @@ define('views/gameSocket',[
         nail: function(y) {
             canvas = document.getElementById('canvas');
             context = canvas.getContext('2d');
-            context.fillStyle = '#000';
+            context.fillStyle = '#FF0000';
             context.beginPath();
             context.rect(150,y,5,100);
             context.fill();
