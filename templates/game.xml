@@ -15,7 +15,7 @@
 
 			<div id="gameplay" style="display: none">
 				<div id="score">
-					<p>Your name : <span id="myName"><fest:value>user.name</fest:value></span></p>
+					<p>Enemy name : <fest:space/><span id="enemyName"></span>.</p>
 					<canvas id="canvas"></canvas>
 
 				</div>
