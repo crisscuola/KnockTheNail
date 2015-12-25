@@ -33,7 +33,7 @@ define([
                     that.nail(that.nail_y);
                     document.getElementById("wait").style.display = "none";
                     document.getElementById("gameplay").style.display = "block";
-                    document.getElementById("enemyName").innerHTML = data.enemyName;
+                    //document.getElementById("enemyName").innerHTML = data.enemyName;
                     if(data.shouldClick){
                         that.$el.find('#waitOpponent').hide();
                         that.$el.find('.game-form').show();
@@ -60,7 +60,7 @@ define([
                 }
 
                 if(data.status == "increment_myscore"){
-                    document.getElementById("myScore").innerHTML = data.score;
+                    //document.getElementById("myScore").innerHTML = data.score;
                     if(data.shouldClick){
                         that.$el.find('#waitOpponent').hide();
                         that.$el.find('game-form').show();
@@ -71,7 +71,7 @@ define([
                 }
 
                 if(data.status == "increment_enemyscore"){
-                    document.getElementById("enemyScore").innerHTML = data.score;
+                    //document.getElementById("enemyScore").innerHTML = data.score;
                     if(!data.shouldClick){
                         that.$el.find('#waitOpponent').hide();
                         that.$el.find('.game-form').show();
@@ -82,9 +82,9 @@ define([
                 }
 
                 if (data.status == "increment" ){
-                    document.getElementById("commonScore").innerHTML = data.commonScore;
+                    //document.getElementById("commonScore").innerHTML = data.commonScore;
                     that.commonscore = data.commonScore;
-                    document.getElementById("frictionRate").innerHTML = data.frictionRate;
+                    //document.getElementById("frictionRate").innerHTML = data.frictionRate;
                     var movement = data.commonScore ;
                     console.log(movement +" "+data.commonScore);
                     that.knock(movement);

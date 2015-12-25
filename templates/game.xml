@@ -15,13 +15,13 @@
 
 			<div id="gameplay" style="display: none">
 				<div id="score">
-					<p>Your name : <span id="myName"><fest:value>user.name</fest:value></span>. Your score : <span id="myScore">0</span></p>
+					<!--<p>Your name : <span id="myName"><fest:value>user.name</fest:value></span>. Your score : <span id="myScore">0</span></p>-->
 
-					<p>Enemy name : <span id="enemyName"></span>. Enemy score : <span id="enemyScore">0</span></p>
+					<!--<p>Enemy name : <span id="enemyName"></span>. Enemy score : <span id="enemyScore">0</span></p>-->
 
-					<p> <span> commonScore : </span> <span id="commonScore">0</span></p>
+					<!--<p> <span> commonScore : </span> <span id="commonScore">0</span></p>-->
 
-					<p> <span> frictionRate : </span> <span id="frictionRate">1</span></p>
+					<!--<p> <span> frictionRate : </span> <span id="frictionRate">1</span></p>-->
 
 					<canvas id="canvas"></canvas>
 
