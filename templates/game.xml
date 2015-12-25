@@ -6,7 +6,7 @@
 		<div class="square square_game">
 
 			<div id="game">
-				<p>Hello, <fest:value>user.name</fest:value>!</p>
+				<p>Hello, <fest:space/><fest:value>user.name</fest:value>!</p>
 			</div>
 
 			<div id="wait">
@@ -15,13 +15,6 @@
 
 			<div id="gameplay" style="display: none">
 				<div id="score">
-					<!--<p>Your name : <span id="myName"><fest:value>user.name</fest:value></span>. Your score : <span id="myScore">0</span></p>-->
-
-					<!--<p>Enemy name : <span id="enemyName"></span>. Enemy score : <span id="enemyScore">0</span></p>-->
-
-					<!--<p> <span> commonScore : </span> <span id="commonScore">0</span></p>-->
-
-					<!--<p> <span> frictionRate : </span> <span id="frictionRate">1</span></p>-->
 
 					<canvas id="canvas"></canvas>
 
@@ -34,7 +27,7 @@
 					</form>
 					<label id="waitOpponent">Please wait your opponent's turn.</label>
 
-			</div>
+				</div>
 
 			<div id="disconnect" style="display: none">
 				<p>You enemy disconnect ! </p>
@@ -44,6 +37,5 @@
 				<p>Game over! You <fest:space/><span id="win"></span></p>
 			</div>
 
-			<!--<button class="square__reset">Reset</button>-->
 		</div>
 </fest:template>

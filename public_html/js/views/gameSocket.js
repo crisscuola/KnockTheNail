@@ -8,7 +8,6 @@ define([
         el: '.game',
         name: 'name',
         initialize: function(){
-
         },
         model: null,
         ws: null,
@@ -33,7 +32,6 @@ define([
                     that.nail(that.nail_y);
                     document.getElementById("wait").style.display = "none";
                     document.getElementById("gameplay").style.display = "block";
-                    //document.getElementById("enemyName").innerHTML = data.enemyName;
                     if(data.shouldClick){
                         that.$el.find('#waitOpponent').hide();
                         that.$el.find('.game-form').show();
@@ -60,7 +58,6 @@ define([
                 }
 
                 if(data.status == "increment_myscore"){
-                    //document.getElementById("myScore").innerHTML = data.score;
                     if(data.shouldClick){
                         that.$el.find('#waitOpponent').hide();
                         that.$el.find('game-form').show();
@@ -71,7 +68,6 @@ define([
                 }
 
                 if(data.status == "increment_enemyscore"){
-                    //document.getElementById("enemyScore").innerHTML = data.score;
                     if(!data.shouldClick){
                         that.$el.find('#waitOpponent').hide();
                         that.$el.find('.game-form').show();
@@ -82,11 +78,8 @@ define([
                 }
 
                 if (data.status == "increment" ){
-                    //document.getElementById("commonScore").innerHTML = data.commonScore;
                     that.commonscore = data.commonScore;
-                    //document.getElementById("frictionRate").innerHTML = data.frictionRate;
                     var movement = data.commonScore ;
-                    console.log(movement +" "+data.commonScore);
                     that.knock(movement);
                 }
 
@@ -125,10 +118,9 @@ define([
         nail: function(y) {
             canvas = document.getElementById('canvas');
             context = canvas.getContext('2d');
-            context.fillStyle = '#FF0000';
-            context.beginPath();
-            context.rect(150,y,5,100);
-            context.fill();
+            var pic = new Image();
+            pic.src    = '/design/nail.jpg';
+            context.drawImage(pic,140,y, 20, 100);
         },
 
         knock: function(y) {
@@ -138,8 +130,6 @@ define([
             this.nail_y += y;
             if(this.nail_y > 150)
                 this.nail_y = 20;
-            //this.nail(this.nail_y);
-            console.log(y);
             this.nail(y);
             this.table();
         }
