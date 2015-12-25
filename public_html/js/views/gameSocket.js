@@ -32,6 +32,7 @@ define([
                     that.nail(that.nail_y);
                     document.getElementById("wait").style.display = "none";
                     document.getElementById("gameplay").style.display = "block";
+                    document.getElementById("enemyName").innerHTML = data.enemyName;
                     if(data.shouldClick){
                         that.$el.find('#waitOpponent').hide();
                         that.$el.find('.game-form').show();
