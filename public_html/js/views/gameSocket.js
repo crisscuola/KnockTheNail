@@ -13,7 +13,7 @@ define([
         ws: null,
         commonscore: null,
         init: function(){
-            this.ws = new WebSocket("ws://localhost:8080/gameplay");
+            this.ws = new WebSocket("ws://capslabs.ddns.net:8080/gameplay");
             this.nail_y = 0;
             this.nail_dy = 10;
             this.nail(this.nail_y);
