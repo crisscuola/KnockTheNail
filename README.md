@@ -1,1 +1,1 @@
-Frontend/backend test repository
+# Game project in Technopark autumn 2015
